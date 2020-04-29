@@ -3,18 +3,14 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import OutlinedInput from '@material-ui/core/OutlinedInput'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
-import {Divider} from '@material-ui/core'
+import {Divider, Paper} from '@material-ui/core'
 
 /**
  * COMPONENT
@@ -43,32 +39,15 @@ const AuthForm = props => {
   }
 
   return (
-    <div
+    <Paper
+      variant="outlined"
       style={{
         display: 'flex',
         flexDirection: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        padding: 30
       }}
     >
-      {/* <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a> */}
       <form
         onSubmit={handleSubmit}
         name={name}
@@ -80,77 +59,56 @@ const AuthForm = props => {
           alignItems: 'center'
         }}
       >
-        <FormControl
-          style={{
-            display: 'flex',
-            width: 'calc(100%*2/3)',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
+        <TextField
+          error={err && err.response && err.response.data}
+          id="outlined-with-icon-adornment"
+          style={{margin: 10, width: 'calc(100%*2/3'}}
+          label="Username"
+          name="email"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
           }}
-        >
-          <TextField
-            error={err && err.response && err.response.data}
-            id="outlined-with-icon-adornment"
-            style={{margin: 10, width: '100%'}}
-            label="Username"
-            name="email"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              )
-            }}
-          />
-        </FormControl>
-        <FormControl
-          style={{
-            display: 'flex',
-            width: 'calc(100%*2/3)',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
+        />
+        <TextField
+          error={err && err.response && err.response.data}
+          id="outlined-adornment-password"
+          type={values.showPassword ? 'text' : 'password'}
+          value={values.password}
+          style={{margin: 10, width: 'calc(100%*2/3'}}
+          label="Password"
+          variant="outlined"
+          name="password"
+          onChange={handleChange('password')}
+          helperText={
+            displayName === 'Sign Up'
+              ? 'Make sure your password is strong'
+              : ' '
+          }
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            )
           }}
-        >
-          <TextField
-            error={err && err.response && err.response.data}
-            id="outlined-adornment-password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            style={{margin: 10, width: '100%'}}
-            label="Password"
-            variant="outlined"
-            name="password"
-            onChange={handleChange('password')}
-            helperText={
-              displayName === 'Sign Up'
-                ? 'Make sure your password is strong'
-                : ' '
-            }
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockIcon />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            labelWidth={70}
-          />
-        </FormControl>
+        />
         <Button
           size="large"
           type="submit"
@@ -186,7 +144,7 @@ const AuthForm = props => {
           {displayName} with Google
         </Button>
       </div>
-    </div>
+    </Paper>
   )
 }
 
