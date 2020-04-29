@@ -2,16 +2,55 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import FormControl from '@material-ui/core/FormControl'
+import TextField from '@material-ui/core/TextField'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import OutlinedInput from '@material-ui/core/OutlinedInput'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import IconButton from '@material-ui/core/IconButton'
+import LockIcon from '@material-ui/icons/Lock'
+import {Divider} from '@material-ui/core'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+  const {name, displayName, handleSubmit} = props
+  const err = props.error
+  const [values, setValues] = React.useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false
+  })
+
+  const handleChange = prop => event => {
+    setValues({...values, [prop]: event.target.value})
+  }
+
+  const handleClickShowPassword = () => {
+    setValues({...values, showPassword: !values.showPassword})
+  }
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault()
+  }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'flex',
+        justifyContent: 'space-around'
+      }}
+    >
+      {/* <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
             <small>Email</small>
@@ -29,7 +68,119 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/google">{displayName} with Google</a> */}
+      <form
+        onSubmit={handleSubmit}
+        name={name}
+        style={{
+          display: 'flex',
+          width: 'calc(100%/2)',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <FormControl
+          style={{
+            display: 'flex',
+            width: 'calc(100%*2/3)',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <TextField
+            error={!!(err && err.response && err.response.data)}
+            id="outlined-with-icon-adornment"
+            style={{margin: 10, width: '100%'}}
+            label="Username"
+            name="email"
+            variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>
+              )
+            }}
+          />
+        </FormControl>
+        <FormControl
+          style={{
+            display: 'flex',
+            width: 'calc(100%*2/3)',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <TextField
+            id="outlined-adornment-password"
+            error={!!(err && err.response && err.response.data)}
+            type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            style={{margin: 10, width: '100%'}}
+            label="Password"
+            variant="outlined"
+            name="password"
+            onChange={handleChange('password')}
+            helperText={
+              displayName === 'Sign Up'
+                ? 'Make sure your password is strong'
+                : ' '
+            }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            labelWidth={70}
+          />
+        </FormControl>
+        <Button
+          size="large"
+          type="submit"
+          style={{margin: 10, width: 'calc(100%/2)'}}
+          variant="contained"
+          color="primary"
+        >
+          {displayName}
+        </Button>
+        {err && err.response && <div> {err.response.data} </div>}
+      </form>
+      <Divider orientation="vertical" color="primary" flexItem />
+      <div
+        style={{
+          width: 'calc(100%/2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Button
+          size="large"
+          style={{margin: 10, width: 'calc(100%/2)'}}
+          variant="contained"
+          color="secondary"
+          href="/auth/google"
+        >
+          {displayName} with Google
+        </Button>
+      </div>
     </div>
   )
 }
@@ -61,6 +212,7 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+      console.log(evt.target)
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
