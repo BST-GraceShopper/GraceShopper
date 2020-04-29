@@ -50,8 +50,9 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           aria-label="disabled tabs example"
           style={{display: 'flex', alignItems: 'center'}}
         >
-          <Tab value="/login" label="Log In" />
-          <Tab value="/signup" label="Sign Up" />
+          <Tab value="/beer" label="Beer" />
+          <Tab value="/wine" label="Wine" />
+          <Tab value="/spirits" label="Spirits" />
         </Tabs>
       </Paper>
     </div>
