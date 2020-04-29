@@ -24,7 +24,6 @@ import {
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, history} = props
-  console.log(history)
   const err = props.error
   const [values, setValues] = React.useState({
     amount: '',
@@ -33,7 +32,7 @@ const AuthForm = props => {
     weightRange: '',
     showPassword: false
   })
-  const [open, setOpen] = React.useState(true)
+  // const [open, setOpen] = React.useState(true)
   const handleChange = prop => event => {
     setValues({...values, [prop]: event.target.value})
   }
@@ -46,147 +45,113 @@ const AuthForm = props => {
     event.preventDefault()
   }
 
-  const handleClose = () => {
-    history.goBack()
-    setOpen(false)
-  }
-  const handleToggle = () => {
-    setOpen(!open)
-  }
+  // const handleClose = () => {
+  //   history.goBack()
+  //   setOpen(false)
+  // }
+  // const handleToggle = () => {
+  //   setOpen(!open)
+  // }
 
   return (
-    <Paper
-      variant="outlined"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: 30,
-        width: 'calc(100%*2/3)'
-      }}
-    >
-      <div style={{display: 'flex', flexDirection: 'flex'}}>
-        <form
-          onSubmit={handleSubmit}
-          name={name}
-          style={{
-            display: 'flex',
-            width: 'calc(100%/2)',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <TextField
-            error={err && err.response && err.response.data}
-            id="outlined-with-icon-adornment"
-            style={{margin: 10, width: 'calc(100%*2/3'}}
-            label="Username"
-            name="email"
-            variant="outlined"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              )
-            }}
-          />
-          <TextField
-            error={err && err.response && err.response.data}
-            id="outlined-adornment-password"
-            type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            style={{margin: 10, width: 'calc(100%*2/3'}}
-            label="Password"
-            variant="outlined"
-            name="password"
-            onChange={handleChange('password')}
-            helperText={
-              displayName === 'Sign Up'
-                ? 'Make sure your password is strong'
-                : ' '
-            }
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockIcon />
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
-                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-          <Button
-            size="large"
-            type="submit"
-            style={{margin: 10, width: 'calc(100%/2)'}}
-            variant="contained"
-            color="primary"
-          >
-            {displayName}
-          </Button>
-          {err && err.response && <div> {err.response.data} </div>}
-        </form>
-        <Divider orientation="vertical" color="primary" flexItem />
-        <div
-          style={{
-            width: 'calc(100%/2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column'
-          }}
-        >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
-            style={{width: 75, height: 75}}
-          />
-          <Button
-            size="large"
-            style={{margin: 20, width: 'calc(100%/2)'}}
-            variant="contained"
-            color="primary"
-            href="/auth/google"
-          >
-            {displayName} with Google
-          </Button>
-        </div>
-      </div>
-      <div
+    <div style={{display: 'flex', flexDirection: 'flex'}}>
+      <form
+        onSubmit={handleSubmit}
+        name={name}
         style={{
           display: 'flex',
+          width: 'calc(100%/2)',
+          flexDirection: 'column',
           justifyContent: 'center',
-          margin: '50px 0px 0px'
+          alignItems: 'center'
         }}
       >
-        {displayName === 'Sign Up' ? (
-          <Typography>
-            Already have an account?{' '}
-            <a color="primary" href="/login">
-              Log In
-            </a>
-          </Typography>
-        ) : (
-          <Typography>
-            Don't have an account?{' '}
-            <a color="primary" href="/signup">
-              Sign Up
-            </a>
-          </Typography>
-        )}
+        <TextField
+          error={err && err.response && err.response.data}
+          id="outlined-with-icon-adornment"
+          style={{margin: 10, width: 'calc(100%*2/3'}}
+          label="Username"
+          name="email"
+          variant="outlined"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AccountCircle />
+              </InputAdornment>
+            )
+          }}
+        />
+        <TextField
+          error={err && err.response && err.response.data}
+          id="outlined-adornment-password"
+          type={values.showPassword ? 'text' : 'password'}
+          value={values.password}
+          style={{margin: 10, width: 'calc(100%*2/3'}}
+          label="Password"
+          variant="outlined"
+          name="password"
+          onChange={handleChange('password')}
+          helperText={
+            displayName === 'Sign Up'
+              ? 'Make sure your password is strong'
+              : ' '
+          }
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LockIcon />
+              </InputAdornment>
+            ),
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
+        <Button
+          size="large"
+          type="submit"
+          style={{margin: 10, width: 'calc(100%/2)'}}
+          variant="contained"
+          color="primary"
+        >
+          {displayName}
+        </Button>
+        {err && err.response && <div> {err.response.data} </div>}
+      </form>
+      <Divider orientation="vertical" color="primary" flexItem />
+      <div
+        style={{
+          width: 'calc(100%/2)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column'
+        }}
+      >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
+          style={{width: 75, height: 75}}
+        />
+        <Button
+          size="large"
+          style={{margin: 20, width: 'calc(100%/2)'}}
+          variant="contained"
+          color="primary"
+          href="/auth/google"
+        >
+          {displayName} with Google
+        </Button>
       </div>
-    </Paper>
+    </div>
   )
 }
 
