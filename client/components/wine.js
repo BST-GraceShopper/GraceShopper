@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Wine} from './nav'
 
-const WinePage = props => {
+const WinePage = () => {
   return <Wine />
 }
 

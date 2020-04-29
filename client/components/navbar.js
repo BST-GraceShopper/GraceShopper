@@ -30,45 +30,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   //   </nav>
   //   <hr />
   // </div>
-  const history = useHistory()
-  const [value, setValue] = React.useState()
-
-  const handleChange = (event, newValue) => {
-    history.push(newValue)
-  }
-  return (
-    <div>
-      <Toolbar component="nav" variant="dense">
-        <h1 className="title">Grace Shopper</h1>
-      </Toolbar>
-      <Paper square style={{margin: '0px 0px 50px'}}>
-        <Tabs
-          value={history.location.pathname}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={handleChange}
-          aria-label="disabled tabs example"
-          style={{
-            display: 'flex',
-            flexDirection: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'space-between'
-          }}
-        >
-          <div>
-            <Tab value="/beer" label="Beer" />
-            <Tab value="/wine" label="Wine" />
-            <Tab value="/spirits" label="Spirits" />
-          </div>
-          {isLoggedIn ? (
-            <Tab value="/logout" label="Log Out" />
-          ) : (
-            <Tab value="/login" label="Log In" />
-          )}
-        </Tabs>
-      </Paper>
-    </div>
-  )
 }
 
 /**

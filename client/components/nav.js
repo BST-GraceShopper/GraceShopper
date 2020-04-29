@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import {Login, Signup} from './auth-form'
 
 const Nav = props => {
-  const {imgURL, imgPosition} = props
+  const {name, imgURL, imgPosition} = props
   const history = useHistory()
   const [value, setValue] = React.useState(window.location.pathname)
   const [open, setOpen] = React.useState(false)
@@ -26,118 +26,128 @@ const Nav = props => {
   }
 
   return (
-    <div style={{display: 'flex', block: 'overlay'}}>
+    <Paper
+      square
+      style={{
+        padding: 10,
+        backgroundImage: `url(${imgURL})`,
+        backgroundPosition: imgPosition,
+        backgroundSize: 'cover',
+        border: '1px solid black',
+        width: '100%',
+        height: 600,
+        margin: '0px 0px 50px',
+        boxShadow: 'inset 600px -125px 5000px black'
+      }}
+    >
       <AppBar
         position="static"
         style={{background: 'transparent', boxShadow: 'none'}}
       >
-        <Paper
-          square
-          style={{
-            padding: 10,
-            backgroundImage: `url(${imgURL})`,
-            backgroundPosition: imgPosition,
-            backgroundSize: 'cover',
-            border: '1px solid black',
-            boxShadow: 'none',
-            width: '100%',
-            height: 600,
-            margin: '0px 0px 50px'
-          }}
-        >
-          <Grid item>
-            <div
-              style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}
-            >
-              <Typography variant="h4" style={{color: 'white', margin: 10}}>
-                Grace Shopper
-              </Typography>
-              <Tabs
-                value={value}
-                indicatorColor="secondary"
-                textColor="white"
-                onChange={handleChange}
-                aria-label="disabled tabs example"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <Tab style={{color: 'white'}} value="/beer" label="Beer" />
-                <Tab style={{color: 'white'}} value="/wine" label="Wine" />
-                <Tab
-                  style={{color: 'white'}}
-                  value="/spirits"
-                  label="Spirits"
-                />
-                <Tab
-                  style={{color: 'white'}}
-                  value={'/login' && '/signup'}
-                  //   onClick={() => setOpen(true)}
-                  label="Log In/Sign Up"
-                />
-              </Tabs>
-            </div>
-          </Grid>
-          <Modal
-            open={open}
-            value={value}
-            color="secondary"
-            onClose={handleClose}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
+        <Grid item>
+          <div
+            style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}
           >
-            <Paper
-              variant="outlined"
+            <Typography variant="h4" style={{color: 'white', margin: 10}}>
+              Grace Shopper
+            </Typography>
+            <Tabs
+              value={value}
+              indicatorColor="secondary"
+              textColor="white"
+              onChange={handleChange}
+              aria-label="disabled tabs example"
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: 30,
-                width: 'calc(100%*2/3)'
+                flexDirection: 'flex',
+                alignItems: 'center'
               }}
             >
-              {page === '/login' ? <Login /> : <Signup />}
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  margin: '50px 0px 0px'
-                }}
-              >
-                {page === '/signup' ? (
-                  <Typography>
-                    Already have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/login')}>
-                      Log In
-                    </a>
-                  </Typography>
-                ) : (
-                  <Typography>
-                    Don't have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/signup')}>
-                      Sign Up
-                    </a>
-                  </Typography>
-                )}
-              </div>
-            </Paper>
-          </Modal>
-        </Paper>
+              <Tab style={{color: 'white'}} value="/beer" label="Beer" />
+              <Tab style={{color: 'white'}} value="/wine" label="Wine" />
+              <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
+              <Tab
+                style={{color: 'white'}}
+                value={'/login' && '/signup'}
+                //   onClick={() => setOpen(true)}
+                label="Log In/Sign Up"
+              />
+            </Tabs>
+          </div>
+        </Grid>
+        <Modal
+          open={open}
+          value={value}
+          color="secondary"
+          onClose={handleClose}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Paper
+            variant="outlined"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              padding: 30,
+              width: 'calc(100%*2/3)'
+            }}
+          >
+            {page === '/login' ? <Login /> : <Signup />}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                margin: '50px 0px 0px'
+              }}
+            >
+              {page === '/signup' ? (
+                <Typography>
+                  Already have an account?{' '}
+                  <a color="primary" onClick={() => setPage('/login')}>
+                    Log In
+                  </a>
+                </Typography>
+              ) : (
+                <Typography>
+                  Don't have an account?{' '}
+                  <a color="primary" onClick={() => setPage('/signup')}>
+                    Sign Up
+                  </a>
+                </Typography>
+              )}
+            </div>
+          </Paper>
+        </Modal>
       </AppBar>
-    </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 'calc(100%*2/3)',
+          width: 'calc(100%/3)'
+        }}
+      >
+        <Typography
+          variant="h1"
+          style={{
+            color: 'white',
+            margin: 10,
+            fontFamily: 'Petit Formal Script, cursive'
+          }}
+        >
+          {name}
+        </Typography>
+      </div>
+    </Paper>
   )
 }
 
-const mapStateToProps = props => {
-  return {props}
-}
-
-const mapBeer = state => {
+const mapBeer = () => {
   return {
     name: 'beer',
     imgURL:
@@ -146,14 +156,14 @@ const mapBeer = state => {
   }
 }
 
-const mapWine = state => {
+const mapWine = () => {
   return {
     name: 'wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
     imgPosition: 'center top'
   }
 }
-const mapSpirits = state => {
+const mapSpirits = () => {
   return {
     name: 'spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',

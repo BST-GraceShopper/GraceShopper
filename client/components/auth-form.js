@@ -10,20 +10,13 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
-import {
-  Divider,
-  Paper,
-  Typography,
-  Backdrop,
-  SimpleDialog,
-  Modal
-} from '@material-ui/core'
+import {Divider} from '@material-ui/core'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit, history} = props
+  const {name, displayName, handleSubmit} = props
   const err = props.error
   const [values, setValues] = React.useState({
     amount: '',

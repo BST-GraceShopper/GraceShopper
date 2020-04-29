@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Spirits} from './nav'
 
-const SpiritPage = props => {
+const SpiritPage = () => {
   return <Spirits />
 }
 

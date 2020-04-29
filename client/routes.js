@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, UserHome} from './components'
 import {me} from './store'
 import Wine from './components/wine.js'
 import Beer from './components/beer.js'
 import Spirits from './components/spirits.js'
+// import {Signup} from './components'
 
 /**
  * COMPONENT
