@@ -90,7 +90,7 @@ const AuthForm = props => {
           }}
         >
           <TextField
-            error={!!(err && err.response && err.response.data)}
+            error={err && err.response && err.response.data}
             id="outlined-with-icon-adornment"
             style={{margin: 10, width: '100%'}}
             label="Username"
@@ -115,8 +115,8 @@ const AuthForm = props => {
           }}
         >
           <TextField
+            error={err && err.response && err.response.data}
             id="outlined-adornment-password"
-            error={!!(err && err.response && err.response.data)}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             style={{margin: 10, width: '100%'}}
@@ -168,14 +168,19 @@ const AuthForm = props => {
           width: 'calc(100%/2)',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          flexDirection: 'column'
         }}
       >
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1024px-Google_%22G%22_Logo.svg.png"
+          style={{width: 75, height: 75}}
+        />
         <Button
           size="large"
-          style={{margin: 10, width: 'calc(100%/2)'}}
+          style={{margin: 20, width: 'calc(100%/2)'}}
           variant="contained"
-          color="secondary"
+          color="primary"
           href="/auth/google"
         >
           {displayName} with Google
