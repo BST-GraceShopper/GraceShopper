@@ -27,11 +27,13 @@ const Spirits = props => {
   const handleChange = (event, newValue) => {
     if (newValue === '/login' || newValue === '/signup') {
       setValue(newValue)
+      setPage(newValue)
     } else {
       history.push(newValue)
     }
   }
   const [open, setOpen] = React.useState(false)
+  const [page, setPage] = React.useState('/login')
 
   const handleClose = () => {
     setOpen(false)
@@ -93,11 +95,18 @@ const Spirits = props => {
                   onClick={() => setOpen(true)}
                   label="Log In"
                 />
+                <Tab
+                  style={{color: 'white'}}
+                  value="/signup"
+                  onClick={() => setOpen(true)}
+                  label="Sign Up"
+                />
               </Tabs>
             </div>
           </Grid>
           <Modal
             open={open}
+            page={page}
             onClose={handleClose}
             style={{
               display: 'flex',
@@ -105,7 +114,7 @@ const Spirits = props => {
               justifyContent: 'center'
             }}
           >
-            <Login />
+            {page === '/login' ? <Login /> : <Signup />}
           </Modal>
         </Paper>
       </AppBar>

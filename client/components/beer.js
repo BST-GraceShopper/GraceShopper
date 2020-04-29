@@ -26,10 +26,15 @@ const Beer = () => {
   const [value, setValue] = React.useState()
 
   const handleChange = (event, newValue) => {
-    // setValue(newValue)
-    history.push(newValue)
+    if (newValue === '/login' || newValue === '/signup') {
+      setValue(newValue)
+      setPage(newValue)
+    } else {
+      history.push(newValue)
+    }
   }
   const [open, setOpen] = React.useState(false)
+  const [page, setPage] = React.useState('/login')
 
   const handleClose = () => {
     // history.goBack()
@@ -91,11 +96,18 @@ const Beer = () => {
                   onClick={() => setOpen(true)}
                   label="Log In"
                 />
+                <Tab
+                  style={{color: 'white'}}
+                  value="/signup"
+                  onClick={() => setOpen(true)}
+                  label="Sign Up"
+                />
               </Tabs>
             </div>
           </Grid>
           <Modal
             open={open}
+            page={page}
             onClose={handleClose}
             style={{
               display: 'flex',
@@ -103,7 +115,7 @@ const Beer = () => {
               justifyContent: 'center'
             }}
           >
-            <Login />
+            {page === '/login' ? <Login /> : <Signup />}
           </Modal>
         </Paper>
       </AppBar>
