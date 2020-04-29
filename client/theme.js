@@ -13,7 +13,7 @@ const theme = createMuiTheme({
       main: '#01579b'
     },
     secondary: {
-      main: 'rgba(255, 255, 255, 0.08)'
+      main: '#ef6c00'
     }
   }
 })

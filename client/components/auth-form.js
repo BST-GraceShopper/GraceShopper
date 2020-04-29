@@ -10,13 +10,21 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
-import {Divider, Paper, Typography} from '@material-ui/core'
+import {
+  Divider,
+  Paper,
+  Typography,
+  Backdrop,
+  SimpleDialog,
+  Modal
+} from '@material-ui/core'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
-  const {name, displayName, handleSubmit} = props
+  const {name, displayName, handleSubmit, history} = props
+  console.log(history)
   const err = props.error
   const [values, setValues] = React.useState({
     amount: '',
@@ -25,7 +33,7 @@ const AuthForm = props => {
     weightRange: '',
     showPassword: false
   })
-
+  const [open, setOpen] = React.useState(true)
   const handleChange = prop => event => {
     setValues({...values, [prop]: event.target.value})
   }
@@ -38,6 +46,14 @@ const AuthForm = props => {
     event.preventDefault()
   }
 
+  const handleClose = () => {
+    history.goBack()
+    setOpen(false)
+  }
+  const handleToggle = () => {
+    setOpen(!open)
+  }
+
   return (
     <Paper
       variant="outlined"
@@ -45,7 +61,8 @@ const AuthForm = props => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        padding: 30
+        padding: 30,
+        width: 'calc(100%*2/3)'
       }}
     >
       <div style={{display: 'flex', flexDirection: 'flex'}}>
