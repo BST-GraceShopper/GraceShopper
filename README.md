@@ -78,6 +78,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 [google-apis]: https://console.developers.google.com/apis/credentials
 
 ## Linting
+## Valmik Linter
 
 Linters are fundamental to any project. They ensure that your code
 has a consistent style, which is critical to writing readable code.
