@@ -5,6 +5,9 @@ import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import {Login, Signup} from './auth-form'
+// const spiritImage = require('./public/images/spirits.jpg')
+// const beerImage = require('./public/images/beer.jpg')
+// const wineImage = require('..../public/images/wine.jpg')
 
 const Nav = props => {
   const {name, imgURL, imgPosition} = props
@@ -35,7 +38,7 @@ const Nav = props => {
         backgroundSize: 'cover',
         border: '1px solid black',
         width: '100%',
-        height: 600,
+        height: 500,
         margin: '0px 0px 50px',
         boxShadow: 'inset 600px -125px 5000px black'
       }}
@@ -48,8 +51,16 @@ const Nav = props => {
           <div
             style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}
           >
-            <Typography variant="h4" style={{color: 'white', margin: 10}}>
-              Grace Shopper
+            <Typography
+              variant="h3"
+              style={{
+                margin: '0px 25px 0px 0px',
+                padding: 10,
+                borderRadius: 200,
+                fontFamily: 'cursive'
+              }}
+            >
+              GS
             </Typography>
             <Tabs
               value={value}
@@ -167,7 +178,7 @@ const mapSpirits = () => {
   return {
     name: 'spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
-    imgPosition: 'right'
+    imgPosition: 'right top'
   }
 }
 
