@@ -5,15 +5,21 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
+import theme from './theme'
+import {ThemeProvider} from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 // establishes socket connection
 import './socket'
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <App />
-    </Router>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <Router history={history}>
+        <CssBaseline />
+        <App />
+      </Router>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('app')
 )
