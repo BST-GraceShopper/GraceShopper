@@ -1,13 +1,33 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Wine} from './nav'
+import {WineHeader} from './nav'
+import WineList from './wines/WineList'
+import {getWines} from '../store/'
 
-const WinePage = () => {
-  return <Wine />
+class Wine extends Component {
+  componentDidMount() {
+    this.props.loadWines()
+  }
+  render() {
+    const {wines} = this.props
+    console.log(wines)
+    return (
+      <div style={{color: 'white'}}>
+        <WineHeader />
+        <WineList wines={wines} />
+      </div>
+    )
+  }
 }
 
-const mapStateToProps = props => {
-  return {props}
+const mapStateToProps = ({wines}) => {
+  return {wines}
 }
-
-export default connect(mapStateToProps)(WinePage)
+const mapDispatchToProps = dispatch => {
+  return {
+    loadWines() {
+      dispatch(getWines())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Wine)
