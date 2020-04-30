@@ -21,9 +21,7 @@ async function seed() {
       type: 'Red',
       grape: 'Cabernet Sauvignon',
       price: 500.0,
-      inventory: 2,
-      image:
-        'https://media.istockphoto.com/photos/black-wine-bottle-with-an-empty-label-on-black-background-picture-id1074112266?k=6&m=1074112266&s=170667a&w=0&h=qoJq5vfF18Vt99t8zLUfKqFtIGxAzcq49u29t8Xn-tE='
+      inventory: 2
     }),
     Wine.create({
       vinter: 'Vinter 2',
@@ -33,9 +31,15 @@ async function seed() {
       type: 'White',
       grape: 'Sauvignon Blanc',
       price: 700.0,
-      inventory: 1,
-      image:
-        'https://media.istockphoto.com/photos/black-wine-bottle-with-an-empty-label-on-black-background-picture-id1074112266?k=6&m=1074112266&s=170667a&w=0&h=qoJq5vfF18Vt99t8zLUfKqFtIGxAzcq49u29t8Xn-tE='
+      inventory: 1
+    }),
+    Beer.create({
+      ABV: 7.5,
+      brand: 'Mother Earth 4Seasons Hazy IPA',
+      region: 'Nampa, ID',
+      type: 'IPA',
+      price: 20.0,
+      inventory: 12
     })
   ])
 

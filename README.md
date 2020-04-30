@@ -1,6 +1,7 @@
 # Boilermaker
 
 hi its lindsey
+hi its valmik
 
 _Good things come in pairs_
 
@@ -53,7 +54,9 @@ export MY_APP_NAME=boilermaker
 createdb $MY_APP_NAME
 createdb $MY_APP_NAME-test
 ```
+
 testing
+
 * By default, running `npm test` will use `boilermaker-test`, while
   regular development uses `boilermaker`
 * Create a file called `secrets.js` in the project root
@@ -80,6 +83,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 [google-apis]: https://console.developers.google.com/apis/credentials
 
 ## Linting
+
 valmik test
 Linters are fundamental to any project. They ensure that your code
 has a consistent style, which is critical to writing readable code.
