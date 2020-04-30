@@ -32,7 +32,10 @@ async function seed() {
       grape: 'Sauvignon Blanc',
       price: 700.0,
       inventory: 1
-    }),
+    })
+  ])
+
+  const beers = await Promise.all([
     Beer.create({
       ABV: 7.5,
       brand: 'Mother Earth 4Seasons Hazy IPA',
