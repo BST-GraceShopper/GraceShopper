@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Wine} = require('../server/db/models')
+const {User, Wine, Beer} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -40,6 +40,14 @@ async function seed() {
       type: 'IPA',
       price: 20.0,
       inventory: 12
+    }),
+    Beer.create({
+      ABV: 5.2,
+      brand: 'Lakefront Brewery Hazy Rabbit IPA',
+      region: 'Milwaukee, WI',
+      type: 'IPA',
+      price: 21.0,
+      inventory: 6
     })
   ])
 
