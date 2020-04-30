@@ -13,7 +13,7 @@ const Beer = db.define('beer', {
     }
   },
   ABV: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.FLOAT,
     allowNull: false,
     validation: {
       notEmpty: true
