@@ -15,7 +15,7 @@ const Wine = db.define('wine', {
   image: {
     type: Sequelize.STRING,
     unique: false,
-    allowNull: false
+    allowNull: true
   },
   vinter: {
     type: Sequelize.STRING,

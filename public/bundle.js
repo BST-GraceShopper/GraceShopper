@@ -917,15 +917,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/esm/Paper/index.js");
+/* harmony import */ var _material_ui_core___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/CardContent */ "./node_modules/@material-ui/core/esm/CardContent/index.js");
+/* eslint-disable react/jsx-key */
+
+
+
+
 
 
 
 var WineList = function WineList(_ref) {
   var wines = _ref.wines;
   console.log(wines);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, wines.map(function (wine) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, wine.vinter);
-  })));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center'
+    }
+  }, wines.map(function (wine) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Card"], {
+      elevation: 3,
+      style: {
+        width: 'calc(100%/4)',
+        margin: 20,
+        padding: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'black',
+        justifyContent: 'center'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardMedia"], {
+      image: wine.image,
+      style: {
+        width: 200,
+        height: 200
+      }
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
+      }
+    }, ['vintage', 'vinter', 'type', 'grape', 'region', 'price', 'inventory'].map(function (key) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        style: {
+          color: 'white'
+        }
+      }, key, ": ", wine[key]);
+    })));
+  }));
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
