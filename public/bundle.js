@@ -442,20 +442,20 @@ function (_Component) {
 
   _createClass(Cart, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
-    key: "render",
-    value: function render() {
+    value: function componentDidMount() {
       var _this$props = this.props,
           getCart = _this$props.getCart,
-          user = _this$props.user,
-          cart = _this$props.cart;
-      console.log(cart);
+          user = _this$props.user;
 
       if (user.id) {
         getCart(user.id);
       }
-
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var cart = this.props.cart;
+      console.log(cart);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           color: 'white'
@@ -521,67 +521,140 @@ __webpack_require__.r(__webpack_exports__);
 
 var CartList = function CartList(_ref) {
   var cart = _ref.cart;
-  console.log(cart);
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center'
-    }
-  }, cart.map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["ButtonBase"], {
+  return (// <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+    //   {cart.map(item => {
+    //     return (
+    //       <ButtonBase
+    //         style={{
+    //           width: 'calc(100%/4)',
+    //           margin: 20,
+    //           padding: 10,
+    //           backgroundColor: 'black',
+    //           border: '1px white solid'
+    //         }}
+    //       >
+    //         <Card
+    //           elevation={3}
+    //           style={{
+    //             width: 'calc(100%)',
+    //             display: 'flex',
+    //             backgroundColor: 'black',
+    //             flexDirection: 'column',
+    //             justifyContent: 'center'
+    //           }}
+    //         >
+    //           <div
+    //             style={{
+    //               width: 'calc(100%)',
+    //               display: 'flex',
+    //               backgroundColor: 'black',
+    //               flexDirection: 'column',
+    //               justifyContent: 'center'
+    //             }}
+    //           >
+    //             <CardMedia
+    //               image={item.image}
+    //               style={{width: 200, height: 200}}
+    //             />
+    //           </div>
+    //           <CardContent
+    //             style={{
+    //               display: 'flex',
+    //               flexDirection: 'column',
+    //               justifyContent: 'center'
+    //             }}
+    //           >
+    //             {['maker', 'name', 'quantity'].map(key => {
+    //               return (
+    //                 <Typography style={{color: 'white'}}>
+    //                   {key}: {item[key]}
+    //                 </Typography>
+    //               )
+    //             })}
+    //           </CardContent>
+    //           <CardActions>
+    //             <IconButton aria-label="add to cart">
+    //               <AddIcon color="secondary" />
+    //             </IconButton>
+    //           </CardActions>
+    //         </Card>
+    //       </ButtonBase>
+    //     )
+    //   })}
+    // </div>
+    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_2__["default"], {
       style: {
-        width: 'calc(100%/4)',
-        margin: 20,
+        // border:'1px gray solid',
+        backgroundColor: 'black',
         padding: 10,
-        backgroundColor: 'black',
-        border: '1px white solid'
+        margin: 20,
+        maxWidth: 500
       }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Card"], {
-      elevation: 3,
-      style: {
-        width: 'calc(100%)',
-        display: 'flex',
-        backgroundColor: 'black',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      style: {
-        width: 'calc(100%)',
-        display: 'flex',
-        backgroundColor: 'black',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardMedia"], {
-      image: item.image,
-      style: {
-        width: 200,
-        height: 200
-      }
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center'
-      }
-    }, ['maker', 'name', 'quantity'].map(function (key) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+    }, cart.map(function (cartItem) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        container: true,
+        spacing: 2,
         style: {
+          border: '1px gray solid'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        alt: "complex",
+        src: cartItem.image,
+        style: {
+          margin: 'auto',
+          display: 'block',
+          maxWidth: 150,
+          maxHeight: 150
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true,
+        xs: 12,
+        sm: true,
+        container: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true,
+        xs: true,
+        container: true,
+        direction: "column",
+        spacing: 2
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true,
+        xs: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        gutterBottom: true,
+        color: "textSecondary",
+        variant: "subtitle1"
+      }, cartItem.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        variant: "body2",
+        gutterBottom: true
+      }, cartItem.maker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        variant: "body2",
+        color: "textSecondary"
+      }, cartItem.quantity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        variant: "body2",
+        color: "textSecondary",
+        style: {
+          cursor: 'pointer',
           color: 'white'
         }
-      }, key, ": ", item[key]);
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
-      "aria-label": "add to cart"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      color: "secondary"
-    })))));
-  }));
+      }, "Remove"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+        item: true
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        variant: "subtitle1",
+        color: "textSecondary"
+      }, "$", cartItem.price))));
+    })))
+  );
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
-  var wines = _ref2.wines;
+  var wines = _ref2.wines,
+      user = _ref2.user,
+      cart = _ref2.cart;
   return {
     wines: wines
   };
@@ -1378,12 +1451,12 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/spirits",
         component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_8__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/cart",
-        component: _components_cart_js__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/cart",
+        component: _components_cart_js__WEBPACK_IMPORTED_MODULE_9__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_8__["default"]
       }));
@@ -2064,6 +2137,10 @@ var theme = Object(_material_ui_core___WEBPACK_IMPORTED_MODULE_0__["createMuiThe
     },
     secondary: {
       main: '#ef6c00'
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#ffffff'
     }
   }
 });

@@ -5,13 +5,15 @@ import CartList from './cart/CartList'
 import {getCart} from '../store/'
 
 class Cart extends Component {
-  componentDidMount() {}
-  render() {
-    const {getCart, user, cart} = this.props
-    console.log(cart)
+  componentDidMount() {
+    const {getCart, user} = this.props
     if (user.id) {
       getCart(user.id)
     }
+  }
+  render() {
+    const {cart} = this.props
+    console.log(cart)
     return (
       <div style={{color: 'white'}}>
         <CartHeader />
