@@ -36,6 +36,10 @@ const Order = db.define('order', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  price: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
   status: {
     type: Sequelize.STRING,
     allowNull: false,

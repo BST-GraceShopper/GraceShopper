@@ -65,6 +65,7 @@ async function seed() {
       maker: Wine1.vinter,
       image: Wine1.image,
       quantity: 1,
+      price: Wine1.price,
       status: 'cart'
     }),
     Order.create({
@@ -73,6 +74,7 @@ async function seed() {
       maker: Wine2.vinter,
       image: Wine2.image,
       quantity: 1,
+      price: Wine2.price,
       status: 'cart'
     })
   ])
