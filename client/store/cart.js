@@ -4,7 +4,7 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_CART = 'GET_USER'
+const GET_CART = 'GET_CART'
 const ADD_CART = 'ADD_CART'
 const REMOVE_CART = 'REMOVE_CART'
 
@@ -16,42 +16,33 @@ const defaultCart = []
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const _getCart = cart => ({type: GET_CART, cart})
+const _removeFromCart = product => ({type: REMOVE_CART, product})
+const _addToCart = product => ({type: ADD_CART, product})
 
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+export const getCart = userId => async dispatch => {
   try {
-    const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    const res = await axios.get(`/api/cart/${userId}`)
+    dispatch(_getCart(res.data || defaultCart))
   } catch (err) {
     console.error(err)
   }
 }
-
-export const auth = (email, password, method) => async dispatch => {
-  let res
+export const removeFromCart = (user, product) => async dispatch => {
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
-  } catch (authError) {
-    return dispatch(getUser({error: authError}))
-  }
-
-  try {
-    dispatch(getUser(res.data))
-    history.push('/home')
-  } catch (dispatchOrHistoryErr) {
-    console.error(dispatchOrHistoryErr)
+    const res = await axios.delete(`/cart/${user.id}/${product.id}`)
+    dispatch(_removeFromCart(product))
+  } catch (err) {
+    console.error(err)
   }
 }
-
-export const logout = () => async dispatch => {
+export const addToCart = product => async dispatch => {
   try {
-    await axios.post('/auth/logout')
-    dispatch(removeUser())
-    history.push('/login')
+    const res = await axios.post(`/cart/${user.id}`.product)
+    dispatch(_addToCart(res.data))
   } catch (err) {
     console.error(err)
   }
@@ -60,12 +51,15 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function(state = defaultCart, action) {
   switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return defaultUser
+    case GET_CART:
+      console.log(action.cart)
+      return action.cart
+    case ADD_CART:
+      return [...state, action.product]
+    case REMOVE_CART:
+      return state.filter(item => item.id === product.id)
     default:
       return state
   }

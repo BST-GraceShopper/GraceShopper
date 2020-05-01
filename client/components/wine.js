@@ -10,7 +10,6 @@ class Wine extends Component {
   }
   render() {
     const {wines} = this.props
-    console.log(wines)
     return (
       <div style={{color: 'white'}}>
         <WineHeader />

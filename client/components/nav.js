@@ -77,6 +77,7 @@ const Nav = props => {
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
               <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
+              <Tab style={{color: 'white'}} value="/cart" label="Cart" />
               <Tab
                 style={{color: 'white'}}
                 value={'/login' && '/signup'}
@@ -182,6 +183,16 @@ const mapSpirits = () => {
   }
 }
 
+const mapCart = () => {
+  return {
+    name: 'cart',
+    imgURL:
+      'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
+    imgPosition: 'right top'
+  }
+}
+
 export const Beer = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
 export const Spirits = connect(mapSpirits)(Nav)
+export const CartHeader = connect(mapCart)(Nav)

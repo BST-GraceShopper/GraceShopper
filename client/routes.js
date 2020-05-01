@@ -7,6 +7,7 @@ import {me} from './store'
 import Wine from './components/wine.js'
 import Beer from './components/beer.js'
 import Spirits from './components/spirits.js'
+import Cart from './components/cart.js'
 // import {Signup} from './components'
 
 /**
@@ -28,6 +29,7 @@ class Routes extends Component {
         <Route path="/wine" component={Wine} />
         <Route path="/beer" component={Beer} />
         <Route path="/spirits" component={Spirits} />
+        <Route path="/cart" component={Cart} />
 
         {isLoggedIn && (
           <Switch>

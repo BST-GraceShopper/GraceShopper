@@ -1,9 +1,8 @@
 const User = require('./user')
 const Wine = require('./wine')
-const Cart = require('./cart')
+const Order = require('./order')
 const Product = require('./product')
 const Beer = require('./beer')
-
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -19,9 +18,8 @@ const Beer = require('./beer')
  * instead of: const User = require('../db/models/user')
  */
 
-Cart.belongsTo(User)
-User.hasOne(Cart)
-Cart.hasMany(Product)
+Order.belongsTo(User)
+Order.hasMany(Product)
 
 addToCart = async (prodId, userId) => {
   const {productId, name, maker, image} = await Product.findByPk(productId)
@@ -34,7 +32,7 @@ removeFromCart = async (productId, userId) => {
 module.exports = {
   User,
   Wine,
-  Cart,
-  Product
+  Order,
+  Product,
   Beer
 }

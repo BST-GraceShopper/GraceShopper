@@ -2,13 +2,8 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Cart = db.define('cart', {
-  userId: {
-    type: Sequelize.UUID,
-    allowNull: false,
-    unique: false
-  },
-  productId: {
+const Order = db.define('order', {
+  id: {
     type: Sequelize.UUID,
     unique: true,
     primaryKey: true,
@@ -40,23 +35,18 @@ const Cart = db.define('cart', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
   }
 })
 
-module.exports = Cart
+module.exports = Order
 
 /**
  * instanceMethods
  */
-
-Cart.prototype.addToCart = async (productId, userId) => {
-  return await Cart.create({productId, userId})
-}
-
-Cart.prototype.removeFromCart = async (productId, userId) => {
-  return await Cart.destroy({productId, userId})
-}
-
-Cart.prototype.getCart = ({userId}) => {
-  return Cart.findAll({where: {userId}})
-}
