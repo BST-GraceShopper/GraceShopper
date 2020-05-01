@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Wine = db.define('wine', {
+const Beer = db.define('beer', {
   id: {
     type: Sequelize.UUID,
     unique: true,
@@ -12,33 +12,14 @@ const Wine = db.define('wine', {
       notEmpty: true
     }
   },
-  image: {
-    type: Sequelize.STRING,
-    unique: false,
-    allowNull: true
-  },
-  vinter: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validation: {
-      notEmpty: true
-    }
-  },
-  vintage: {
-    type: Sequelize.INTEGER,
+  ABV: {
+    type: Sequelize.FLOAT,
     allowNull: false,
     validation: {
       notEmpty: true
     }
   },
   type: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validation: {
-      notEmpty: true
-    }
-  },
-  grape: {
     type: Sequelize.STRING,
     allowNull: false,
     validation: {
@@ -75,4 +56,4 @@ const Wine = db.define('wine', {
   }
 })
 
-module.exports = Wine
+module.exports = Beer
