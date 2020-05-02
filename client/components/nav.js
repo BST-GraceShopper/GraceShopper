@@ -184,4 +184,4 @@ const mapSpirits = () => {
 
 export const Beer = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
-export const Spirits = connect(mapSpirits)(Nav)
+export const SpiritsHeader = connect(mapSpirits)(Nav)

@@ -1,6 +1,7 @@
 const User = require('./user')
 const Wine = require('./wine')
-
+const Beer = require('./beer')
+const Spirit = require('./spirit')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -16,5 +17,7 @@ const Wine = require('./wine')
  */
 module.exports = {
   User,
-  Wine
+  Wine,
+  Beer,
+  Spirit
 }

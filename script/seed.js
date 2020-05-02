@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Wine, Beer} = require('../server/db/models')
+const {User, Wine, Beer, Spirit} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -51,6 +51,29 @@ async function seed() {
       type: 'IPA',
       price: 21.0,
       inventory: 6
+    })
+  ])
+
+  const spirits = await Promise.all([
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
     })
   ])
 
