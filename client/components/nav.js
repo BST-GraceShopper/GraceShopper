@@ -10,7 +10,8 @@ import {Login, Signup} from './auth-form'
 // const wineImage = require('..../public/images/wine.jpg')
 
 const Nav = props => {
-  const {name, imgURL, imgPosition} = props
+  const {name, imgURL, imgPosition, user} = props
+  console.log('from state', user)
   const history = useHistory()
   const [value, setValue] = React.useState(window.location.pathname)
   const [open, setOpen] = React.useState(false)
@@ -65,7 +66,7 @@ const Nav = props => {
             <Tabs
               value={value}
               indicatorColor="secondary"
-              textColor="white"
+              color="textSecondary"
               onChange={handleChange}
               aria-label="disabled tabs example"
               style={{
@@ -78,12 +79,15 @@ const Nav = props => {
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
               <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
               <Tab style={{color: 'white'}} value="/cart" label="Cart" />
-              <Tab
-                style={{color: 'white'}}
-                value={'/login' && '/signup'}
-                //   onClick={() => setOpen(true)}
-                label="Log In/Sign Up"
-              />
+              {!user.id ? (
+                <Tab
+                  style={{color: 'white'}}
+                  value={'/login' && '/signup'}
+                  label="Log In/Sign Up"
+                />
+              ) : (
+                <Tab color="secondary" value="/logout" label="Log Out" />
+              )}
             </Tabs>
           </div>
         </Grid>
@@ -159,36 +163,55 @@ const Nav = props => {
   )
 }
 
-const mapBeer = () => {
+const mapBeer = state => {
+  const {user} = state
   return {
     name: 'beer',
     imgURL:
       'https://www.connshg.com/Resources/b5f10bc2-4cd8-4ccf-be25-d8b538cf524c/bigstock-Beer-Cold-Craft-light-Beer-in-202781995.jpg',
-    imgPosition: 'left top'
+    imgPosition: 'left top',
+    user
   }
 }
 
-const mapWine = () => {
+const mapWine = state => {
+  const {user} = state
   return {
     name: 'wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
-    imgPosition: 'center top'
+    imgPosition: 'center top',
+    user
   }
 }
-const mapSpirits = () => {
+const mapSpirits = state => {
+  const {user} = state
   return {
     name: 'spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
-    imgPosition: 'right top'
+    imgPosition: 'right top',
+    user
   }
 }
 
-const mapCart = () => {
+const mapCart = state => {
+  const {user} = state
   return {
     name: 'cart',
     imgURL:
       'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
-    imgPosition: 'right top'
+    imgPosition: 'right top',
+    user
+  }
+}
+
+const mapHome = state => {
+  const {user} = state
+  return {
+    name: 'home',
+    imgURL:
+      'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
+    imgPosition: 'center bottom',
+    user
   }
 }
 
@@ -196,3 +219,4 @@ export const Beer = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
 export const Spirits = connect(mapSpirits)(Nav)
 export const CartHeader = connect(mapCart)(Nav)
+export const HomeHeader = connect(mapHome)(Nav)

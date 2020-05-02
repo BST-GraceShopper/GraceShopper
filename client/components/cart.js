@@ -13,7 +13,6 @@ class Cart extends Component {
   }
   render() {
     const {cart} = this.props
-    console.log(cart)
     return (
       <div style={{color: 'white'}}>
         <CartHeader />

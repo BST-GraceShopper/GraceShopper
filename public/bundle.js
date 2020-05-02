@@ -154,6 +154,7 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/* eslint-disable complexity */
 
 
 
@@ -455,7 +456,6 @@ function (_Component) {
     key: "render",
     value: function render() {
       var cart = this.props.cart;
-      console.log(cart);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
           color: 'white'
@@ -521,134 +521,72 @@ __webpack_require__.r(__webpack_exports__);
 
 var CartList = function CartList(_ref) {
   var cart = _ref.cart;
-  return (// <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-    //   {cart.map(item => {
-    //     return (
-    //       <ButtonBase
-    //         style={{
-    //           width: 'calc(100%/4)',
-    //           margin: 20,
-    //           padding: 10,
-    //           backgroundColor: 'black',
-    //           border: '1px white solid'
-    //         }}
-    //       >
-    //         <Card
-    //           elevation={3}
-    //           style={{
-    //             width: 'calc(100%)',
-    //             display: 'flex',
-    //             backgroundColor: 'black',
-    //             flexDirection: 'column',
-    //             justifyContent: 'center'
-    //           }}
-    //         >
-    //           <div
-    //             style={{
-    //               width: 'calc(100%)',
-    //               display: 'flex',
-    //               backgroundColor: 'black',
-    //               flexDirection: 'column',
-    //               justifyContent: 'center'
-    //             }}
-    //           >
-    //             <CardMedia
-    //               image={item.image}
-    //               style={{width: 200, height: 200}}
-    //             />
-    //           </div>
-    //           <CardContent
-    //             style={{
-    //               display: 'flex',
-    //               flexDirection: 'column',
-    //               justifyContent: 'center'
-    //             }}
-    //           >
-    //             {['maker', 'name', 'quantity'].map(key => {
-    //               return (
-    //                 <Typography style={{color: 'white'}}>
-    //                   {key}: {item[key]}
-    //                 </Typography>
-    //               )
-    //             })}
-    //           </CardContent>
-    //           <CardActions>
-    //             <IconButton aria-label="add to cart">
-    //               <AddIcon color="secondary" />
-    //             </IconButton>
-    //           </CardActions>
-    //         </Card>
-    //       </ButtonBase>
-    //     )
-    //   })}
-    // </div>
-    react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Paper__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    style: {
+      // border:'1px gray solid',
+      backgroundColor: 'black',
+      padding: 10,
+      margin: 20,
+      maxWidth: 500
+    }
+  }, cart.map(function (cartItem) {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      container: true,
+      spacing: 2,
       style: {
-        // border:'1px gray solid',
-        backgroundColor: 'black',
-        padding: 10,
-        margin: 20,
-        maxWidth: 500
+        border: '1px gray solid'
+      },
+      key: cartItem.id
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      alt: "complex",
+      src: cartItem.image,
+      style: {
+        margin: 'auto',
+        display: 'block',
+        maxWidth: 150,
+        maxHeight: 150
       }
-    }, cart.map(function (cartItem) {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        container: true,
-        spacing: 2,
-        style: {
-          border: '1px gray solid'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        alt: "complex",
-        src: cartItem.image,
-        style: {
-          margin: 'auto',
-          display: 'block',
-          maxWidth: 150,
-          maxHeight: 150
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true,
-        xs: 12,
-        sm: true,
-        container: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true,
-        xs: true,
-        container: true,
-        direction: "column",
-        spacing: 2
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true,
-        xs: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
-        gutterBottom: true,
-        color: "textSecondary",
-        variant: "subtitle1"
-      }, cartItem.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
-        variant: "body2",
-        gutterBottom: true
-      }, cartItem.maker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
-        variant: "body2",
-        color: "textSecondary"
-      }, cartItem.quantity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
-        variant: "body2",
-        color: "textSecondary",
-        style: {
-          cursor: 'pointer',
-          color: 'white'
-        }
-      }, "Remove"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
-        item: true
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
-        variant: "subtitle1",
-        color: "textSecondary"
-      }, "$", cartItem.price))));
-    })))
-  );
+    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true,
+      xs: 12,
+      sm: true,
+      container: true
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true,
+      xs: true,
+      container: true,
+      direction: "column",
+      spacing: 2
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true,
+      xs: true
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+      gutterBottom: true,
+      color: "textSecondary",
+      variant: "subtitle1"
+    }, cartItem.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+      variant: "body2",
+      gutterBottom: true
+    }, cartItem.maker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+      variant: "body2",
+      color: "textSecondary"
+    }, cartItem.quantity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+      variant: "body2",
+      color: "textSecondary",
+      style: {
+        cursor: 'pointer'
+      }
+    }, "Remove"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Grid"], {
+      item: true
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+      variant: "subtitle1",
+      color: "textSecondary"
+    }, "$", cartItem.price))));
+  }));
 };
 
 var mapStateToProps = function mapStateToProps(_ref2) {
@@ -669,6 +607,44 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CartList));
+
+/***/ }),
+
+/***/ "./client/components/home.js":
+/*!***********************************!*\
+  !*** ./client/components/home.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var _material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Tabs */ "./node_modules/@material-ui/core/esm/Tabs/index.js");
+/* harmony import */ var _material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/Tab */ "./node_modules/@material-ui/core/esm/Tab/index.js");
+/* harmony import */ var _auth_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./auth-form */ "./client/components/auth-form.js");
+/* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./nav */ "./client/components/nav.js");
+
+
+
+
+
+
+ // const spiritImage = require('./public/images/spirits.jpg')
+// const beerImage = require('./public/images/beer.jpg')
+// const wineImage = require('..../public/images/wine.jpg')
+
+
+
+var Home = function Home(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav__WEBPACK_IMPORTED_MODULE_7__["HomeHeader"], null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -707,7 +683,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!**********************************!*\
   !*** ./client/components/nav.js ***!
   \**********************************/
-/*! exports provided: Beer, WineHeader, Spirits, CartHeader */
+/*! exports provided: Beer, WineHeader, Spirits, CartHeader, HomeHeader */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -716,6 +692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WineHeader", function() { return WineHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Spirits", function() { return Spirits; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartHeader", function() { return CartHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeHeader", function() { return HomeHeader; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -745,7 +722,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Nav = function Nav(props) {
   var name = props.name,
       imgURL = props.imgURL,
-      imgPosition = props.imgPosition;
+      imgPosition = props.imgPosition,
+      user = props.user;
+  console.log('from state', user);
   var history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(window.location.pathname),
@@ -816,7 +795,7 @@ var Nav = function Nav(props) {
   }, "GS"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tabs__WEBPACK_IMPORTED_MODULE_4__["default"], {
     value: value,
     indicatorColor: "secondary",
-    textColor: "white",
+    color: "textSecondary",
     onChange: handleChange,
     "aria-label": "disabled tabs example",
     style: {
@@ -848,13 +827,16 @@ var Nav = function Nav(props) {
     },
     value: "/cart",
     label: "Cart"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }), !user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
     style: {
       color: 'white'
     },
-    value:  true && '/signup' //   onClick={() => setOpen(true)}
-    ,
+    value:  true && '/signup',
     label: "Log In/Sign Up"
+  }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    color: "secondary",
+    value: "/logout",
+    label: "Log Out"
   })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["Modal"], {
     open: open,
     value: value,
@@ -908,35 +890,53 @@ var Nav = function Nav(props) {
   }, name)));
 };
 
-var mapBeer = function mapBeer() {
+var mapBeer = function mapBeer(state) {
+  var user = state.user;
   return {
     name: 'beer',
     imgURL: 'https://www.connshg.com/Resources/b5f10bc2-4cd8-4ccf-be25-d8b538cf524c/bigstock-Beer-Cold-Craft-light-Beer-in-202781995.jpg',
-    imgPosition: 'left top'
+    imgPosition: 'left top',
+    user: user
   };
 };
 
-var mapWine = function mapWine() {
+var mapWine = function mapWine(state) {
+  var user = state.user;
   return {
     name: 'wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
-    imgPosition: 'center top'
+    imgPosition: 'center top',
+    user: user
   };
 };
 
-var mapSpirits = function mapSpirits() {
+var mapSpirits = function mapSpirits(state) {
+  var user = state.user;
   return {
     name: 'spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
-    imgPosition: 'right top'
+    imgPosition: 'right top',
+    user: user
   };
 };
 
-var mapCart = function mapCart() {
+var mapCart = function mapCart(state) {
+  var user = state.user;
   return {
     name: 'cart',
     imgURL: 'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
-    imgPosition: 'right top'
+    imgPosition: 'right top',
+    user: user
+  };
+};
+
+var mapHome = function mapHome(state) {
+  var user = state.user;
+  return {
+    name: 'home',
+    imgURL: 'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
+    imgPosition: 'center bottom',
+    user: user
   };
 };
 
@@ -944,6 +944,7 @@ var Beer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapBeer)(
 var WineHeader = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapWine)(Nav);
 var Spirits = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapSpirits)(Nav);
 var CartHeader = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapCart)(Nav);
+var HomeHeader = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapHome)(Nav);
 
 /***/ }),
 
@@ -1385,10 +1386,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components */ "./client/components/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
-/* harmony import */ var _components_wine_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/wine.js */ "./client/components/wine.js");
-/* harmony import */ var _components_beer_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/beer.js */ "./client/components/beer.js");
-/* harmony import */ var _components_spirits_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/spirits.js */ "./client/components/spirits.js");
-/* harmony import */ var _components_cart_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/cart.js */ "./client/components/cart.js");
+/* harmony import */ var _components_home_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/home.js */ "./client/components/home.js");
+/* harmony import */ var _components_wine_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/wine.js */ "./client/components/wine.js");
+/* harmony import */ var _components_beer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/beer.js */ "./client/components/beer.js");
+/* harmony import */ var _components_spirits_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/spirits.js */ "./client/components/spirits.js");
+/* harmony import */ var _components_cart_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cart.js */ "./client/components/cart.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1406,6 +1408,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1443,22 +1446,26 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/home",
+        component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/wine",
-        component: _components_wine_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+        component: _components_wine_js__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/beer",
-        component: _components_beer_js__WEBPACK_IMPORTED_MODULE_7__["default"]
+        component: _components_beer_js__WEBPACK_IMPORTED_MODULE_8__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/spirits",
-        component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_8__["default"]
+        component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart",
-        component: _components_cart_js__WEBPACK_IMPORTED_MODULE_9__["default"]
+        component: _components_cart_js__WEBPACK_IMPORTED_MODULE_10__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_8__["default"]
+        path: "/home",
+        component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }));
     }
   }]);
