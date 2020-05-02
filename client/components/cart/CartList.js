@@ -26,7 +26,7 @@ const CartList = ({cart}) => {
         maxWidth: 500
       }}
     >
-      {cart.map(cartItem => {
+      {cart.items.map(cartItem => {
         return (
           <Grid
             container

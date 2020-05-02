@@ -11,7 +11,7 @@ const REMOVE_CART = 'REMOVE_CART'
 /**
  * INITIAL STATE
  */
-const defaultCart = []
+const defaultCart = {items: [], totalPrice: 0, totalQuantity: 0}
 
 /**
  * ACTION CREATORS
@@ -26,7 +26,20 @@ const _addToCart = product => ({type: ADD_CART, product})
 export const getCart = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/cart/${userId}`)
-    dispatch(_getCart(res.data || defaultCart))
+    if (res.data) {
+      const cart = {
+        items: res.data,
+        totalPrice: res.data.reduce((acc, item) => {
+          return acc + item.price
+        }, 0),
+        totalQuantity: res.data.reduce((acc, item) => {
+          return acc + item.quantity
+        }, 0)
+      }
+      dispatch(_getCart(cart))
+    } else {
+      dispatch(_getCart(cart || defaultCart))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -39,9 +52,9 @@ export const removeFromCart = (user, product) => async dispatch => {
     console.error(err)
   }
 }
-export const addToCart = product => async dispatch => {
+export const addToCart = (user, product) => async dispatch => {
   try {
-    const res = await axios.post(`/cart/${user.id}`.product)
+    const res = await axios.post(`/cart/${user.id}`, product)
     dispatch(_addToCart(res.data))
   } catch (err) {
     console.error(err)

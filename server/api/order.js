@@ -12,7 +12,7 @@ router.get('/:status/:userId', async (req, res, next) => {
   }
 })
 
-router.post('/:userId', async (req, res, next) => {
+router.post('/:status/:userId', async (req, res, next) => {
   try {
     const {productId} = req.body
     const {userId} = req.params
@@ -23,10 +23,12 @@ router.post('/:userId', async (req, res, next) => {
   }
 })
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:status/:userId', async (req, res, next) => {
   try {
-    const wines = await Wine.findAll()
-    res.json(wines)
+    const {productId} = req.body
+    const {userId} = req.params
+    const wines = await removeFromCart(productId, userId)
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }
