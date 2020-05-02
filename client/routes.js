@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, UserHome} from './components'
 import {me} from './store'
+import Home from './components/home.js'
 import Wine from './components/wine.js'
 import Beer from './components/beer.js'
 import Spirits from './components/spirits.js'
@@ -26,6 +27,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
+        <Route path="/home" component={Home} />
         <Route path="/wine" component={Wine} />
         <Route path="/beer" component={Beer} />
         <Route path="/spirits" component={Spirits} />
@@ -39,7 +41,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Spirits} />
+        <Route path="/home" component={Home} />
       </Switch>
     )
   }
