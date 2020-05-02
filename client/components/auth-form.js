@@ -116,6 +116,9 @@ const AuthForm = props => {
           style={{margin: 10, width: 'calc(100%/2)'}}
           variant="contained"
           color="primary"
+          // name={name}
+          // href={`/auth/${name}`}
+          // onClick={(ev)=>handleSubmit(ev)}
         >
           {displayName}
         </Button>
@@ -141,6 +144,8 @@ const AuthForm = props => {
           variant="contained"
           color="primary"
           href="/auth/google"
+          // name="google"
+          // onClick={(ev)=>handleSubmit(ev)}
         >
           {displayName} with Google
         </Button>

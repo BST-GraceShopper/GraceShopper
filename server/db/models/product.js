@@ -12,6 +12,13 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
+  ABV: {
+    type: Sequelize.FLOAT,
+    allowNull: true,
+    validation: {
+      notEmpty: true
+    }
+  },
   image: {
     type: Sequelize.STRING,
     unique: false,
@@ -32,6 +39,13 @@ const Product = db.define('product', {
     }
   },
   category: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
+  type: {
     type: Sequelize.STRING,
     allowNull: false,
     validation: {
@@ -62,6 +76,13 @@ const Product = db.define('product', {
   region: {
     type: Sequelize.STRING,
     allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
+  grape: {
+    type: Sequelize.STRING,
+    allowNull: true,
     validation: {
       notEmpty: true
     }

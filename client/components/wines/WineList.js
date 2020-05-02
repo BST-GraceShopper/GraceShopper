@@ -28,10 +28,10 @@ const WineList = ({wines}) => {
               backgroundColor: 'black',
               border: '1px white solid'
             }}
-            key={wine.id}
           >
             <Card
               elevation={3}
+              key={wine.id}
               style={{
                 width: 'calc(100%)',
                 display: 'flex',
@@ -62,8 +62,8 @@ const WineList = ({wines}) => {
                 }}
               >
                 {[
-                  'vintage',
-                  'vinter',
+                  'name',
+                  'maker',
                   'type',
                   'grape',
                   'region',

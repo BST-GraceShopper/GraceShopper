@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Wine, Beer, Order} = require('../server/db/models')
+const {User, Wine, Beer, Order, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -32,6 +32,35 @@ async function seed() {
       region: 'New World',
       type: 'White',
       grape: 'Sauvignon Blanc',
+      price: 700.0,
+      inventory: 1,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    })
+  ])
+
+  const [Product1, Product2] = await Promise.all([
+    Product.create({
+      maker: 'Vinter 1',
+      year: 2019,
+      name: 'Wine 1',
+      region: 'Old World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Cabernet Sauvignon',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    }),
+    Product.create({
+      maker: 'Vinter 2',
+      year: 2019,
+      name: 'Wine 2',
+      region: 'New World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Pinot Noir',
       price: 700.0,
       inventory: 1,
       image:
