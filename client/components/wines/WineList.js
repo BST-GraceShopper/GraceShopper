@@ -28,6 +28,7 @@ const WineList = ({wines}) => {
               backgroundColor: 'black',
               border: '1px white solid'
             }}
+            key={wine.id}
           >
             <Card
               elevation={3}
