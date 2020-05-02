@@ -62,8 +62,8 @@ const WineList = ({wines}) => {
                 }}
               >
                 {[
-                  'vintage',
-                  'vinter',
+                  'name',
+                  'maker',
                   'type',
                   'grape',
                   'region',

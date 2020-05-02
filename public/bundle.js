@@ -1348,7 +1348,7 @@ var WineList = function WineList(_ref) {
         flexDirection: 'column',
         justifyContent: 'center'
       }
-    }, ['vintage', 'vinter', 'type', 'grape', 'region', 'price', 'inventory'].map(function (key) {
+    }, ['name', 'maker', 'type', 'grape', 'region', 'price', 'inventory'].map(function (key) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
         style: {
           color: 'white'
@@ -1463,7 +1463,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_beer_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/beer.js */ "./client/components/beer.js");
 /* harmony import */ var _components_spirits_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/spirits.js */ "./client/components/spirits.js");
 /* harmony import */ var _components_cart_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/cart.js */ "./client/components/cart.js");
-/* harmony import */ var _components_logout_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/logout.js */ "./client/components/logout.js");
+/* harmony import */ var _components_logout_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/logout.js */ "./client/components/logout.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1539,7 +1539,7 @@ function (_Component) {
         component: _components_cart_js__WEBPACK_IMPORTED_MODULE_10__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/logout",
-        component: _components_logout_js__WEBPACK_IMPORTED_MODULE_12__["default"]
+        component: _components_logout_js__WEBPACK_IMPORTED_MODULE_11__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
