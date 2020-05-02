@@ -17,7 +17,7 @@ const defaultCart = {items: [], totalPrice: 0, totalQuantity: 0}
  * ACTION CREATORS
  */
 const _getCart = cart => ({type: GET_CART, cart})
-const _removeFromCart = product => ({type: REMOVE_CART, product})
+const _removeFromCart = product => ({type: REMOVE_CART, productId})
 const _addToCart = product => ({type: ADD_CART, product})
 
 /**
@@ -44,17 +44,17 @@ export const getCart = userId => async dispatch => {
     console.error(err)
   }
 }
-export const removeFromCart = (user, product) => async dispatch => {
+export const removeFromCart = (userId, productId) => async dispatch => {
   try {
-    const res = await axios.delete(`/cart/${user.id}/${product.id}`)
-    dispatch(_removeFromCart(product))
+    const res = await axios.delete(`/api/cart/${userId}/${productId}`)
+    dispatch(_removeFromCart(productId))
   } catch (err) {
     console.error(err)
   }
 }
-export const addToCart = (user, product) => async dispatch => {
+export const addToCart = (userId, productId) => async dispatch => {
   try {
-    const res = await axios.post(`/cart/${user.id}`, product)
+    const res = await axios.post(`/api/cart/${userId}`, {productId})
     dispatch(_addToCart(res.data))
   } catch (err) {
     console.error(err)
@@ -70,9 +70,17 @@ export default function(state = defaultCart, action) {
       console.log(action.cart)
       return action.cart
     case ADD_CART:
-      return [...state, action.product]
+      return {
+        totalPrice: state.totalPrice + action.product.price,
+        totalQuantity: state.totalQuantity + action.product.quantity,
+        items: [...state.items, action.product]
+      }
     case REMOVE_CART:
-      return state.filter(item => item.id === product.id)
+      return {
+        totalPrice: state.totalPrice - action.product.price,
+        totalQuantity: state.totalQuantity - action.product.quantity,
+        items: state.items.filter(item => item.id !== action.productId)
+      }
     default:
       return state
   }

@@ -13,8 +13,9 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
+import {addToCart} from '../store/'
 
-const WineList = ({wines}) => {
+const WineList = ({user, wines, addToCart}) => {
   console.log(wines)
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
@@ -64,7 +65,7 @@ const WineList = ({wines}) => {
                 {[
                   'name',
                   'maker',
-                  'type',
+                  'category',
                   'grape',
                   'region',
                   'price',
@@ -78,7 +79,10 @@ const WineList = ({wines}) => {
                 })}
               </CardContent>
               <CardActions>
-                <IconButton aria-label="add to cart">
+                <IconButton
+                  aria-label="add to cart"
+                  onClick={() => addToCart(user.id, wine.id)}
+                >
                   <AddIcon color="secondary" />
                 </IconButton>
               </CardActions>
@@ -90,13 +94,13 @@ const WineList = ({wines}) => {
   )
 }
 
-const mapStateToProps = ({wines}) => {
-  return {wines}
+const mapStateToProps = ({wines, user}) => {
+  return {wines, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    loadWines() {
-      dispatch(getWines())
+    addToCart(userId, productId) {
+      dispatch(addToCart(userId, productId))
     }
   }
 }

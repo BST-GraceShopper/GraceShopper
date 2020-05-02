@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {CartHeader} from './nav'
-import CartList from './cart/CartList'
+import CartList from './CartList'
 import CartSummary from './cart/CartSummary'
 import {getCart} from '../store/'
 

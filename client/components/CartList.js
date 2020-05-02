@@ -14,8 +14,9 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
+import {removeFromCart} from '../store/'
 
-const CartList = ({cart}) => {
+const CartList = ({cart, user, removeFromCart}) => {
   return (
     <Paper
       style={{
@@ -63,15 +64,17 @@ const CartList = ({cart}) => {
                     {cartItem.quantity}
                   </Typography>
                 </Grid>
-                <Grid item>
+                <ButtonBase
+                  onClick={() => removeFromCart(user.id, cartItem.id)}
+                >
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    style={{cursor: 'pointer'}}
+                    // style={{cursor: 'pointer'}}
                   >
                     Remove
                   </Typography>
-                </Grid>
+                </ButtonBase>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1" color="textSecondary">
@@ -87,12 +90,12 @@ const CartList = ({cart}) => {
 }
 
 const mapStateToProps = ({wines, user, cart}) => {
-  return {wines}
+  return {wines, user, cart}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    loadWines() {
-      dispatch(getWines())
+    removeFromCart(userId, productId) {
+      dispatch(removeFromCart(userId, productId))
     }
   }
 }
