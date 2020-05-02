@@ -22,11 +22,20 @@ Order.belongsTo(User)
 Order.hasMany(Product)
 
 addToCart = async (prodId, userId) => {
-  const {productId, name, maker, image} = await Product.findByPk(productId)
-  return await Cart.create({userId, productId, name, maker, image, quantity: 1})
+  const {id, name, maker, price, image} = await Product.findByPk(prodId)
+  return await Order.create({
+    userId,
+    productId: id,
+    name,
+    maker,
+    image,
+    price,
+    status: 'cart',
+    quantity: 1
+  })
 }
 removeFromCart = async (productId, userId) => {
-  return await Cart.destroy({where: {userId, productId}})
+  return await Order.destroy({where: {userId, productId}})
 }
 
 module.exports = {
@@ -34,5 +43,7 @@ module.exports = {
   Wine,
   Order,
   Product,
-  Beer
+  Beer,
+  addToCart,
+  removeFromCart
 }
