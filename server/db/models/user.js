@@ -26,6 +26,14 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  level: {
+    type: Sequelize.STRING,
+    unique: false,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
   }
 })
 

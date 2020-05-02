@@ -1,5 +1,7 @@
 const User = require('./user')
 const Wine = require('./wine')
+const Order = require('./order')
+const Product = require('./product')
 const Beer = require('./beer')
 const Spirit = require('./spirit')
 /**
@@ -15,9 +17,34 @@ const Spirit = require('./spirit')
  * for example, we can say: const {User} = require('../db/models')
  * instead of: const User = require('../db/models/user')
  */
+
+Order.belongsTo(User)
+Order.hasMany(Product)
+
+addToCart = async (prodId, userId) => {
+  const {id, name, maker, price, image} = await Product.findByPk(prodId)
+  return await Order.create({
+    userId,
+    productId: id,
+    name,
+    maker,
+    image,
+    price,
+    status: 'cart',
+    quantity: 1
+  })
+}
+removeFromCart = async (productId, userId) => {
+  return await Order.destroy({where: {userId, productId}})
+}
+
 module.exports = {
   User,
   Wine,
+  Spirit,
+  Order,
+  Product,
   Beer,
-  Spirit
+  addToCart,
+  removeFromCart
 }

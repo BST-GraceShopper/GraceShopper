@@ -1,18 +1,26 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Wine, Beer, Spirit} = require('../server/db/models')
+
+const {
+  User,
+  Wine,
+  Beer,
+  Order,
+  Product,
+  Spirit
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  const [Cody, Murphy] = await Promise.all([
+    User.create({email: 'cody@email.com', password: '123', level: 'admin'}),
+    User.create({email: 'murphy@email.com', password: '123', level: 'read'})
   ])
 
-  const wines = await Promise.all([
+  const [Wine1, Wine2] = await Promise.all([
     Wine.create({
       vinter: 'Vinter 1',
       vintage: 2019,
@@ -21,7 +29,9 @@ async function seed() {
       type: 'Red',
       grape: 'Cabernet Sauvignon',
       price: 500.0,
-      inventory: 2
+      inventory: 2,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
     }),
     Wine.create({
       vinter: 'Vinter 2',
@@ -31,7 +41,38 @@ async function seed() {
       type: 'White',
       grape: 'Sauvignon Blanc',
       price: 700.0,
-      inventory: 1
+      inventory: 1,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    })
+  ])
+
+  const [Product1, Product2] = await Promise.all([
+    Product.create({
+      maker: 'Vinter 1',
+      year: 2019,
+      name: 'Wine 1',
+      region: 'Old World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Cabernet Sauvignon',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    }),
+    Product.create({
+      maker: 'Vinter 2',
+      year: 2019,
+      name: 'Wine 2',
+      region: 'New World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Pinot Noir',
+      price: 700.0,
+      inventory: 1,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
     })
   ])
 
@@ -77,7 +118,28 @@ async function seed() {
     })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const orders = await Promise.all([
+    Order.create({
+      userId: Cody.id,
+      name: Wine1.brand,
+      maker: Wine1.vinter,
+      image: Wine1.image,
+      quantity: 1,
+      price: Wine1.price,
+      status: 'cart'
+    }),
+    Order.create({
+      userId: Cody.id,
+      name: Wine2.brand,
+      maker: Wine2.vinter,
+      image: Wine2.image,
+      quantity: 1,
+      price: Wine2.price,
+      status: 'cart'
+    })
+  ])
+
+  console.log(`seeded users`)
   console.log(`seeded successfully`)
 }
 

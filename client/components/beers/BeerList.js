@@ -6,11 +6,11 @@ import {CardMedia, Card} from '@material-ui/core/'
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 
-const WineList = ({wines}) => {
-  console.log(wines)
+const BeerList = ({beers}) => {
+  console.log(beers)
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-      {wines.map(wine => {
+      {beers.map(beer => {
         return (
           <Card
             elevation={3}
@@ -24,7 +24,7 @@ const WineList = ({wines}) => {
               justifyContent: 'center'
             }}
           >
-            <CardMedia image={wine.image} style={{width: 200, height: 200}} />
+            <CardMedia image={beer.image} style={{width: 200, height: 200}} />
             <CardContent
               style={{
                 display: 'flex',
@@ -43,12 +43,12 @@ const WineList = ({wines}) => {
               ].map(key => {
                 return (
                   <Typography style={{color: 'white'}}>
-                    {key}: {wine[key]}
+                    {key}: {beer[key]}
                   </Typography>
                 )
               })}
-              {/* <Typography style={{ color:'white'}}>Vinter: {wine.vinter}</Typography>
-              <Typography style={{ color:'white'}}>Vintage: {wine.vintage}</Typography> */}
+              {/* <Typography style={{ color:'white'}}>Vinter: {beer.vinter}</Typography>
+              <Typography style={{ color:'white'}}>Vintage: {beer.vintage}</Typography> */}
             </CardContent>
           </Card>
         )
@@ -57,14 +57,14 @@ const WineList = ({wines}) => {
   )
 }
 
-const mapStateToProps = ({wines}) => {
-  return {wines}
+const mapStateToProps = ({beers}) => {
+  return {beers}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    loadWines() {
-      dispatch(getWines())
+    loadbeers() {
+      dispatch(getbeers())
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(WineList)
+export default connect(mapStateToProps, mapDispatchToProps)(BeerList)

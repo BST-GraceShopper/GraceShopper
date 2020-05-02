@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {WineHeader} from './nav'
-import WineList from './wines/WineList'
+import WineList from './WineList'
 import {getWines} from '../store/'
 
 class Wine extends Component {
@@ -10,7 +10,6 @@ class Wine extends Component {
   }
   render() {
     const {wines} = this.props
-    console.log(wines)
     return (
       <div style={{color: 'white'}}>
         <WineHeader />
