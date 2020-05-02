@@ -65,7 +65,7 @@ const CartList = ({cart, user, removeFromCart}) => {
                   </Typography>
                 </Grid>
                 <ButtonBase
-                  onClick={() => removeFromCart(user.id, cartItem.id)}
+                  onClick={() => removeFromCart(user.id, cartItem.productId)}
                 >
                   <Typography
                     variant="body2"
@@ -95,6 +95,7 @@ const mapStateToProps = ({wines, user, cart}) => {
 const mapDispatchToProps = dispatch => {
   return {
     removeFromCart(userId, productId) {
+      console.log(userId, productId)
       dispatch(removeFromCart(userId, productId))
     }
   }
