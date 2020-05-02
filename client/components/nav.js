@@ -11,7 +11,6 @@ import {Login, Signup} from './auth-form'
 
 const Nav = props => {
   const {name, imgURL, imgPosition, user} = props
-  console.log('from state', user)
   const history = useHistory()
   const [value, setValue] = React.useState(window.location.pathname)
   const [open, setOpen] = React.useState(false)
@@ -75,6 +74,7 @@ const Nav = props => {
                 alignItems: 'center'
               }}
             >
+              <Tab color="secondary" value="/home" label="Home" />
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
               <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
