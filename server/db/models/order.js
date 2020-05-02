@@ -46,6 +46,13 @@ const Order = db.define('order', {
     validation: {
       notEmpty: true
     }
+  },
+  productId: {
+    type: Sequelize.UUID,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
   }
 })
 

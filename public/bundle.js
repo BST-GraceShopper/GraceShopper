@@ -195,7 +195,7 @@ var CartList = function CartList(_ref) {
       color: "textSecondary"
     }, cartItem.quantity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["ButtonBase"], {
       onClick: function onClick() {
-        return removeFromCart(user.id, cartItem.id);
+        return removeFromCart(user.id, cartItem.productId);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
       variant: "body2",
@@ -224,6 +224,7 @@ var mapStateToProps = function mapStateToProps(_ref2) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     removeFromCart: function removeFromCart(userId, productId) {
+      console.log(userId, productId);
       dispatch(Object(_store___WEBPACK_IMPORTED_MODULE_6__["removeFromCart"])(userId, productId));
     }
   };
@@ -1874,26 +1875,27 @@ var removeFromCart = function removeFromCart(userId, productId) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
+                console.log('store', userId, productId);
+                _context2.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("/api/cart/".concat(userId, "/").concat(productId));
 
-              case 3:
+              case 4:
                 res = _context2.sent;
                 dispatch(_removeFromCart(productId));
-                _context2.next = 10;
+                _context2.next = 11;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 8:
+                _context2.prev = 8;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 7]]);
+        }, _callee2, null, [[0, 8]]);
       }));
 
       return function (_x2) {
