@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Beer = db.define('beer', {
+const Spirit = db.define('spirit', {
   id: {
     type: Sequelize.UUID,
     unique: true,
@@ -12,12 +12,15 @@ const Beer = db.define('beer', {
       notEmpty: true
     }
   },
+  category: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validattion: {
+      notEmpty: true
+    }
+  },
   ABV: {
-
-    type: Sequelize.DECIMAL,
-
-    type: Sequelize.FLOAT,
-
+    type: Sequelize.INTEGER,
     allowNull: false,
     validation: {
       notEmpty: true
@@ -34,6 +37,13 @@ const Beer = db.define('beer', {
     type: Sequelize.STRING,
     allowNull: false,
     validation: {
+      notEmpty: true
+    }
+  },
+  size: {
+    type: Sequelize.DECIMAL,
+    allowNull: false,
+    validate: {
       notEmpty: true
     }
   },
@@ -57,7 +67,11 @@ const Beer = db.define('beer', {
     validation: {
       notEmpty: true
     }
+  },
+  rating: {
+    type: Sequelize.INTEGER,
+    allowNull: true
   }
 })
 
-module.exports = Beer
+module.exports = Spirit

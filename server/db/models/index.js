@@ -4,6 +4,9 @@ const Wine = require('./wine')
 const Order = require('./order')
 const Product = require('./product')
 const Beer = require('./beer')
+const Spirit = require('./spirit')
+
+
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -21,6 +24,12 @@ const Beer = require('./beer')
 
 Order.belongsTo(User)
 Order.hasMany(Product)
+
+
+const addToCart = async (prodId, userId) => {
+  const {id, name, maker, price, image} = await Product.findByPk(prodId)
+  await Order.create({
+
 Product.belongsTo(Order)
 
 addToCart = async (productId, userId) => {
@@ -30,6 +39,7 @@ addToCart = async (productId, userId) => {
   }
   const {id, name, maker, price, image} = await Product.findByPk(productId)
   return await Order.create({
+
     userId,
     productId: id,
     name,
@@ -40,6 +50,10 @@ addToCart = async (productId, userId) => {
     quantity: 1
   })
 }
+
+const removeFromCart = async (productId, userId) => {
+  await Order.destroy({where: {userId, productId}})
+
 
 editCart = async (action, productId, userId) => {
   const order = await Order.findOne({where: {userId, productId}})
@@ -60,11 +74,13 @@ editCart = async (action, productId, userId) => {
 
 removeFromCart = async (productId, userId) => {
   return await Order.destroy({where: {userId, productId}})
+
 }
 
 module.exports = {
   User,
   Wine,
+  Spirit,
   Order,
   Product,
   Beer,

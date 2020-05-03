@@ -1,6 +1,15 @@
 'use strict'
 
 const db = require('../server/db')
+
+const {
+  User,
+  Wine,
+  Beer,
+  Order,
+  Product,
+  Spirit
+} = require('../server/db/models')
 const {User, Wine, Beer, Order, Product} = require('../server/db/models')
 
 async function seed() {
@@ -87,6 +96,49 @@ async function seed() {
     })
   ])
 
+
+  const spirits = await Promise.all([
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    })
+  ])
+
+  const orders = await Promise.all([
+    Order.create({
+      userId: Cody.id,
+      name: Wine1.brand,
+      maker: Wine1.vinter,
+      image: Wine1.image,
+      quantity: 1,
+      price: Wine1.price,
+      status: 'cart'
+    }),
+    Order.create({
+      userId: Cody.id,
+      name: Wine2.brand,
+      maker: Wine2.vinter,
+      image: Wine2.image,
+      quantity: 1,
+      price: Wine2.price,
+      status: 'cart'
+
   const orders = await Promise.all([
     Order.create({
       userId: Cody.id,
@@ -107,6 +159,7 @@ async function seed() {
       price: Product2.price,
       status: 'cart',
       productId: Product2.id
+
     })
   ])
 
