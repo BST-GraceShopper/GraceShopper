@@ -1,7 +1,8 @@
+const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Beer = db.define('beer', {
+const Order = db.define('order', {
   id: {
     type: Sequelize.UUID,
     unique: true,
@@ -12,47 +13,42 @@ const Beer = db.define('beer', {
       notEmpty: true
     }
   },
-  ABV: {
-
-    type: Sequelize.DECIMAL,
-
-    type: Sequelize.FLOAT,
-
-    allowNull: false,
-    validation: {
-      notEmpty: true
-    }
-  },
-  type: {
+  name: {
     type: Sequelize.STRING,
     allowNull: false,
     validation: {
       notEmpty: true
     }
   },
-  brand: {
+  maker: {
     type: Sequelize.STRING,
     allowNull: false,
     validation: {
       notEmpty: true
     }
+  },
+  image: {
+    type: Sequelize.STRING,
+    unique: false,
+    allowNull: false
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   },
   price: {
     type: Sequelize.FLOAT,
-    allowNull: false,
-    validation: {
-      notEmpty: true
-    }
+    allowNull: false
   },
-  inventory: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    validation: {
-      notEmpty: true
-    }
-  },
-  region: {
+  status: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
+  productId: {
+    type: Sequelize.UUID,
     allowNull: false,
     validation: {
       notEmpty: true
@@ -60,4 +56,8 @@ const Beer = db.define('beer', {
   }
 })
 
-module.exports = Beer
+module.exports = Order
+
+/**
+ * instanceMethods
+ */

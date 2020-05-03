@@ -10,6 +10,7 @@ const {
   Product,
   Spirit
 } = require('../server/db/models')
+const {User, Wine, Beer, Order, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -95,6 +96,7 @@ async function seed() {
     })
   ])
 
+
   const spirits = await Promise.all([
     Spirit.create({
       category: 'Whiskey',
@@ -136,6 +138,28 @@ async function seed() {
       quantity: 1,
       price: Wine2.price,
       status: 'cart'
+
+  const orders = await Promise.all([
+    Order.create({
+      userId: Cody.id,
+      name: Product1.name,
+      maker: Product1.maker,
+      image: Product1.image,
+      quantity: 1,
+      price: Product1.price,
+      status: 'cart',
+      productId: Product1.id
+    }),
+    Order.create({
+      userId: Cody.id,
+      name: Product2.name,
+      maker: Product2.maker,
+      image: Product2.image,
+      quantity: 1,
+      price: Product2.price,
+      status: 'cart',
+      productId: Product2.id
+
     })
   ])
 

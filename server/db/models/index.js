@@ -1,9 +1,13 @@
+/* eslint-disable no-return-await */
 const User = require('./user')
 const Wine = require('./wine')
 const Order = require('./order')
 const Product = require('./product')
 const Beer = require('./beer')
 const Spirit = require('./spirit')
+
+
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -21,9 +25,21 @@ const Spirit = require('./spirit')
 Order.belongsTo(User)
 Order.hasMany(Product)
 
+
 const addToCart = async (prodId, userId) => {
   const {id, name, maker, price, image} = await Product.findByPk(prodId)
   await Order.create({
+
+Product.belongsTo(Order)
+
+addToCart = async (productId, userId) => {
+  const order = await Order.findOne({where: {userId, productId}})
+  if (order) {
+    return await editCart('add', productId, userId)
+  }
+  const {id, name, maker, price, image} = await Product.findByPk(productId)
+  return await Order.create({
+
     userId,
     productId: id,
     name,
@@ -34,8 +50,31 @@ const addToCart = async (prodId, userId) => {
     quantity: 1
   })
 }
+
 const removeFromCart = async (productId, userId) => {
   await Order.destroy({where: {userId, productId}})
+
+
+editCart = async (action, productId, userId) => {
+  const order = await Order.findOne({where: {userId, productId}})
+  if (action === 'add' && order) {
+    const ret = await Order.update(
+      {quantity: order.quantity + 1},
+      {returning: true, where: {userId, productId}}
+    )
+    return ret[1][0]
+  } else if (action === 'remove' && order) {
+    const ret = await Order.update(
+      {quantity: order.quantity - 1},
+      {returning: true, where: {userId, productId}}
+    )
+    return ret[1][0]
+  }
+}
+
+removeFromCart = async (productId, userId) => {
+  return await Order.destroy({where: {userId, productId}})
+
 }
 
 module.exports = {

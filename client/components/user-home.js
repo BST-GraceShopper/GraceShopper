@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {HomeHeader} from './nav'
+import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
 
 /**
  * COMPONENT
@@ -10,7 +12,10 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <HomeHeader />
+      <Typography style={{color: 'white'}} variant="h3">
+        Welcome, {email}
+      </Typography>
     </div>
   )
 }
