@@ -20,7 +20,7 @@ const defaultCart = {items: [], totalPrice: 0, totalQuantity: 0}
 const _getCart = cart => ({type: GET_CART, cart})
 const _addToCart = product => ({type: ADD_CART, product})
 const _removeOneFromCart = product => ({type: REMOVEONE_CART, product})
-const _removeProductFromCart = productId => ({type: REMOVEP_CART, productId})
+const _removeProductFromCart = product => ({type: REMOVEP_CART, product})
 
 /**
  * THUNK CREATORS
