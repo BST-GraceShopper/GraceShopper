@@ -1825,10 +1825,10 @@ var _removeOneFromCart = function _removeOneFromCart(product) {
   };
 };
 
-var _removeProductFromCart = function _removeProductFromCart(productId) {
+var _removeProductFromCart = function _removeProductFromCart(product) {
   return {
     type: REMOVEP_CART,
-    productId: productId
+    product: product
   };
 };
 /**
