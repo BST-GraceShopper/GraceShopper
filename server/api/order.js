@@ -17,7 +17,17 @@ router.post('/:status/:userId', async (req, res, next) => {
     const {productId} = req.body
     const {userId} = req.params
     const cart = await addToCart(productId, userId)
-    console.log(cart)
+    res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:status/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const {productId} = req.body
+    const cart = await editCart('remove', productId, userId)
     res.json(cart)
   } catch (err) {
     next(err)
@@ -27,7 +37,7 @@ router.post('/:status/:userId', async (req, res, next) => {
 router.delete('/:status/:userId/:productId', async (req, res, next) => {
   try {
     const {userId, productId} = req.params
-    const wines = await removeFromCart(productId, userId)
+    const cart = await removeFromCart(productId, userId)
     res.sendStatus(204)
   } catch (err) {
     next(err)

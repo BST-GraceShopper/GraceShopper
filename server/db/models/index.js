@@ -23,46 +23,43 @@ Order.belongsTo(User)
 Order.hasMany(Product)
 Product.belongsTo(Order)
 
-addToCart = async (prodId, userId) => {
-  const {id, name, maker, price, image} = await Product.findByPk(prodId)
-  const order = await Order.findOne({where: {userId, productId: id}})
-  if (order) {
-    return await Order.update(
-      {
-        quantity: order.quantity + 1
-      },
-      {
-        returning: true,
-        where: {
-          userId,
-          productId: id
-        }
-      }
-    )
-  } else {
-    return await Order.create({
-      userId,
-      productId: id,
-      name,
-      maker,
-      image,
-      price,
-      status: 'cart',
-      quantity: 1
-    })
-  }
-}
-removeFromCart = async (productId, userId) => {
-  console.log(productId, userId)
+addToCart = async (productId, userId) => {
   const order = await Order.findOne({where: {userId, productId}})
-  if (order.quantity === 1) {
-    return await Order.destroy({where: {userId, productId}})
-  } else {
-    return await Order.update(
+  if (order) {
+    return await editCart('add', productId, userId)
+  }
+  const {id, name, maker, price, image} = await Product.findByPk(productId)
+  return await Order.create({
+    userId,
+    productId: id,
+    name,
+    maker,
+    image,
+    price,
+    status: 'cart',
+    quantity: 1
+  })
+}
+
+editCart = async (action, productId, userId) => {
+  const order = await Order.findOne({where: {userId, productId}})
+  if (action === 'add' && order) {
+    const ret = await Order.update(
+      {quantity: order.quantity + 1},
+      {returning: true, where: {userId, productId}}
+    )
+    return ret[1][0]
+  } else if (action === 'remove' && order) {
+    const ret = await Order.update(
       {quantity: order.quantity - 1},
       {returning: true, where: {userId, productId}}
     )
+    return ret[1][0]
   }
+}
+
+removeFromCart = async (productId, userId) => {
+  return await Order.destroy({where: {userId, productId}})
 }
 
 module.exports = {
