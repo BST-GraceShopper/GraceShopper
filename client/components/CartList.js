@@ -14,9 +14,10 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {removeFromCart} from '../store/'
+import RemoveIcon from '@material-ui/icons/Remove'
+import {removeFromCart, addToCart} from '../store/'
 
-const CartList = ({cart, user, removeFromCart}) => {
+const CartList = ({cart, user, removeFromCart, addToCart}) => {
   return (
     <Paper
       style={{
@@ -75,6 +76,23 @@ const CartList = ({cart, user, removeFromCart}) => {
                     Remove
                   </Typography>
                 </ButtonBase>
+                <CardActions>
+                  <IconButton
+                    aria-label="remove one"
+                    onClick={() => removeFromCart(user.id, cartItem)}
+                  >
+                    <RemoveIcon color="secondary" />
+                  </IconButton>
+                  <Typography variant="body2" color="textSecondary">
+                    {cartItem.quantity}
+                  </Typography>
+                  <IconButton
+                    aria-label="add one"
+                    onClick={() => addToCart(user.id, cartItem.productId)}
+                  >
+                    <AddIcon color="secondary" />
+                  </IconButton>
+                </CardActions>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1" color="textSecondary">
@@ -95,8 +113,10 @@ const mapStateToProps = ({wines, user, cart}) => {
 const mapDispatchToProps = dispatch => {
   return {
     removeFromCart(userId, productId) {
-      console.log(userId, productId)
       dispatch(removeFromCart(userId, productId))
+    },
+    addToCart(userId, productId) {
+      dispatch(addToCart(userId, productId))
     }
   }
 }
