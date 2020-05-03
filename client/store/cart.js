@@ -86,13 +86,14 @@ export default function(state = defaultCart, action) {
       ) {
         return {
           totalPrice: state.totalPrice + action.product.price,
-          totalQuantity: state.totalQuantity + action.product.quantity,
-          items: [
-            ...state.items.filter(
-              item => item.productId !== action.product.productId
-            ),
-            action.product
-          ]
+          totalQuantity: state.totalQuantity + 1,
+          items: state.items.map(item => {
+            if (item.productId === action.product.productId) {
+              return action.product
+            } else {
+              return item
+            }
+          })
         }
       } else {
         return {
@@ -104,13 +105,14 @@ export default function(state = defaultCart, action) {
     case REMOVEONE_CART:
       return {
         totalPrice: state.totalPrice - action.product.price,
-        totalQuantity: state.totalQuantity - action.product.quantity,
-        items: [
-          ...state.items.filter(
-            item => item.productId !== action.product.productId
-          ),
-          action.product
-        ]
+        totalQuantity: state.totalQuantity - 1,
+        items: state.items.map(item => {
+          if (item.productId === action.product.productId) {
+            return action.product
+          } else {
+            return item
+          }
+        })
       }
     case REMOVEP_CART:
       return {
