@@ -6,8 +6,6 @@ const Product = require('./product')
 const Beer = require('./beer')
 const Spirit = require('./spirit')
 
-
-
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -24,22 +22,15 @@ const Spirit = require('./spirit')
 
 Order.belongsTo(User)
 Order.hasMany(Product)
-
-
-const addToCart = async (prodId, userId) => {
-  const {id, name, maker, price, image} = await Product.findByPk(prodId)
-  await Order.create({
-
 Product.belongsTo(Order)
 
-addToCart = async (productId, userId) => {
+const addToCart = async (productId, userId) => {
   const order = await Order.findOne({where: {userId, productId}})
   if (order) {
     return await editCart('add', productId, userId)
   }
   const {id, name, maker, price, image} = await Product.findByPk(productId)
   return await Order.create({
-
     userId,
     productId: id,
     name,
@@ -51,11 +42,7 @@ addToCart = async (productId, userId) => {
   })
 }
 
-const removeFromCart = async (productId, userId) => {
-  await Order.destroy({where: {userId, productId}})
-
-
-editCart = async (action, productId, userId) => {
+const editCart = async (action, productId, userId) => {
   const order = await Order.findOne({where: {userId, productId}})
   if (action === 'add' && order) {
     const ret = await Order.update(
@@ -72,9 +59,8 @@ editCart = async (action, productId, userId) => {
   }
 }
 
-removeFromCart = async (productId, userId) => {
+const removeFromCart = async (productId, userId) => {
   return await Order.destroy({where: {userId, productId}})
-
 }
 
 module.exports = {
