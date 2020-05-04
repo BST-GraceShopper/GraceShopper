@@ -120,7 +120,6 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Price'}
   ]
-
   return (
     <Table color="textSecondary">
       <TableHead>

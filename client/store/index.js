@@ -8,7 +8,7 @@ import cart from './cart'
 
 import spirits from './spirit'
 
-const reducer = combineReducers({user, wines, spirits})
+const reducer = combineReducers({user, wines, spirits, cart})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
