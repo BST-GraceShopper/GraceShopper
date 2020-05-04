@@ -32,7 +32,7 @@ class Routes extends Component {
         <Route path="/wine" component={Wine} />
         <Route path="/beer" component={Beer} />
         <Route path="/spirits" component={Spirits} />
-        {/* <Route path="/cart" component={Cart} /> */}
+        <Route path="/cart" component={Cart} />
 
         {isLoggedIn && (
           <Switch>
