@@ -12,6 +12,7 @@ const reducer = combineReducers({user, wines, spirits, cart})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
+
 const store = createStore(reducer, middleware)
 
 export default store
