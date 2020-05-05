@@ -5,10 +5,11 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import wines from './wine'
 import cart from './cart'
+import beers from './beer'
 
 import spirits from './spirit'
 
-const reducer = combineReducers({user, wines, spirits})
+const reducer = combineReducers({user, wines, beers, spirits})
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
@@ -21,3 +22,4 @@ export * from './user'
 export * from './wine'
 export * from './spirit'
 export * from './cart'
+export * from './beer'

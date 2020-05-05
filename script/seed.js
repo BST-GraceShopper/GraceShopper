@@ -78,20 +78,26 @@ async function seed() {
 
   const beers = await Promise.all([
     Beer.create({
+      category: 'Beer',
       ABV: 7.5,
       brand: 'Mother Earth 4Seasons Hazy IPA',
       region: 'Nampa, ID',
       type: 'IPA',
       price: 20.0,
-      inventory: 12
+      inventory: 12,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/12/fourseasons.png'
     }),
     Beer.create({
+      category: 'Beer',
       ABV: 5.2,
       brand: 'Lakefront Brewery Hazy Rabbit IPA',
       region: 'Milwaukee, WI',
       type: 'IPA',
       price: 21.0,
-      inventory: 6
+      inventory: 6,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/03/btbhazyipa_internal_lakefront.png'
     })
   ])
 
