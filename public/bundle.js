@@ -2347,7 +2347,7 @@ var removeFromCart = function removeFromCart(userId, product) {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, getCart, addToCart, removeFromCart */
+/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, addSpirits, editSpirits, removeSpirits, getCart, addToCart, removeFromCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2360,13 +2360,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user */ "./client/store/user.js");
 /* harmony import */ var _wine__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./wine */ "./client/store/wine.js");
-<<<<<<< HEAD
 /* harmony import */ var _spirit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./spirit */ "./client/store/spirit.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
-=======
-/* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
-/* harmony import */ var _spirit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./spirit */ "./client/store/spirit.js");
->>>>>>> 48c9cf8c5ef24234f65b60cb5d5f20f345a571d4
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "me", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["me"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["auth"]; });
@@ -2381,13 +2376,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeWine", function() { return _wine__WEBPACK_IMPORTED_MODULE_5__["removeWine"]; });
 
-<<<<<<< HEAD
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["getSpirits"]; });
-=======
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_7__["getSpirits"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_6__["getCart"]; });
->>>>>>> 48c9cf8c5ef24234f65b60cb5d5f20f345a571d4
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["addSpirits"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "editSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["editSpirits"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["removeSpirits"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_7__["getCart"]; });
 
@@ -2403,17 +2398,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   user: _user__WEBPACK_IMPORTED_MODULE_4__["default"],
   wines: _wine__WEBPACK_IMPORTED_MODULE_5__["default"],
-<<<<<<< HEAD
   spirits: _spirit__WEBPACK_IMPORTED_MODULE_6__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_7__["default"]
-=======
-  spirits: _spirit__WEBPACK_IMPORTED_MODULE_7__["default"],
-  cart: _cart__WEBPACK_IMPORTED_MODULE_6__["default"]
->>>>>>> 48c9cf8c5ef24234f65b60cb5d5f20f345a571d4
 });
 var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger"])({
   collapsed: true
@@ -2431,27 +2420,62 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!********************************!*\
   !*** ./client/store/spirit.js ***!
   \********************************/
-/*! exports provided: getSpirits, default */
+/*! exports provided: getSpirits, addSpirits, editSpirits, removeSpirits, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSpirits", function() { return getSpirits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addSpirits", function() { return addSpirits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editSpirits", function() { return editSpirits; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeSpirits", function() { return removeSpirits; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
  //ACTION TYPES
 
-var GET_SPIRITS = 'GET_SPIRITS'; //INITIAL STATE
+var GET_SPIRITS = 'GET_SPIRITS';
+var ADD_SPIRITS = 'ADD_SPIRITS';
+var EDIT_SPIRITS = 'EDIT_SPIRITS';
+var REMOVE_SPIRITS = 'REMOVE_SPIRITS'; //INITIAL STATE
 
 var defaultSpirits = []; //ACTION CREATORS
 
 var _getSpirits = function _getSpirits(spirits) {
   return {
     type: GET_SPIRITS,
+    spirits: spirits
+  };
+};
+
+var _addSpirits = function _addSpirits(spirits) {
+  return {
+    type: ADD_SPIRITS,
+    spirits: spirits
+  };
+};
+
+var _editSpirits = function _editSpirits(spirits) {
+  return {
+    type: EDIT_SPIRITS,
+    spirits: spirits
+  };
+};
+
+var _removeSpirits = function _removeSpirits(spirits) {
+  return {
+    type: REMOVE_SPIRITS,
     spirits: spirits
   };
 }; //THUNK CREATORS
@@ -2498,6 +2522,132 @@ var getSpirits = function getSpirits() {
       };
     }()
   );
+};
+var addSpirits = function addSpirits() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(dispatch) {
+        var spirits;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/spirits');
+
+              case 3:
+                spirits = _context2.sent.data;
+                console.log(spirits);
+                dispatch(_addSpirits(spirits));
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
+var editSpirits = function editSpirits() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var spirits;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/spirits');
+
+              case 3:
+                spirits = _context3.sent.data;
+                console.log(spirits);
+                dispatch(_editSpirits(spirits));
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
+      }));
+
+      return function (_x3) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
+};
+var removeSpirits = function removeSpirits() {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref4 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        var spirits;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/spirits');
+
+              case 3:
+                spirits = _context4.sent.data;
+                console.log(spirits);
+                dispatch(_removeSpirits(spirits));
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 8]]);
+      }));
+
+      return function (_x4) {
+        return _ref4.apply(this, arguments);
+      };
+    }()
+  );
 }; //REDUCER
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
@@ -2507,6 +2657,17 @@ var getSpirits = function getSpirits() {
   switch (action.type) {
     case GET_SPIRITS:
       return action.spirits;
+
+    case ADD_SPIRITS:
+      return [].concat(_toConsumableArray(state), [action.spirits]);
+
+    case EDIT_SPIRITS:
+      return state;
+
+    case REMOVE_SPIRITS:
+      return state.filter(function (spiritItem) {
+        return spiritItem.id !== action.spirit.id;
+      });
 
     default:
       return state;

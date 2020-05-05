@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const {Spirit} = require('../db/models')
+const {Beer} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const spirits = await Spirit.findAll()
-    res.send(spirits)
+    const beers = await Beer.findAll()
+    res.json(beers)
   } catch (err) {
     next(err)
   }

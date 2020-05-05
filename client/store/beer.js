@@ -21,9 +21,9 @@ const _getBeers = beers => ({type: GET_BEERS, beers})
  */
 export const getBeers = () => async dispatch => {
   try {
-    const wines = (await axios.get('/api/wines')).data
-    console.log(wines)
-    dispatch(_getBeers(wines))
+    const beers = (await axios.get('/api/beers')).data
+    console.log(beers)
+    dispatch(_getBeers(beers))
   } catch (err) {
     console.error(err)
   }
