@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 const User = require('./user')
 const Wine = require('./wine')
 const Order = require('./order')
@@ -20,9 +21,14 @@ const Spirit = require('./spirit')
 
 Order.belongsTo(User)
 Order.hasMany(Product)
+Product.belongsTo(Order)
 
-addToCart = async (prodId, userId) => {
-  const {id, name, maker, price, image} = await Product.findByPk(prodId)
+addToCart = async (productId, userId) => {
+  const order = await Order.findOne({where: {userId, productId}})
+  if (order) {
+    return await editCart('add', productId, userId)
+  }
+  const {id, name, maker, price, image} = await Product.findByPk(productId)
   return await Order.create({
     userId,
     productId: id,
@@ -34,6 +40,24 @@ addToCart = async (prodId, userId) => {
     quantity: 1
   })
 }
+
+editCart = async (action, productId, userId) => {
+  const order = await Order.findOne({where: {userId, productId}})
+  if (action === 'add' && order) {
+    const ret = await Order.update(
+      {quantity: order.quantity + 1},
+      {returning: true, where: {userId, productId}}
+    )
+    return ret[1][0]
+  } else if (action === 'remove' && order) {
+    const ret = await Order.update(
+      {quantity: order.quantity - 1},
+      {returning: true, where: {userId, productId}}
+    )
+    return ret[1][0]
+  }
+}
+
 removeFromCart = async (productId, userId) => {
   return await Order.destroy({where: {userId, productId}})
 }

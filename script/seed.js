@@ -121,21 +121,23 @@ async function seed() {
   const orders = await Promise.all([
     Order.create({
       userId: Cody.id,
-      name: Wine1.brand,
-      maker: Wine1.vinter,
-      image: Wine1.image,
+      name: Product1.name,
+      maker: Product1.maker,
+      image: Product1.image,
       quantity: 1,
-      price: Wine1.price,
-      status: 'cart'
+      price: Product1.price,
+      status: 'cart',
+      productId: Product1.id
     }),
     Order.create({
       userId: Cody.id,
-      name: Wine2.brand,
-      maker: Wine2.vinter,
-      image: Wine2.image,
+      name: Product2.name,
+      maker: Product2.maker,
+      image: Product2.image,
       quantity: 1,
-      price: Wine2.price,
-      status: 'cart'
+      price: Product2.price,
+      status: 'cart',
+      productId: Product2.id
     })
   ])
 

@@ -32,7 +32,19 @@ class CartSummary extends Component {
           maxWidth: 500
         }}
       >
-        <Typography color="textSecondary">Total Cost = {totalPrice}</Typography>
+        <Typography color="textSecondary">
+          Total Quantity = {totalPrice}
+        </Typography>
+        <Typography color="textSecondary">
+          Total Cost = ${totalPrice}
+        </Typography>
+        <Typography color="textSecondary">
+          Tax: = ${totalPrice * 0.05}
+        </Typography>
+        <Typography color="textSecondary">Shipping: = $5.00</Typography>
+        <Typography color="textSecondary">
+          Grand Total: = ${totalPrice + totalPrice * 0.05 + 5}
+        </Typography>
       </Paper>
     )
   }
