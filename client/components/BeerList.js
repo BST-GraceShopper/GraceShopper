@@ -15,7 +15,7 @@ import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
 
-const beerList = ({user, beers, addToCart}) => {
+const beerList = ({user, beers}) => {
   console.log(beers, 'valmik')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>

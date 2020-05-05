@@ -5,7 +5,7 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_beers = 'GET_beers'
-const ADD_beer = 'DD_beer'
+const ADD_beer = 'ADD_beer'
 const EDIT_beer = 'EDIT_beer'
 const REMOVE_beer = 'REMOVE_beer'
 
