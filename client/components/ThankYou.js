@@ -14,21 +14,13 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {checkout} from '../store/'
-import {useHistory} from 'react-router-dom'
+import {checkout} from '../store'
 
 class Checkout extends Component {
   render() {
     const {user} = this.props
     const token = window.localStorage.getItem('guestToken')
-    return (
-      <Button
-        onClick={() => this.props.checkout(user.id || token)}
-        color="secondary"
-      >
-        Checkout
-      </Button>
-    )
+    return <div style={{color: 'white'}}>Thank you for your order!!!</div>
   }
 }
 

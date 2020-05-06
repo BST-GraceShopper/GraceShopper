@@ -24,8 +24,6 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    console.log('store user', res.data)
-    //if no user then log in as guest here!!!!!
     if (!res.data) {
       dispatch(guestLogin())
     } else {
