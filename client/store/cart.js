@@ -56,6 +56,15 @@ export const addToCart = (userId, productId) => async dispatch => {
   }
 }
 
+export const checkout = userId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/cart/checkout/${userId}`)
+    dispatch(getCart(userId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const removeFromCart = (userId, product) => async dispatch => {
   try {
     if (product.quantity === 1) {
