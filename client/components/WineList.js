@@ -16,7 +16,7 @@ import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
 
 const WineList = ({user, wines, addToCart}) => {
-  console.log(wines)
+  const token = window.localStorage.getItem('guestToken')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {wines.map(wine => {
@@ -81,7 +81,7 @@ const WineList = ({user, wines, addToCart}) => {
               <CardActions>
                 <IconButton
                   aria-label="add to cart"
-                  onClick={() => addToCart(user.id, wine.id)}
+                  onClick={() => addToCart(user.id || token, wine.id)}
                 >
                   <AddIcon color="secondary" />
                 </IconButton>

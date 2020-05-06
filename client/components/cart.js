@@ -8,9 +8,8 @@ import {getCart} from '../store/'
 class Cart extends Component {
   componentDidMount() {
     const {getCart, user} = this.props
-    if (user.id) {
-      getCart(user.id)
-    }
+    const token = window.localStorage.getItem('guestToken')
+    getCart(user.id || token)
   }
   render() {
     const {cart} = this.props

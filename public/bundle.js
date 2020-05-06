@@ -268,6 +268,7 @@ var CartList = function CartList(_ref) {
     disablePadding: false,
     label: 'Price'
   }];
+  var token = window.localStorage.getItem('guestToken');
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_8__["default"], {
     color: "textSecondary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_12__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_14__["default"], null, ['Item', 'Quantity', 'Price'].map(function (item) {
@@ -320,7 +321,7 @@ var CartList = function CartList(_ref) {
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
       "aria-label": "remove one",
       onClick: function onClick() {
-        return removeFromCart(user.id, cartItem);
+        return removeFromCart(user.id || token, cartItem);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_6___default.a, {
       color: "secondary"
@@ -330,7 +331,7 @@ var CartList = function CartList(_ref) {
     }, cartItem.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
       "aria-label": "add one",
       onClick: function onClick() {
-        return addToCart(user.id, cartItem.productId);
+        return addToCart(user.id || token, cartItem.productId);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
       color: "secondary"
@@ -416,7 +417,7 @@ var WineList = function WineList(_ref) {
   var user = _ref.user,
       wines = _ref.wines,
       addToCart = _ref.addToCart;
-  console.log(wines);
+  var token = window.localStorage.getItem('guestToken');
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: 'flex',
@@ -471,7 +472,7 @@ var WineList = function WineList(_ref) {
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
       "aria-label": "add to cart",
       onClick: function onClick() {
-        return addToCart(user.id, wine.id);
+        return addToCart(user.id || token, wine.id);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
       color: "secondary"
@@ -844,10 +845,8 @@ function (_Component) {
       var _this$props = this.props,
           getCart = _this$props.getCart,
           user = _this$props.user;
-
-      if (user.id) {
-        getCart(user.id);
-      }
+      var token = window.localStorage.getItem('guestToken');
+      getCart(user.id || token);
     }
   }, {
     key: "render",
@@ -1254,7 +1253,7 @@ var Nav = function Nav(props) {
     }
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
     color: "secondary",
-    value: "/home",
+    value: "/",
     label: "Home"
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
     style: {
@@ -1952,7 +1951,8 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/home",
+        exact: true,
+        path: "/",
         component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/wine",
@@ -1963,8 +1963,12 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/spirits",
         component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_9__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/cart",
+        component: _components_cart_js__WEBPACK_IMPORTED_MODULE_10__["default"]
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/home",
+        exact: true,
+        path: "/",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart",
@@ -1973,7 +1977,8 @@ function (_Component) {
         path: "/logout",
         component: _components_logout_js__WEBPACK_IMPORTED_MODULE_11__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/home",
+        exact: true,
+        path: "/",
         component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }));
     }
@@ -2347,7 +2352,7 @@ var removeFromCart = function removeFromCart(userId, product) {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, addSpirits, editSpirits, removeSpirits, getCart, addToCart, removeFromCart */
+/*! exports provided: default, me, guestLogin, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, addSpirits, editSpirits, removeSpirits, getCart, addToCart, removeFromCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2363,6 +2368,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _spirit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./spirit */ "./client/store/spirit.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "me", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["me"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "guestLogin", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["guestLogin"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["auth"]; });
 
@@ -2680,12 +2687,13 @@ var removeSpirits = function removeSpirits() {
 /*!******************************!*\
   !*** ./client/store/user.js ***!
   \******************************/
-/*! exports provided: me, auth, logout, default */
+/*! exports provided: me, guestLogin, auth, logout, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "me", function() { return me; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "guestLogin", function() { return guestLogin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return auth; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -2747,21 +2755,28 @@ var me = function me() {
 
               case 3:
                 res = _context.sent;
-                dispatch(getUser(res.data || defaultUser));
-                _context.next = 10;
+                console.log('store user', res.data); //if no user then log in as guest here!!!!!
+
+                if (!res.data) {
+                  dispatch(guestLogin());
+                } else {
+                  dispatch(getUser(res.data || defaultUser));
+                }
+
+                _context.next = 11;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }));
 
       return function (_x) {
@@ -2770,35 +2785,99 @@ var me = function me() {
     }()
   );
 };
-var auth = function auth(email, password, method) {
+var guestLogin = function guestLogin() {
   return (
     /*#__PURE__*/
     function () {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var res;
+        var token, res, _res;
+
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
-                _context2.next = 3;
+                token = window.localStorage.getItem('guestToken');
+
+                if (!token) {
+                  _context2.next = 9;
+                  break;
+                }
+
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/guest/login', {
+                  token: token
+                });
+
+              case 5:
+                res = _context2.sent;
+                console.log('login', res.data);
+                _context2.next = 14;
+                break;
+
+              case 9:
+                _context2.next = 11;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/guest/signup');
+
+              case 11:
+                _res = _context2.sent;
+                console.log('signup', _res.data);
+                window.localStorage.setItem('guestToken', _res.data);
+
+              case 14:
+                _context2.next = 19;
+                break;
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 19:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 16]]);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
+var auth = function auth(email, password, method) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref3 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(dispatch) {
+        var res;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/auth/".concat(method), {
                   email: email,
                   password: password
                 });
 
               case 3:
-                res = _context2.sent;
-                _context2.next = 9;
+                res = _context3.sent;
+                _context3.next = 9;
                 break;
 
               case 6:
-                _context2.prev = 6;
-                _context2.t0 = _context2["catch"](0);
-                return _context2.abrupt("return", dispatch(getUser({
-                  error: _context2.t0
+                _context3.prev = 6;
+                _context3.t0 = _context3["catch"](0);
+                return _context3.abrupt("return", dispatch(getUser({
+                  error: _context3.t0
                 })));
 
               case 9:
@@ -2811,14 +2890,14 @@ var auth = function auth(email, password, method) {
 
               case 10:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee3, null, [[0, 6]]);
       }));
 
-      return function (_x2) {
-        return _ref2.apply(this, arguments);
+      return function (_x3) {
+        return _ref3.apply(this, arguments);
       };
     }()
   );
@@ -2827,38 +2906,38 @@ var logout = function logout() {
   return (
     /*#__PURE__*/
     function () {
-      var _ref3 = _asyncToGenerator(
+      var _ref4 = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(dispatch) {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      regeneratorRuntime.mark(function _callee4(dispatch) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.prev = 0;
-                _context3.next = 3;
+                _context4.prev = 0;
+                _context4.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/logout');
 
               case 3:
                 dispatch(removeUser());
                 _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/home');
-                _context3.next = 10;
+                _context4.next = 10;
                 break;
 
               case 7:
-                _context3.prev = 7;
-                _context3.t0 = _context3["catch"](0);
-                console.error(_context3.t0);
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+                console.error(_context4.t0);
 
               case 10:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, null, [[0, 7]]);
+        }, _callee4, null, [[0, 7]]);
       }));
 
-      return function (_x3) {
-        return _ref3.apply(this, arguments);
+      return function (_x4) {
+        return _ref4.apply(this, arguments);
       };
     }()
   );

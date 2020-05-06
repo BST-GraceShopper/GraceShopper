@@ -120,6 +120,8 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Price'}
   ]
+
+  const token = window.localStorage.getItem('guestToken')
   return (
     <Table color="textSecondary">
       <TableHead>
@@ -187,7 +189,7 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
                 >
                   <IconButton
                     aria-label="remove one"
-                    onClick={() => removeFromCart(user.id, cartItem)}
+                    onClick={() => removeFromCart(user.id || token, cartItem)}
                   >
                     <RemoveIcon color="secondary" />
                   </IconButton>
@@ -196,7 +198,9 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
                   </Typography>
                   <IconButton
                     aria-label="add one"
-                    onClick={() => addToCart(user.id, cartItem.productId)}
+                    onClick={() =>
+                      addToCart(user.id || token, cartItem.productId)
+                    }
                   >
                     <AddIcon color="secondary" />
                   </IconButton>

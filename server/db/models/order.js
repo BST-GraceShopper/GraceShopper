@@ -53,6 +53,13 @@ const Order = db.define('order', {
     validation: {
       notEmpty: true
     }
+  },
+  userId: {
+    type: Sequelize.UUID,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
   }
 })
 

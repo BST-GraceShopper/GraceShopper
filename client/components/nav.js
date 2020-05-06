@@ -74,7 +74,7 @@ const Nav = props => {
                 alignItems: 'center'
               }}
             >
-              <Tab color="secondary" value="/home" label="Home" />
+              <Tab color="secondary" value="/" label="Home" />
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
               <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />

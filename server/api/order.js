@@ -1,10 +1,16 @@
 const router = require('express').Router()
-const {Order, Product, addToCart, removeFromCart} = require('../db/models')
+const {
+  Order,
+  Product,
+  User,
+  addToCart,
+  removeFromCart
+} = require('../db/models')
 module.exports = router
 
 router.get('/:status/:userId', async (req, res, next) => {
   try {
-    const {userId, status} = req.params
+    let {userId, status} = req.params
     const cart = await Order.findAll({where: {userId, status}})
     res.json(cart)
   } catch (err) {
@@ -16,6 +22,8 @@ router.post('/:status/:userId', async (req, res, next) => {
   try {
     const {productId} = req.body
     const {userId} = req.params
+    // const user = await User.findByPk(userId)
+    // userId = user.id || jwt.decode(userId,"NONE").id
     const order = await Order.findOne({where: {userId, productId}})
     if (order) {
       const ret = await Order.update(
