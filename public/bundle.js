@@ -1650,7 +1650,6 @@ var addToCart = function addToCart(product) {
 
   switch (action.type) {
     case GET_CART:
-      console.log(action.cart);
       return action.cart;
 
     case ADD_CART:
