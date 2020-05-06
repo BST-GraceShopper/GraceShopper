@@ -140,8 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var beerList = function beerList(_ref) {
   var user = _ref.user,
-      beers = _ref.beers,
-      addToCart = _ref.addToCart;
+      beers = _ref.beers;
   console.log(beers, 'valmik');
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -197,7 +196,7 @@ var beerList = function beerList(_ref) {
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
       "aria-label": "add to cart",
       onClick: function onClick() {
-        return addToCart(user.id, beer.id);
+        return Object(_store___WEBPACK_IMPORTED_MODULE_6__["addToCart"])(user.id, beer.id);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
       color: "secondary"
@@ -1310,11 +1309,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!**********************************!*\
   !*** ./client/components/nav.js ***!
   \**********************************/
-<<<<<<< HEAD
-/*! exports provided: BeerHeader, WineHeader, Spirits, CartHeader, HomeHeader */
-=======
-/*! exports provided: Beer, WineHeader, SpiritsHeader, CartHeader, HomeHeader */
->>>>>>> 8a4a7431f0efaa2c3dd91ff7718182b6a69ae37a
+/*! exports provided: BeerHeader, WineHeader, SpiritsHeader, CartHeader, HomeHeader */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2252,7 +2247,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  */
 
 var GET_beers = 'GET_beers';
-var ADD_beer = 'DD_beer';
+var ADD_beer = 'ADD_beer';
 var EDIT_beer = 'EDIT_beer';
 var REMOVE_beer = 'REMOVE_beer';
 /**
@@ -2751,11 +2746,7 @@ var removeFromCart = function removeFromCart(userId, product) {
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
   \*******************************/
-<<<<<<< HEAD
-/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, getCart, addToCart, removeFromCart, getBeers, addbeer, editbeer, removebeer */
-=======
-/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, addSpirits, editSpirits, removeSpirits, getCart, addToCart, removeFromCart */
->>>>>>> 8a4a7431f0efaa2c3dd91ff7718182b6a69ae37a
+/*! exports provided: default, me, auth, logout, getWines, addWine, editWine, removeWine, getSpirits, addSpirits, editSpirits, removeSpirits, getCart, addToCart, removeFromCart, getBeers, addbeer, editbeer, removebeer */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2768,14 +2759,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./user */ "./client/store/user.js");
 /* harmony import */ var _wine__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./wine */ "./client/store/wine.js");
-<<<<<<< HEAD
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
 /* harmony import */ var _beer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./beer */ "./client/store/beer.js");
 /* harmony import */ var _spirit__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./spirit */ "./client/store/spirit.js");
-=======
-/* harmony import */ var _spirit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./spirit */ "./client/store/spirit.js");
-/* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
->>>>>>> 8a4a7431f0efaa2c3dd91ff7718182b6a69ae37a
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "me", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["me"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "auth", function() { return _user__WEBPACK_IMPORTED_MODULE_4__["auth"]; });
@@ -2790,23 +2776,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeWine", function() { return _wine__WEBPACK_IMPORTED_MODULE_5__["removeWine"]; });
 
-<<<<<<< HEAD
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_8__["getSpirits"]; });
-=======
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["getSpirits"]; });
->>>>>>> 8a4a7431f0efaa2c3dd91ff7718182b6a69ae37a
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["addSpirits"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_8__["addSpirits"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "editSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["editSpirits"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "editSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_8__["editSpirits"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_6__["removeSpirits"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeSpirits", function() { return _spirit__WEBPACK_IMPORTED_MODULE_8__["removeSpirits"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_7__["getCart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_6__["getCart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addToCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_7__["addToCart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "addToCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_6__["addToCart"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeFromCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_7__["removeFromCart"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "removeFromCart", function() { return _cart__WEBPACK_IMPORTED_MODULE_6__["removeFromCart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getBeers", function() { return _beer__WEBPACK_IMPORTED_MODULE_7__["getBeers"]; });
 
@@ -2828,13 +2810,9 @@ __webpack_require__.r(__webpack_exports__);
 var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   user: _user__WEBPACK_IMPORTED_MODULE_4__["default"],
   wines: _wine__WEBPACK_IMPORTED_MODULE_5__["default"],
-<<<<<<< HEAD
   beers: _beer__WEBPACK_IMPORTED_MODULE_7__["default"],
-  spirits: _spirit__WEBPACK_IMPORTED_MODULE_8__["default"]
-=======
-  spirits: _spirit__WEBPACK_IMPORTED_MODULE_6__["default"],
-  cart: _cart__WEBPACK_IMPORTED_MODULE_7__["default"]
->>>>>>> 8a4a7431f0efaa2c3dd91ff7718182b6a69ae37a
+  spirits: _spirit__WEBPACK_IMPORTED_MODULE_8__["default"],
+  cart: _cart__WEBPACK_IMPORTED_MODULE_6__["default"]
 });
 var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger"])({
   collapsed: true
