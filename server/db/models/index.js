@@ -1,9 +1,11 @@
+/* eslint-disable no-return-await */
 const User = require('./user')
 const Wine = require('./wine')
 const Order = require('./order')
 const Product = require('./product')
 const Beer = require('./beer')
-
+const Spirit = require('./spirit')
+const Guest = require('./guest')
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -18,21 +20,17 @@ const Beer = require('./beer')
  * instead of: const User = require('../db/models/user')
  */
 
-Order.belongsTo(User)
+// Order.belongsTo(User)
 Order.hasMany(Product)
-
-addToCart = async (prodId, userId) => {
-  const {productId, name, maker, image} = await Product.findByPk(productId)
-  return await Cart.create({userId, productId, name, maker, image, quantity: 1})
-}
-removeFromCart = async (productId, userId) => {
-  return await Cart.destroy({where: {userId, productId}})
-}
+Product.belongsTo(Order)
+// Order.belongsTo(Guest)
 
 module.exports = {
   User,
   Wine,
+  Spirit,
   Order,
   Product,
-  Beer
+  Beer,
+  Guest
 }

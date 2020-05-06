@@ -1,15 +1,23 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Wine, Beer, Order} = require('../server/db/models')
+
+const {
+  User,
+  Wine,
+  Beer,
+  Order,
+  Product,
+  Spirit
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const [Cody, Murphy] = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'cody@email.com', password: '123', level: 'admin'}),
+    User.create({email: 'murphy@email.com', password: '123', level: 'read'})
   ])
 
   const [Wine1, Wine2] = await Promise.all([
@@ -39,6 +47,35 @@ async function seed() {
     })
   ])
 
+  const [Product1, Product2] = await Promise.all([
+    Product.create({
+      maker: 'Vinter 1',
+      year: 2019,
+      name: 'Wine 1',
+      region: 'Old World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Cabernet Sauvignon',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    }),
+    Product.create({
+      maker: 'Vinter 2',
+      year: 2019,
+      name: 'Wine 2',
+      region: 'New World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Pinot Noir',
+      price: 700.0,
+      inventory: 1,
+      image:
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    })
+  ])
+
   const beers = await Promise.all([
     Beer.create({
       ABV: 7.5,
@@ -58,22 +95,187 @@ async function seed() {
     })
   ])
 
+  const spirits = await Promise.all([
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Tennessee, USA',
+      size: 1.75,
+      price: 54.99,
+      inventory: 21
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: 'Crown Royal',
+      type: 'Special Reserve',
+      region: 'Canada',
+      size: 1.75,
+      price: 86.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 58.6,
+      brand: "Clyde May's",
+      type: '9 YR Alabama Style Cask Strength',
+      region: 'Alabama, USA',
+      size: 0.75,
+      price: 129.99,
+      inventory: 5
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: 'Jameson',
+      type: '18 YR',
+      region: 'Ireland',
+      size: 0.75,
+      price: 86.99,
+      inventory: 16
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 48.0,
+      brand: 'Shin',
+      type: '10 YR Malt Whiskey Mizunara Oak Finish',
+      region: 'Japan',
+      size: 0.75,
+      price: 99.99,
+      inventory: 8
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 46.0,
+      brand: 'Westland',
+      type: 'Sherry Wood Single Malt',
+      region: 'USA',
+      size: 0.75,
+      price: 79.99,
+      inventory: 13
+    }),
+
+    //--- TEQUILA ---
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+
+    //--- RUM ---
+    Spirit.create({
+      category: 'Rum',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+
+    //--- VODKA ---
+    Spirit.create({
+      category: 'Vodka',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+
+    //--- SCOTCH ---
+    Spirit.create({
+      category: 'Scotch',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    })
+  ])
+
   const orders = await Promise.all([
     Order.create({
       userId: Cody.id,
-      name: Wine1.brand,
-      maker: Wine1.vinter,
-      image: Wine1.image,
+      name: Product1.name,
+      maker: Product1.maker,
+      image: Product1.image,
       quantity: 1,
-      status: 'cart'
+      price: Product1.price,
+      status: 'cart',
+      productId: Product1.id
     }),
     Order.create({
       userId: Cody.id,
-      name: Wine2.brand,
-      maker: Wine2.vinter,
-      image: Wine2.image,
+      name: Product2.name,
+      maker: Product2.maker,
+      image: Product2.image,
       quantity: 1,
-      status: 'cart'
+      price: Product2.price,
+      status: 'cart',
+      productId: Product2.id
     })
   ])
 

@@ -36,8 +36,26 @@ const Order = db.define('order', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
+  price: {
+    type: Sequelize.FLOAT,
+    allowNull: false
+  },
   status: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
+  productId: {
+    type: Sequelize.UUID,
+    allowNull: false,
+    validation: {
+      notEmpty: true
+    }
+  },
+  userId: {
+    type: Sequelize.UUID,
     allowNull: false,
     validation: {
       notEmpty: true

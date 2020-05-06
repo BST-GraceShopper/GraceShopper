@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import {CardMedia, Card} from '@material-ui/core/'
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
+import {getBeers} from '../../store'
 
 const BeerList = ({beers}) => {
   console.log(beers)
@@ -63,7 +64,7 @@ const mapStateToProps = ({beers}) => {
 const mapDispatchToProps = dispatch => {
   return {
     loadbeers() {
-      dispatch(getbeers())
+      dispatch(getBeers())
     }
   }
 }
