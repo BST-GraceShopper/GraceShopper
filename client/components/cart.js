@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {CartHeader} from './nav'
 import CartList from './CartList'
 import CartSummary from './cart/CartSummary'
+import Checkout from './Checkout'
 import {getCart} from '../store/'
 
 class Cart extends Component {
@@ -19,6 +20,7 @@ class Cart extends Component {
         <div id="cartBody">
           <CartList cart={cart} />
           <CartSummary />
+          <Checkout />
         </div>
       </div>
     )
