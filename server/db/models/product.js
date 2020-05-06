@@ -33,7 +33,7 @@ const Product = db.define('product', {
   },
   year: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }
