@@ -5,7 +5,7 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const spirits = await Spirit.findAll()
-    res.json(spirits)
+    res.send(spirits)
   } catch (err) {
     next(err)
   }

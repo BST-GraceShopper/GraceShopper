@@ -217,6 +217,6 @@ const mapHome = state => {
 
 export const BeerHeader = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
-export const Spirits = connect(mapSpirits)(Nav)
+export const SpiritsHeader = connect(mapSpirits)(Nav)
 export const CartHeader = connect(mapCart)(Nav)
 export const HomeHeader = connect(mapHome)(Nav)

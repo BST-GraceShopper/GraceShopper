@@ -20,7 +20,7 @@ const Spirit = db.define('spirit', {
     }
   },
   ABV: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL,
     allowNull: false,
     validation: {
       notEmpty: true

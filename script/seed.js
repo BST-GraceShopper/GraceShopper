@@ -107,10 +107,72 @@ async function seed() {
       ABV: 40.0,
       brand: "Jack Daniel's",
       type: 'Gentelman Jack',
-      region: 'Lynchburg, Tennessee',
+      region: 'Tennessee, USA',
       size: 1.75,
       price: 54.99,
+      inventory: 21
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: 'Crown Royal',
+      type: 'Special Reserve',
+      region: 'Canada',
+      size: 1.75,
+      price: 86.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 58.6,
+      brand: "Clyde May's",
+      type: '9 YR Alabama Style Cask Strength',
+      region: 'Alabama, USA',
+      size: 0.75,
+      price: 129.99,
+      inventory: 5
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 40.0,
+      brand: 'Jameson',
+      type: '18 YR',
+      region: 'Ireland',
+      size: 0.75,
+      price: 86.99,
       inventory: 16
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 48.0,
+      brand: 'Shin',
+      type: '10 YR Malt Whiskey Mizunara Oak Finish',
+      region: 'Japan',
+      size: 0.75,
+      price: 99.99,
+      inventory: 8
+    }),
+    Spirit.create({
+      category: 'Whiskey',
+      ABV: 46.0,
+      brand: 'Westland',
+      type: 'Sherry Wood Single Malt',
+      region: 'USA',
+      size: 0.75,
+      price: 79.99,
+      inventory: 13
+    }),
+
+    //--- TEQUILA ---
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
     }),
     Spirit.create({
       category: 'Tequila',
@@ -121,6 +183,82 @@ async function seed() {
       size: 0.75,
       price: 49.99,
       inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+    Spirit.create({
+      category: 'Tequila',
+      ABV: 40.0,
+      brand: 'Patron',
+      type: 'Reposado',
+      region: 'Mexico',
+      size: 0.75,
+      price: 49.99,
+      inventory: 9
+    }),
+
+    //--- RUM ---
+    Spirit.create({
+      category: 'Rum',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+
+    //--- VODKA ---
+    Spirit.create({
+      category: 'Vodka',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
+    }),
+
+    //--- SCOTCH ---
+    Spirit.create({
+      category: 'Scotch',
+      ABV: 40.0,
+      brand: "Jack Daniel's",
+      type: 'Gentelman Jack',
+      region: 'Lynchburg, Tennessee',
+      size: 1.75,
+      price: 54.99,
+      inventory: 16
     })
   ])
 
