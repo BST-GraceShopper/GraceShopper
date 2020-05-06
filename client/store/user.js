@@ -41,8 +41,8 @@ export const guestLogin = () => async dispatch => {
     const token = window.localStorage.getItem('guestToken')
     if (token) {
       //login guest
-      const res = await axios.post('/auth/guest/login', {token})
-      console.log('login', res.data)
+      // const res = await axios.post('/auth/guest/login', {token})
+      // console.log('login', res.data)
     } else {
       //create new guest
       const res = await axios.get('/auth/guest/signup')

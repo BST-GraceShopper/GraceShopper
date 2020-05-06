@@ -28,7 +28,6 @@ const _removeWine = wines => ({type: REMOVE_WINE, wine})
 export const getWines = () => async dispatch => {
   try {
     const wines = (await axios.get('/api/wines')).data
-    console.log(wines)
     dispatch(_getWines(wines))
   } catch (err) {
     console.error(err)

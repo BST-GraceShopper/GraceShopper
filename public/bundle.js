@@ -272,7 +272,9 @@ var CartList = function CartList(_ref) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_8__["default"], {
     color: "textSecondary"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableHead__WEBPACK_IMPORTED_MODULE_12__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_14__["default"], null, ['Item', 'Quantity', 'Price'].map(function (item) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_10__["default"], null, item);
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      key: item
+    }, item);
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_9__["default"], null, cart.items.map(function (cartItem) {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_14__["default"], {
       key: cartItem.productId
@@ -425,23 +427,22 @@ var WineList = function WineList(_ref) {
       justifyContent: 'center'
     }
   }, wines.map(function (wine) {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["ButtonBase"], {
-      style: {
-        width: 'calc(100%/4)',
-        margin: 20,
-        padding: 10,
-        backgroundColor: 'black',
-        border: '1px white solid'
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Card"], {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Card"], {
       elevation: 3,
       key: wine.id,
       style: {
         width: 'calc(100%)',
         display: 'flex',
         backgroundColor: 'black',
-        flexDirection: 'column',
         justifyContent: 'center'
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["ButtonBase"], {
+      style: {
+        width: 'calc(100%/4)',
+        margin: 20,
+        padding: 10,
+        backgroundColor: 'black',
+        border: '1px white solid'
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       style: {
@@ -463,20 +464,21 @@ var WineList = function WineList(_ref) {
         flexDirection: 'column',
         justifyContent: 'center'
       }
-    }, ['name', 'maker', 'category', 'grape', 'region', 'price', 'inventory'].map(function (key) {
+    }, ['name', 'maker', 'category', 'grape', 'region', 'price', 'inventory'].map(function (prop) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["Typography"], {
+        key: prop,
         style: {
           color: 'white'
         }
-      }, key, ": ", wine[key]);
-    })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
+      }, prop, ": ", wine[prop]);
+    }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["CardActions"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core___WEBPACK_IMPORTED_MODULE_3__["IconButton"], {
       "aria-label": "add to cart",
       onClick: function onClick() {
         return addToCart(user.id || token, wine.id);
       }
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
       color: "secondary"
-    })))));
+    }))));
   }));
 };
 
@@ -2792,8 +2794,7 @@ var guestLogin = function guestLogin() {
       var _ref2 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(dispatch) {
-        var token, res, _res;
-
+        var token, res;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -2802,45 +2803,37 @@ var guestLogin = function guestLogin() {
                 token = window.localStorage.getItem('guestToken');
 
                 if (!token) {
-                  _context2.next = 9;
+                  _context2.next = 5;
                   break;
                 }
 
-                _context2.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/auth/guest/login', {
-                  token: token
-                });
+                _context2.next = 10;
+                break;
 
               case 5:
-                res = _context2.sent;
-                console.log('login', res.data);
-                _context2.next = 14;
-                break;
-
-              case 9:
-                _context2.next = 11;
+                _context2.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/auth/guest/signup');
 
-              case 11:
-                _res = _context2.sent;
-                console.log('signup', _res.data);
-                window.localStorage.setItem('guestToken', _res.data);
+              case 7:
+                res = _context2.sent;
+                console.log('signup', res.data);
+                window.localStorage.setItem('guestToken', res.data);
 
-              case 14:
-                _context2.next = 19;
+              case 10:
+                _context2.next = 15;
                 break;
 
-              case 16:
-                _context2.prev = 16;
+              case 12:
+                _context2.prev = 12;
                 _context2.t0 = _context2["catch"](0);
                 console.error(_context2.t0);
 
-              case 19:
+              case 15:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 16]]);
+        }, _callee2, null, [[0, 12]]);
       }));
 
       return function (_x2) {
@@ -3061,22 +3054,21 @@ var getWines = function getWines() {
 
               case 3:
                 wines = _context.sent.data;
-                console.log(wines);
                 dispatch(_getWines(wines));
-                _context.next = 11;
+                _context.next = 10;
                 break;
 
-              case 8:
-                _context.prev = 8;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.error(_context.t0);
 
-              case 11:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 7]]);
       }));
 
       return function (_x) {

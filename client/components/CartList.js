@@ -127,7 +127,7 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
       <TableHead>
         <TableRow>
           {['Item', 'Quantity', 'Price'].map(item => {
-            return <TableCell>{item}</TableCell>
+            return <TableCell key={item}>{item}</TableCell>
           })}
         </TableRow>
       </TableHead>
