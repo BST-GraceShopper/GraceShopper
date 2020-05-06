@@ -63,7 +63,7 @@ const AuthForm = props => {
         <TextField
           error={err && err.response && err.response.data}
           id="outlined-with-icon-adornment"
-          style={{margin: 10, width: 'calc(100%*2/3'}}
+          style={{margin: 10, width: 'calc(100%*2/3', color: 'black'}}
           label="Username"
           name="email"
           variant="outlined"
