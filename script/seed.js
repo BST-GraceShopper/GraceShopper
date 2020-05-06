@@ -47,7 +47,7 @@ async function seed() {
     })
   ])
 
-  const [Product1, Product2] = await Promise.all([
+  const products = await Promise.all([
     Product.create({
       maker: 'Vinter 1',
       year: 2019,
@@ -73,25 +73,79 @@ async function seed() {
       inventory: 1,
       image:
         'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+    }),
+    Product.create({
+      ABV: 7.5,
+      maker: 'Mother Earth',
+      name: '4Seasons Hazy IPA',
+      region: 'Nampa, ID',
+      type: 'IPA',
+      category: 'beer',
+      price: 20.0,
+      inventory: 12,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h53/h9c/11192333664286.png'
+    }),
+    Product.create({
+      ABV: 5.2,
+      maker: 'Lakefront Brewery',
+      name: 'Hazy Rabbit IPA',
+      region: 'Milwaukee, WI',
+      type: 'IPA',
+      category: 'beer',
+      price: 29.0,
+      inventory: 6,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/03/btbhazyipa_internal_lakefront.png'
+    }),
+    Product.create({
+      ABV: 6.8,
+      maker: 'Anchor Brewing',
+      name: 'Fog Breaker IPA',
+      region: 'San Francisco, CA',
+      type: 'IPA',
+      category: 'beer',
+      price: 24.0,
+      inventory: 12,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/12/fogbreaker.png'
+    }),
+    Product.create({
+      ABV: 4.0,
+      maker: 'Shiner',
+      name: 'Ruby Redbird',
+      region: 'Shiner, TX',
+      type: 'Lager',
+      category: 'beer',
+      price: 27.0,
+      inventory: 12,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/12/RubyRedbird.png'
     })
   ])
 
   const beers = await Promise.all([
     Beer.create({
+      category: 'Beer',
       ABV: 7.5,
       brand: 'Mother Earth 4Seasons Hazy IPA',
       region: 'Nampa, ID',
       type: 'IPA',
       price: 20.0,
-      inventory: 12
+      inventory: 12,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/12/fourseasons.png'
     }),
     Beer.create({
+      category: 'Beer',
       ABV: 5.2,
       brand: 'Lakefront Brewery Hazy Rabbit IPA',
       region: 'Milwaukee, WI',
       type: 'IPA',
       price: 21.0,
-      inventory: 6
+      inventory: 6,
+      image:
+        'https://static.vinepair.com/wp-content/uploads/2019/03/btbhazyipa_internal_lakefront.png'
     })
   ])
 
@@ -256,28 +310,28 @@ async function seed() {
     })
   ])
 
-  const orders = await Promise.all([
-    Order.create({
-      userId: Cody.id,
-      name: Product1.name,
-      maker: Product1.maker,
-      image: Product1.image,
-      quantity: 1,
-      price: Product1.price,
-      status: 'cart',
-      productId: Product1.id
-    }),
-    Order.create({
-      userId: Cody.id,
-      name: Product2.name,
-      maker: Product2.maker,
-      image: Product2.image,
-      quantity: 1,
-      price: Product2.price,
-      status: 'cart',
-      productId: Product2.id
-    })
-  ])
+  // const orders = await Promise.all([
+  //   Order.create({
+  //     userId: Cody.id,
+  //     name: Product1.name,
+  //     maker: Product1.maker,
+  //     image: Product1.image,
+  //     quantity: 1,
+  //     price: Product1.price,
+  //     status: 'cart',
+  //     productId: Product1.id
+  //   }),
+  //   Order.create({
+  //     userId: Cody.id,
+  //     name: Product2.name,
+  //     maker: Product2.maker,
+  //     image: Product2.image,
+  //     quantity: 1,
+  //     price: Product2.price,
+  //     status: 'cart',
+  //     productId: Product2.id
+  //   })
+  // ])
 
   console.log(`seeded users`)
   console.log(`seeded successfully`)
