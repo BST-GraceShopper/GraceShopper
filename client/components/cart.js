@@ -10,6 +10,7 @@ class Cart extends Component {
   componentDidMount() {
     const {getCart, user} = this.props
     const token = window.localStorage.getItem('guestToken')
+    console.log(user.id, token)
     getCart(user.id || token)
   }
   render() {
