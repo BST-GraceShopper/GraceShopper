@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {BeerHeader} from './nav'
 import BeerList from './BeerList'
+import BeerListAdmin from './BeerListAdmin'
 import {getBeers} from '../store/'
 
 class Beer extends Component {
@@ -9,19 +10,22 @@ class Beer extends Component {
     this.props.loadbeers()
   }
   render() {
-    const {beers} = this.props
-    console.log(beers, 'valmik')
+    const {beers, user} = this.props
     return (
       <div style={{color: 'white'}}>
         <BeerHeader />
-        <BeerList beers={beers} />
+        {user.level === 'admin' ? (
+          <BeerListAdmin beers={beers} />
+        ) : (
+          <BeerList beers={beers} />
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({beers}) => {
-  return {beers}
+const mapStateToProps = ({beers, user}) => {
+  return {beers, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
