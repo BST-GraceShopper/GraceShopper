@@ -166,7 +166,7 @@ const Nav = props => {
 const mapBeer = state => {
   const {user} = state
   return {
-    name: 'beer',
+    name: 'Beer',
     imgURL:
       'https://www.connshg.com/Resources/b5f10bc2-4cd8-4ccf-be25-d8b538cf524c/bigstock-Beer-Cold-Craft-light-Beer-in-202781995.jpg',
     imgPosition: 'left top',
@@ -177,7 +177,7 @@ const mapBeer = state => {
 const mapWine = state => {
   const {user} = state
   return {
-    name: 'wine',
+    name: 'Wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
     imgPosition: 'center top',
     user
@@ -186,7 +186,7 @@ const mapWine = state => {
 const mapSpirits = state => {
   const {user} = state
   return {
-    name: 'spirits',
+    name: 'Spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
     imgPosition: 'right top',
     user
@@ -196,7 +196,7 @@ const mapSpirits = state => {
 const mapCart = state => {
   const {user} = state
   return {
-    name: 'cart',
+    name: 'Cart',
     imgURL:
       'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
     imgPosition: 'right top',
@@ -207,7 +207,7 @@ const mapCart = state => {
 const mapHome = state => {
   const {user} = state
   return {
-    name: 'home',
+    name: 'Home',
     imgURL:
       'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
     imgPosition: 'center bottom',

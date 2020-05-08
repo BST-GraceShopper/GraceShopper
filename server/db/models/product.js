@@ -66,6 +66,10 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
+  size: {
+    type: Sequelize.DECIMAL,
+    allowNull: true
+  },
   inventory: {
     type: Sequelize.INTEGER,
     allowNull: false,

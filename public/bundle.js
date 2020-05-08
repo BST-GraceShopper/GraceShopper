@@ -1346,7 +1346,7 @@ var Nav = function Nav(props) {
 var mapBeer = function mapBeer(state) {
   var user = state.user;
   return {
-    name: 'beer',
+    name: 'Beer',
     imgURL: 'https://www.connshg.com/Resources/b5f10bc2-4cd8-4ccf-be25-d8b538cf524c/bigstock-Beer-Cold-Craft-light-Beer-in-202781995.jpg',
     imgPosition: 'left top',
     user: user
@@ -1356,7 +1356,7 @@ var mapBeer = function mapBeer(state) {
 var mapWine = function mapWine(state) {
   var user = state.user;
   return {
-    name: 'wine',
+    name: 'Wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
     imgPosition: 'center top',
     user: user
@@ -1366,7 +1366,7 @@ var mapWine = function mapWine(state) {
 var mapSpirits = function mapSpirits(state) {
   var user = state.user;
   return {
-    name: 'spirits',
+    name: 'Spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
     imgPosition: 'right top',
     user: user
@@ -1376,7 +1376,7 @@ var mapSpirits = function mapSpirits(state) {
 var mapCart = function mapCart(state) {
   var user = state.user;
   return {
-    name: 'cart',
+    name: 'Cart',
     imgURL: 'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
     imgPosition: 'right top',
     user: user
@@ -1386,7 +1386,7 @@ var mapCart = function mapCart(state) {
 var mapHome = function mapHome(state) {
   var user = state.user;
   return {
-    name: 'home',
+    name: 'Home',
     imgURL: 'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
     imgPosition: 'center bottom',
     user: user
@@ -1952,6 +1952,10 @@ function (_Component) {
     value: function render() {
       var isLoggedIn = this.props.isLoggedIn;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/",
+        component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -1964,8 +1968,12 @@ function (_Component) {
         path: "/spirits",
         component: _components_spirits_js__WEBPACK_IMPORTED_MODULE_9__["default"]
       }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/home",
+        exact: true,
+        path: "/",
         component: _components__WEBPACK_IMPORTED_MODULE_4__["UserHome"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/home",
+        component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart",
         component: _components_cart_js__WEBPACK_IMPORTED_MODULE_10__["default"]
@@ -1973,6 +1981,10 @@ function (_Component) {
         path: "/logout",
         component: _components_logout_js__WEBPACK_IMPORTED_MODULE_11__["default"]
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        exact: true,
+        path: "/",
+        component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/home",
         component: _components_home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
       }));

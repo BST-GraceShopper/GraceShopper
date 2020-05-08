@@ -104,7 +104,9 @@ async function seed() {
       region: 'Tennessee, USA',
       size: 1.75,
       price: 54.99,
-      inventory: 21
+      inventory: 21,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hd6/h8d/8799633801246.png'
     }),
     Spirit.create({
       category: 'Whiskey',
@@ -114,7 +116,9 @@ async function seed() {
       region: 'Canada',
       size: 1.75,
       price: 86.99,
-      inventory: 9
+      inventory: 9,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h04/h4c/12468343799838.png'
     }),
     Spirit.create({
       category: 'Whiskey',
@@ -124,7 +128,8 @@ async function seed() {
       region: 'Alabama, USA',
       size: 0.75,
       price: 129.99,
-      inventory: 5
+      inventory: 5,
+      image: ''
     }),
     Spirit.create({
       category: 'Whiskey',
@@ -134,7 +139,9 @@ async function seed() {
       region: 'Ireland',
       size: 0.75,
       price: 86.99,
-      inventory: 16
+      inventory: 16,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hf3/h4e/11698283937822.png'
     }),
     Spirit.create({
       category: 'Whiskey',
@@ -144,7 +151,9 @@ async function seed() {
       region: 'Japan',
       size: 0.75,
       price: 99.99,
-      inventory: 8
+      inventory: 8,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/haf/h26/12306864472094.png'
     }),
     Spirit.create({
       category: 'Whiskey',
@@ -154,7 +163,9 @@ async function seed() {
       region: 'USA',
       size: 0.75,
       price: 79.99,
-      inventory: 13
+      inventory: 13,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h70/hd7/12291719331870.png'
     }),
 
     //--- TEQUILA ---
@@ -166,58 +177,70 @@ async function seed() {
       region: 'Mexico',
       size: 0.75,
       price: 49.99,
-      inventory: 9
+      inventory: 9,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h0c/h29/12217904201758.png'
     }),
-    Spirit.create({
-      category: 'Tequila',
-      ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
-      region: 'Mexico',
-      size: 0.75,
-      price: 49.99,
-      inventory: 9
-    }),
-    Spirit.create({
-      category: 'Tequila',
-      ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
-      region: 'Mexico',
-      size: 0.75,
-      price: 49.99,
-      inventory: 9
-    }),
-    Spirit.create({
-      category: 'Tequila',
-      ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
-      region: 'Mexico',
-      size: 0.75,
-      price: 49.99,
-      inventory: 9
-    }),
-    Spirit.create({
-      category: 'Tequila',
-      ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
-      region: 'Mexico',
-      size: 0.75,
-      price: 49.99,
-      inventory: 9
-    }),
-    Spirit.create({
-      category: 'Tequila',
-      ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
-      region: 'Mexico',
-      size: 0.75,
-      price: 49.99,
-      inventory: 9
-    }),
+    // Spirit.create({
+    //   category: 'Tequila',
+    //   ABV: 40.0,
+    //   brand: 'Patron',
+    //   type: 'Reposado',
+    //   region: 'Mexico',
+    //   size: 0.75,
+    //   price: 49.99,
+    //   inventory: 9,
+    //   image:
+    //     ''
+    // }),
+    // Spirit.create({
+    //   category: 'Tequila',
+    //   ABV: 40.0,
+    //   brand: 'Patron',
+    //   type: 'Reposado',
+    //   region: 'Mexico',
+    //   size: 0.75,
+    //   price: 49.99,
+    //   inventory: 9,
+    //   image:
+    //     ''
+    // }),
+    // Spirit.create({
+    //   category: 'Tequila',
+    //   ABV: 40.0,
+    //   brand: 'Patron',
+    //   type: 'Reposado',
+    //   region: 'Mexico',
+    //   size: 0.75,
+    //   price: 49.99,
+    //   inventory: 9,
+    //   image:
+    //     ''
+    // }),
+    // Spirit.create({
+    //   category: 'Tequila',
+    //   ABV: 40.0,
+    //   brand: 'Patron',
+    //   type: 'Reposado',
+    //   region: 'Mexico',
+    //   size: 0.75,
+    //   price: 49.99,
+    //   inventory: 9,
+    //   image:
+    //     ''
+    // }),
+    // Spirit.create({
+    //   category: 'Tequila',
+    //   ABV: 40.0,
+    //   brand: 'Patron',
+    //   type: 'Reposado',
+    //   region: 'Mexico',
+    //   size: 0.75,
+    //   price: 49.99,
+    //   inventory: 9,
+    //   image:
+    //     ''
+    // }),
 
     //--- RUM ---
     Spirit.create({
@@ -228,7 +251,8 @@ async function seed() {
       region: 'Lynchburg, Tennessee',
       size: 1.75,
       price: 54.99,
-      inventory: 16
+      inventory: 16,
+      image: ''
     }),
 
     //--- VODKA ---
@@ -240,7 +264,8 @@ async function seed() {
       region: 'Lynchburg, Tennessee',
       size: 1.75,
       price: 54.99,
-      inventory: 16
+      inventory: 16,
+      image: ''
     }),
 
     //--- SCOTCH ---
@@ -252,7 +277,8 @@ async function seed() {
       region: 'Lynchburg, Tennessee',
       size: 1.75,
       price: 54.99,
-      inventory: 16
+      inventory: 16,
+      image: ''
     })
   ])
 
