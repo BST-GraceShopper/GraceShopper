@@ -1,9 +1,9 @@
 TIER 1: MVP SHOPPING EXPERIENCE
 
-๏ Two roles: guests (not signed in) and users (signed in) --DONE (LZ)
-๏ Deployed (online!)
-๏ See all products
-๏ Add to cart / edit cart--DONE (LZ)
+Two roles: guests (not signed in) and users (signed in) --DONE (LZ)
+Deployed (online!)
+See all products
+Add to cart / edit cart--DONE (LZ)
 ๏ Checkout (submit order)--IN PROGRESS (LZ)
 ๏ Backend data validations
 ๏ Rudiments of security
