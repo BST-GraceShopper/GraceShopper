@@ -29,20 +29,21 @@ const Nav = props => {
   }
 
   return (
-    <Paper
-      square
-      style={{
-        padding: 10,
-        backgroundImage: `url(${imgURL})`,
-        backgroundPosition: imgPosition,
-        backgroundSize: 'cover',
-        border: '1px solid black',
-        width: '100%',
-        height: 500,
-        margin: '0px 0px 50px',
-        boxShadow: 'inset 600px -125px 5000px black'
-      }}
-    >
+    // <Paper
+    //   square
+    //   style={{
+    //     padding: 10,
+    //     backgroundImage: `url(${imgURL})`,
+    //     backgroundPosition: imgPosition,
+    //     backgroundSize: 'cover',
+    //     border: '1px solid black',
+    //     width: '100%',
+    //     height: 500,
+    //     margin: '0px 0px 50px',
+    //     boxShadow: 'inset 600px -125px 5000px black'
+    //   }}
+    // >
+    <div>
       <AppBar
         position="static"
         style={{background: 'transparent', boxShadow: 'none'}}
@@ -74,7 +75,7 @@ const Nav = props => {
                 alignItems: 'center'
               }}
             >
-              <Tab color="secondary" value="/home" label="Home" />
+              <Tab color="secondary" value="/" label="Home" />
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
               <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
@@ -91,75 +92,94 @@ const Nav = props => {
             </Tabs>
           </div>
         </Grid>
-        <Modal
-          open={open}
-          value={value}
-          color="secondary"
-          onClose={handleClose}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <Paper
-            variant="outlined"
+        {user.id ? (
+          ''
+        ) : (
+          <Modal
+            open={open}
+            value={value}
+            color="secondary"
+            onClose={handleClose}
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              padding: 30,
-              width: 'calc(100%*2/3)'
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
-            {page === '/login' ? <Login /> : <Signup />}
-            <div
+            <Paper
+              variant="outlined"
               style={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
-                margin: '50px 0px 0px'
+                padding: 30,
+                width: 'calc(100%*2/3)'
               }}
             >
-              {page === '/signup' ? (
-                <Typography>
-                  Already have an account?{' '}
-                  <a color="primary" onClick={() => setPage('/login')}>
-                    Log In
-                  </a>
-                </Typography>
-              ) : (
-                <Typography>
-                  Don't have an account?{' '}
-                  <a color="primary" onClick={() => setPage('/signup')}>
-                    Sign Up
-                  </a>
-                </Typography>
-              )}
-            </div>
-          </Paper>
-        </Modal>
+              {page === '/login' ? <Login /> : <Signup />}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  margin: '50px 0px 0px'
+                }}
+              >
+                {page === '/signup' ? (
+                  <Typography>
+                    Already have an account?{' '}
+                    <a color="primary" onClick={() => setPage('/login')}>
+                      Log In
+                    </a>
+                  </Typography>
+                ) : (
+                  <Typography>
+                    Don't have an account?{' '}
+                    <a color="primary" onClick={() => setPage('/signup')}>
+                      Sign Up
+                    </a>
+                  </Typography>
+                )}
+              </div>
+            </Paper>
+          </Modal>
+        )}
       </AppBar>
-      <div
+      <Paper
+        square
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: 'calc(100%*2/3)',
-          width: 'calc(100%/3)'
+          padding: 10,
+          backgroundImage: `url(${imgURL})`,
+          backgroundPosition: imgPosition,
+          backgroundSize: 'cover',
+          border: '1px solid black',
+          width: '100%',
+          height: 500,
+          margin: '0px 0px 50px',
+          boxShadow: 'inset 600px -125px 5000px black'
         }}
       >
-        <Typography
-          variant="h1"
+        <div
           style={{
-            color: 'white',
-            margin: 10,
-            fontFamily: 'Petit Formal Script, cursive'
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: 'calc(100%*2/3)',
+            width: 'calc(100%/3)'
           }}
         >
-          {name}
-        </Typography>
-      </div>
-    </Paper>
+          <Typography
+            variant="h1"
+            style={{
+              color: 'white',
+              margin: 10,
+              fontFamily: 'Petit Formal Script, cursive'
+            }}
+          >
+            {name}
+          </Typography>
+        </div>
+      </Paper>
+    </div>
   )
 }
 
@@ -215,7 +235,7 @@ const mapHome = state => {
   }
 }
 
-export const Beer = connect(mapBeer)(Nav)
+export const BeerHeader = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
 export const SpiritsHeader = connect(mapSpirits)(Nav)
 export const CartHeader = connect(mapCart)(Nav)

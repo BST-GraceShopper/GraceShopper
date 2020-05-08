@@ -24,7 +24,30 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    if (!res.data) {
+      dispatch(guestLogin())
+    } else {
+      dispatch(getUser(res.data || defaultUser))
+    }
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const guestLogin = () => async dispatch => {
+  try {
+    const token = window.localStorage.getItem('guestToken')
+    if (token) {
+      //login guest
+      // const res = await axios.post('/auth/guest/login', {token})
+      // console.log('login', res.data)
+    } else {
+      //create new guest
+      const res = await axios.get('/auth/guest/signup')
+      console.log('signup', res.data)
+      window.localStorage.setItem('guestToken', res.data)
+    }
+    //dispatch get user???
   } catch (err) {
     console.error(err)
   }
@@ -40,7 +63,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -50,7 +73,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
-    history.push('/home')
+    history.push('/')
   } catch (err) {
     console.error(err)
   }

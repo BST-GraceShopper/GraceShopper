@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {CartHeader} from './nav'
 import CartList from './CartList'
 import CartSummary from './cart/CartSummary'
+import Checkout from './Checkout'
 import {getCart} from '../store/'
 
 class Cart extends Component {
   componentDidMount() {
     const {getCart, user} = this.props
-    if (user.id) {
-      getCart(user.id)
-    }
+    const token = window.localStorage.getItem('guestToken')
+    getCart(user.id || token)
   }
   render() {
     const {cart} = this.props
@@ -20,6 +20,7 @@ class Cart extends Component {
         <div id="cartBody">
           <CartList cart={cart} />
           <CartSummary />
+          <Checkout />
         </div>
       </div>
     )

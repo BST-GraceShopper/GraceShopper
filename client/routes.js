@@ -10,6 +10,7 @@ import Beer from './components/beer.js'
 import Spirits from './components/spirits.js'
 import Cart from './components/cart.js'
 import LogOut from './components/logout.js'
+import ThankYou from './components/ThankYou.js'
 // import {Signup} from './components'
 
 /**
@@ -29,24 +30,23 @@ class Routes extends Component {
         {/* <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} /> */}
         <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
         <Route path="/wine" component={Wine} />
         <Route path="/beer" component={Beer} />
         <Route path="/spirits" component={Spirits} />
-        {/* <Route path="/cart" component={Cart} /> */}
+        <Route path="/cart" component={Cart} />
+        <Route path="/thankyou" component={ThankYou} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={UserHome} />
-            <Route path="/home" component={Home} />
             <Route path="/cart" component={Cart} />
             <Route path="/logout" component={LogOut} />
+            <Route path="/thankyou" component={ThankYou} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
         <Route exact path="/" component={Home} />
-        <Route path="/home" component={Home} />
       </Switch>
     )
   }

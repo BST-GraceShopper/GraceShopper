@@ -16,29 +16,28 @@ import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
 
 const WineList = ({user, wines, addToCart}) => {
-  console.log(wines)
+  const token = window.localStorage.getItem('guestToken')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {wines.map(wine => {
         return (
-          <ButtonBase
+          <Card
+            elevation={3}
+            key={wine.id}
             style={{
-              width: 'calc(100%/4)',
-              margin: 20,
-              padding: 10,
+              width: 'calc(100%)',
+              display: 'flex',
               backgroundColor: 'black',
-              border: '1px white solid'
+              justifyContent: 'center'
             }}
           >
-            <Card
-              elevation={3}
-              key={wine.id}
+            <ButtonBase
               style={{
-                width: 'calc(100%)',
-                display: 'flex',
+                width: 'calc(100%/4)',
+                margin: 20,
+                padding: 10,
                 backgroundColor: 'black',
-                flexDirection: 'column',
-                justifyContent: 'center'
+                border: '1px white solid'
               }}
             >
               <div
@@ -70,24 +69,24 @@ const WineList = ({user, wines, addToCart}) => {
                   'region',
                   'price',
                   'inventory'
-                ].map(key => {
+                ].map(prop => {
                   return (
-                    <Typography style={{color: 'white'}}>
-                      {key}: {wine[key]}
+                    <Typography key={prop} style={{color: 'white'}}>
+                      {prop}: {wine[prop]}
                     </Typography>
                   )
                 })}
               </CardContent>
-              <CardActions>
-                <IconButton
-                  aria-label="add to cart"
-                  onClick={() => addToCart(user.id, wine.id)}
-                >
-                  <AddIcon color="secondary" />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </ButtonBase>
+            </ButtonBase>
+            <CardActions>
+              <IconButton
+                aria-label="add to cart"
+                onClick={() => addToCart(user.id || token, wine.id)}
+              >
+                <AddIcon color="secondary" />
+              </IconButton>
+            </CardActions>
+          </Card>
         )
       })}
     </div>
