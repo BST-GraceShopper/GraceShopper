@@ -16,7 +16,6 @@ import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
 
 const beerList = ({user, beers}) => {
-  console.log(beers, 'valmik')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {beers.map(beer => {
@@ -63,7 +62,7 @@ const beerList = ({user, beers}) => {
                 }}
               >
                 {[
-                  'brand',
+                  'name',
                   'ABV',
                   'maker',
                   'type',
