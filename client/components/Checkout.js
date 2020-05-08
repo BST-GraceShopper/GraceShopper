@@ -28,16 +28,10 @@ const useStyles = makeStyles(theme => ({
   instructions: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
-  },
-  active: {
-    color: 'primary'
-  },
-  nonactive: {
-    color: '#808080'
   }
 }))
 
-const Checkout = ({user, checkout}) => {
+const Checkout = ({user, checkout, cart}) => {
   const [open, setOpen] = React.useState(false)
   const token = window.localStorage.getItem('guestToken')
   const classes = useStyles()
@@ -70,9 +64,10 @@ const Checkout = ({user, checkout}) => {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
   }
 
-  // const handleReset = () => {
-  //   setActiveStep(0);
-  // };
+  const handleClose = () => {
+    setOpen(false)
+    setActiveStep(0)
+  }
 
   return (
     <div>
@@ -83,7 +78,7 @@ const Checkout = ({user, checkout}) => {
         open={open}
         // value={value}
         color="secondary"
-        onClose={() => setOpen(false)}
+        onClose={handleClose}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -178,8 +173,8 @@ const Checkout = ({user, checkout}) => {
 }
 // }
 
-const mapStateToProps = ({wines, user, cart}) => {
-  return {wines, cart, user}
+const mapStateToProps = ({user, cart}) => {
+  return {cart, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
