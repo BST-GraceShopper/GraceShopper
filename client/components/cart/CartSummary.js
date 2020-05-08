@@ -32,9 +32,7 @@ class CartSummary extends Component {
           maxWidth: 500
         }}
       >
-        <Typography color="textSecondary">
-          Total Quantity = {totalPrice}
-        </Typography>
+        <Typography>Total Quantity = {totalPrice}</Typography>
         <Typography color="textSecondary">
           Total Cost = ${totalPrice}
         </Typography>

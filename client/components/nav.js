@@ -5,6 +5,8 @@ import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import {Login, Signup} from './auth-form'
+import {formTheme} from '../theme'
+import {ThemeProvider} from '@material-ui/core/styles'
 // const spiritImage = require('./public/images/spirits.jpg')
 // const beerImage = require('./public/images/beer.jpg')
 // const wineImage = require('..../public/images/wine.jpg')
@@ -95,53 +97,56 @@ const Nav = props => {
         {user.id ? (
           ''
         ) : (
-          <Modal
-            open={open}
-            value={value}
-            color="secondary"
-            onClose={handleClose}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Paper
-              variant="outlined"
+          <ThemeProvider theme={formTheme}>
+            <Modal
+              open={open}
+              value={value}
+              color="secondary"
+              onClose={handleClose}
+              theme={formTheme}
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: 30,
-                width: 'calc(100%*2/3)'
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              {page === '/login' ? <Login /> : <Signup />}
-              <div
+              <Paper
+                variant="outlined"
                 style={{
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'center',
-                  margin: '50px 0px 0px'
+                  padding: 30,
+                  width: 'calc(100%*2.5/3)'
                 }}
               >
-                {page === '/signup' ? (
-                  <Typography>
-                    Already have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/login')}>
-                      Log In
-                    </a>
-                  </Typography>
-                ) : (
-                  <Typography>
-                    Don't have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/signup')}>
-                      Sign Up
-                    </a>
-                  </Typography>
-                )}
-              </div>
-            </Paper>
-          </Modal>
+                {page === '/login' ? <Login /> : <Signup />}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    margin: '50px 0px 0px'
+                  }}
+                >
+                  {page === '/signup' ? (
+                    <Typography color="textSecondary">
+                      Already have an account?{' '}
+                      <a color="primary" onClick={() => setPage('/login')}>
+                        <b>Log In</b>
+                      </a>
+                    </Typography>
+                  ) : (
+                    <Typography color="textSecondary">
+                      Don't have an account?{' '}
+                      <a color="primary" onClick={() => setPage('/signup')}>
+                        <b>Sign Up</b>
+                      </a>
+                    </Typography>
+                  )}
+                </div>
+              </Paper>
+            </Modal>
+          </ThemeProvider>
         )}
       </AppBar>
       <Paper
