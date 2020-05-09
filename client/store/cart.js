@@ -81,6 +81,14 @@ export const removeFromCart = (userId, product) => async dispatch => {
     console.error(err)
   }
 }
+export const removeProductFromCart = (userId, product) => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/cart/${userId}/${product.productId}`)
+    dispatch(_removeProductFromCart(product))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 /**
  * REDUCER
