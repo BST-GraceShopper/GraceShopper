@@ -45,7 +45,7 @@ const Product = db.define('product', {
   },
   maker: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }
@@ -73,7 +73,7 @@ const Product = db.define('product', {
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }

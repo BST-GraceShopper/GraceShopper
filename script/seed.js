@@ -2,14 +2,7 @@
 
 const db = require('../server/db')
 
-const {
-  User,
-  Wine,
-  Beer,
-  Order,
-  Product,
-  Spirit
-} = require('../server/db/models')
+const {User, Order, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -18,33 +11,6 @@ async function seed() {
   const [Cody, Murphy] = await Promise.all([
     User.create({email: 'cody@email.com', password: '123', level: 'admin'}),
     User.create({email: 'murphy@email.com', password: '123', level: 'read'})
-  ])
-
-  const [Wine1, Wine2] = await Promise.all([
-    Wine.create({
-      vinter: 'Vinter 1',
-      vintage: 2019,
-      brand: 'Wine 1',
-      region: 'Old World',
-      type: 'Red',
-      grape: 'Cabernet Sauvignon',
-      price: 500.0,
-      inventory: 2,
-      image:
-        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-    }),
-    Wine.create({
-      vinter: 'Vinter 2',
-      vintage: 2019,
-      brand: 'Wine 2',
-      region: 'New World',
-      type: 'White',
-      grape: 'Sauvignon Blanc',
-      price: 700.0,
-      inventory: 1,
-      image:
-        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-    })
   ])
 
   const products = await Promise.all([
@@ -121,11 +87,8 @@ async function seed() {
       inventory: 12,
       image:
         'https://static.vinepair.com/wp-content/uploads/2019/12/RubyRedbird.png'
-    })
-  ])
-
-  const spirits = await Promise.all([
-    Spirit.create({
+    }),
+    Product.create({
       category: 'Whiskey',
       ABV: 40.0,
       brand: "Jack Daniel's",
@@ -137,7 +100,7 @@ async function seed() {
       image:
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hd6/h8d/8799633801246.png'
     }),
-    Spirit.create({
+    Product.create({
       category: 'Whiskey',
       ABV: 40.0,
       brand: 'Crown Royal',
@@ -149,7 +112,7 @@ async function seed() {
       image:
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h04/h4c/12468343799838.png'
     }),
-    Spirit.create({
+    Product.create({
       category: 'Whiskey',
       ABV: 58.6,
       brand: "Clyde May's",
@@ -160,7 +123,7 @@ async function seed() {
       inventory: 5,
       image: ''
     }),
-    Spirit.create({
+    Product.create({
       category: 'Whiskey',
       ABV: 40.0,
       brand: 'Jameson',
@@ -172,7 +135,7 @@ async function seed() {
       image:
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hf3/h4e/11698283937822.png'
     }),
-    Spirit.create({
+    Product.create({
       category: 'Whiskey',
       ABV: 48.0,
       brand: 'Shin',
@@ -184,7 +147,7 @@ async function seed() {
       image:
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/haf/h26/12306864472094.png'
     }),
-    Spirit.create({
+    Product.create({
       category: 'Whiskey',
       ABV: 46.0,
       brand: 'Westland',
@@ -198,7 +161,7 @@ async function seed() {
     }),
 
     //--- TEQUILA ---
-    Spirit.create({
+    Product.create({
       category: 'Tequila',
       ABV: 40.0,
       brand: 'Patron',
@@ -209,107 +172,110 @@ async function seed() {
       inventory: 9,
       image:
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h0c/h29/12217904201758.png'
-    }),
-    // Spirit.create({
-    //   category: 'Tequila',
-    //   ABV: 40.0,
-    //   brand: 'Patron',
-    //   type: 'Reposado',
-    //   region: 'Mexico',
-    //   size: 0.75,
-    //   price: 49.99,
-    //   inventory: 9,
-    //   image:
-    //     ''
-    // }),
-    // Spirit.create({
-    //   category: 'Tequila',
-    //   ABV: 40.0,
-    //   brand: 'Patron',
-    //   type: 'Reposado',
-    //   region: 'Mexico',
-    //   size: 0.75,
-    //   price: 49.99,
-    //   inventory: 9,
-    //   image:
-    //     ''
-    // }),
-    // Spirit.create({
-    //   category: 'Tequila',
-    //   ABV: 40.0,
-    //   brand: 'Patron',
-    //   type: 'Reposado',
-    //   region: 'Mexico',
-    //   size: 0.75,
-    //   price: 49.99,
-    //   inventory: 9,
-    //   image:
-    //     ''
-    // }),
-    // Spirit.create({
-    //   category: 'Tequila',
-    //   ABV: 40.0,
-    //   brand: 'Patron',
-    //   type: 'Reposado',
-    //   region: 'Mexico',
-    //   size: 0.75,
-    //   price: 49.99,
-    //   inventory: 9,
-    //   image:
-    //     ''
-    // }),
-    // Spirit.create({
-    //   category: 'Tequila',
-    //   ABV: 40.0,
-    //   brand: 'Patron',
-    //   type: 'Reposado',
-    //   region: 'Mexico',
-    //   size: 0.75,
-    //   price: 49.99,
-    //   inventory: 9,
-    //   image:
-    //     ''
-    // }),
-
-    //--- RUM ---
-    Spirit.create({
-      category: 'Rum',
-      ABV: 40.0,
-      brand: "Jack Daniel's",
-      type: 'Gentelman Jack',
-      region: 'Lynchburg, Tennessee',
-      size: 1.75,
-      price: 54.99,
-      inventory: 16,
-      image: ''
-    }),
-
-    //--- VODKA ---
-    Spirit.create({
-      category: 'Vodka',
-      ABV: 40.0,
-      brand: "Jack Daniel's",
-      type: 'Gentelman Jack',
-      region: 'Lynchburg, Tennessee',
-      size: 1.75,
-      price: 54.99,
-      inventory: 16,
-      image: ''
-    }),
-
-    //--- SCOTCH ---
-    Spirit.create({
-      category: 'Scotch',
-      ABV: 40.0,
-      brand: "Jack Daniel's",
-      type: 'Gentelman Jack',
-      region: 'Lynchburg, Tennessee',
-      size: 1.75,
-      price: 54.99,
-      inventory: 16,
-      image: ''
     })
   ])
+
+  //const spirits = await Promise.all([
+  // Spirit.create({
+  //   category: 'Tequila',
+  //   ABV: 40.0,
+  //   brand: 'Patron',
+  //   type: 'Reposado',
+  //   region: 'Mexico',
+  //   size: 0.75,
+  //   price: 49.99,
+  //   inventory: 9,
+  //   image:
+  //     ''
+  // }),
+  // Spirit.create({
+  //   category: 'Tequila',
+  //   ABV: 40.0,
+  //   brand: 'Patron',
+  //   type: 'Reposado',
+  //   region: 'Mexico',
+  //   size: 0.75,
+  //   price: 49.99,
+  //   inventory: 9,
+  //   image:
+  //     ''
+  // }),
+  // Spirit.create({
+  //   category: 'Tequila',
+  //   ABV: 40.0,
+  //   brand: 'Patron',
+  //   type: 'Reposado',
+  //   region: 'Mexico',
+  //   size: 0.75,
+  //   price: 49.99,
+  //   inventory: 9,
+  //   image:
+  //     ''
+  // }),
+  // Spirit.create({
+  //   category: 'Tequila',
+  //   ABV: 40.0,
+  //   brand: 'Patron',
+  //   type: 'Reposado',
+  //   region: 'Mexico',
+  //   size: 0.75,
+  //   price: 49.99,
+  //   inventory: 9,
+  //   image:
+  //     ''
+  // }),
+  // Spirit.create({
+  //   category: 'Tequila',
+  //   ABV: 40.0,
+  //   brand: 'Patron',
+  //   type: 'Reposado',
+  //   region: 'Mexico',
+  //   size: 0.75,
+  //   price: 49.99,
+  //   inventory: 9,
+  //   image:
+  //     ''
+  // }),
+
+  //   //--- RUM ---
+  //   Spirit.create({
+  //     category: 'Rum',
+  //     ABV: 40.0,
+  //     brand: "Jack Daniel's",
+  //     type: 'Gentelman Jack',
+  //     region: 'Lynchburg, Tennessee',
+  //     size: 1.75,
+  //     price: 54.99,
+  //     inventory: 16,
+  //     image: ''
+  //   }),
+
+  //   //--- VODKA ---
+  //   Spirit.create({
+  //     category: 'Vodka',
+  //     ABV: 40.0,
+  //     brand: "Jack Daniel's",
+  //     type: 'Gentelman Jack',
+  //     region: 'Lynchburg, Tennessee',
+  //     size: 1.75,
+  //     price: 54.99,
+  //     inventory: 16,
+  //     image: ''
+  //   }),
+
+  //   //--- SCOTCH ---
+  //   Spirit.create({
+  //     category: 'Scotch',
+  //     ABV: 40.0,
+  //     brand: "Jack Daniel's",
+  //     type: 'Gentelman Jack',
+  //     region: 'Lynchburg, Tennessee',
+  //     size: 1.75,
+  //     price: 54.99,
+  //     inventory: 16,
+  //     image: ''
+  //   })
+  // ])
 
   // const orders = await Promise.all([
   //   Order.create({

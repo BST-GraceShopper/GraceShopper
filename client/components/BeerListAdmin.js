@@ -13,7 +13,7 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addToCart, updateProduct} from '../store/'
+//import {addToCart, updateProduct} from '../store/'
 
 class beerListAdmin2 extends Component {
   constructor(props) {
