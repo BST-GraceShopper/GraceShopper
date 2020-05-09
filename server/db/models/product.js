@@ -1,6 +1,25 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+/*
+Product Attributes
+
+id          -   all
+ABV         -   all
+image       -   all
+maker       -   all
+year        -   spirits , wines
+category    -   all
+type        -   all
+name        -   all
+price       -   all
+size        -   spirits , wines
+inventory   -   all
+region      -   all
+grape       -   wine
+
+*/
+
 const Product = db.define('product', {
   id: {
     type: Sequelize.UUID,
