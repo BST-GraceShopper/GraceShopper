@@ -14,18 +14,11 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
-import {Snackbar, SnackbarContent} from '@material-ui/core/'
-import Slide from '@material-ui/core/Slide'
+import {Snackbar} from '@material-ui/core/'
 
 const WineList = ({user, wines, addToCart}) => {
   const [open, setOpen] = React.useState(false)
   const token = window.localStorage.getItem('guestToken')
-  const handleClick = () => {
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false)
-  }
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {wines.map(wine => {
@@ -102,7 +95,7 @@ const WineList = ({user, wines, addToCart}) => {
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               open={open}
               autoHideDuration={2000}
-              onClose={handleClose}
+              onClose={() => setOpen(false)}
               message="Added to Cart"
             />
           </Card>

@@ -16,7 +16,7 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
-import {removeFromCart, addToCart} from '../store/'
+import {removeFromCart, addToCart, removeProductFromCart} from '../store/'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -25,96 +25,17 @@ import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
+import CloseIcon from '@material-ui/icons/Close'
 
 import TableSortLabel from '@material-ui/core/TableSortLabel'
 
-const CartList = ({cart, user, removeFromCart, addToCart}) => {
-  // return (
-  // <Paper
-  //   style={{
-  //     // border:'1px gray solid',
-  //     backgroundColor: 'black',
-  //     padding: 10,
-  //     margin: 20,
-  //     maxWidth: 500
-  //   }}
-  // >
-  //   {cart.items.map(cartItem => {
-  //     return (
-  //       <Grid
-  //         container
-  //         spacing={2}
-  //         style={{border: '1px gray solid'}}
-  //         key={cartItem.id}
-  //       >
-  //         <Grid item>
-  //           <img
-  //             alt="complex"
-  //             src={cartItem.image}
-  //             style={{
-  //               margin: 'auto',
-  //               display: 'block',
-  //               maxWidth: 150,
-  //               maxHeight: 150
-  //             }}
-  //           />
-  //         </Grid>
-  //         <Grid item xs={12} sm container>
-  //           <Grid item xs container direction="column" spacing={2}>
-  //             <Grid item xs>
-  //               <Typography
-  //                 gutterBottom
-  //                 color="textSecondary"
-  //                 variant="subtitle1"
-  //               >
-  //                 {cartItem.name}
-  //               </Typography>
-  //               <Typography variant="body2" gutterBottom>
-  //                 {cartItem.maker}
-  //               </Typography>
-  //               <Typography variant="body2" color="textSecondary">
-  //                 {cartItem.quantity}
-  //               </Typography>
-  //             </Grid>
-  //             <ButtonBase
-  //               onClick={() => removeFromCart(user.id, cartItem.productId)}
-  //             >
-  //               <Typography
-  //                 variant="body2"
-  //                 color="textSecondary"
-  //                 // style={{cursor: 'pointer'}}
-  //               >
-  //                 Remove
-  //               </Typography>
-  //             </ButtonBase>
-  //             <CardActions>
-  //               <IconButton
-  //                 aria-label="remove one"
-  //                 onClick={() => removeFromCart(user.id, cartItem)}
-  //               >
-  //                 <RemoveIcon color="secondary" />
-  //               </IconButton>
-  //               <Typography variant="body2" color="textSecondary">
-  //                 {cartItem.quantity}
-  //               </Typography>
-  //               <IconButton
-  //                 aria-label="add one"
-  //                 onClick={() => addToCart(user.id, cartItem.productId)}
-  //               >
-  //                 <AddIcon color="secondary" />
-  //               </IconButton>
-  //             </CardActions>
-  //           </Grid>
-  //           <Grid item>
-  //             <Typography variant="subtitle1" color="textSecondary">
-  //               ${cartItem.price}
-  //             </Typography>
-  //           </Grid>
-  //         </Grid>
-  //       </Grid>
-  //     )
-  //   })}
-  // </Paper>
+const CartList = ({
+  cart,
+  user,
+  removeFromCart,
+  addToCart,
+  removeProductFromCart
+}) => {
   const headCells = [
     {id: 'item', numeric: false, disablePadding: true, label: 'Item'},
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
@@ -123,7 +44,7 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
 
   const token = window.localStorage.getItem('guestToken')
   return (
-    <Table color="textSecondary">
+    <Table>
       <TableHead>
         <TableRow>
           {['Item', 'Quantity', 'Price'].map(item => {
@@ -211,6 +132,16 @@ const CartList = ({cart, user, removeFromCart, addToCart}) => {
                   ${cartItem.price}
                 </Typography>
               </TableCell>
+              <TableCell>
+                <IconButton
+                  aria-label="remove product"
+                  onClick={() =>
+                    removeProductFromCart(user.id || token, cartItem)
+                  }
+                >
+                  <CloseIcon color="secondary" />
+                </IconButton>
+              </TableCell>
             </TableRow>
           )
         })}
@@ -250,6 +181,9 @@ const mapDispatchToProps = dispatch => {
     },
     addToCart(userId, productId) {
       dispatch(addToCart(userId, productId))
+    },
+    removeProductFromCart(userId, productId) {
+      dispatch(removeProductFromCart(userId, productId))
     }
   }
 }
