@@ -12,9 +12,10 @@ router.get('/:status/checkout/:userId', async (req, res, next) => {
   try {
     const {userId, status} = req.params
     // const {productId} = req.body
-    // const order = await Order.findOne({where: {userId, productId}})
+    const order = await Order.findOne({where: {userId, status}})
+    console.log(order.id)
     const cart = await Order.update(
-      {status: 'order'},
+      {status: 'order', orderId: order.id},
       {returning: true, where: {userId, status}}
     )
     res.json(cart[1])

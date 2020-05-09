@@ -4,6 +4,7 @@ import {CartHeader} from './nav'
 import CartList from './CartList'
 import CartSummary from './cart/CartSummary'
 import Checkout from './Checkout'
+import {Typography} from '@material-ui/core'
 import {getCart} from '../store/'
 
 class Cart extends Component {
@@ -17,11 +18,24 @@ class Cart extends Component {
     return (
       <div style={{color: 'white'}}>
         <CartHeader />
-        <div id="cartBody">
-          <CartList cart={cart} />
-          <CartSummary />
-          <Checkout />
-        </div>
+        {cart.totalQuantity === 0 ? (
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+            <Typography variant="h6">There's nothing in your cart</Typography>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              width: '100%'
+            }}
+          >
+            <CartList cart={cart} />
+            <CartSummary />
+            <Checkout />
+          </div>
+        )}
       </div>
     )
   }

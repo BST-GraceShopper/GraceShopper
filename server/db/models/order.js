@@ -60,6 +60,10 @@ const Order = db.define('order', {
     validation: {
       notEmpty: true
     }
+  },
+  orderId: {
+    type: Sequelize.UUID,
+    allowNull: true
   }
 })
 
