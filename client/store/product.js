@@ -18,11 +18,7 @@ const _removeProducts = products => ({type: REMOVE_PRODUCTS, products})
 //THUNK CREATORS
 export const getProducts = () => async dispatch => {
   try {
-    const wines = (await axios.get('/api/wines')).data
-    const spirits = (await axios.get('/api/spirits')).data
-    const beers = (await axios.get('/api/beers')).data
-
-    const products = Promise.all(wines, spirits, beers)
+    const products = (await axios.get('/api/products')).data
     console.log(products)
     dispatch(_getProducts(products))
   } catch (err) {
@@ -39,11 +35,7 @@ export const getProducts = () => async dispatch => {
 
 export const addProducts = () => async dispatch => {
   try {
-    const wines = (await axios.get('/api/wines')).data
-    const spirits = (await axios.get('/api/spirits')).data
-    const beers = (await axios.get('/api/beers')).data
-
-    const products = Promise.all(wines, spirits, beers)
+    const products = (await axios.get('/api/products')).data
     console.log(products)
     dispatch(_addProducts(products))
   } catch (err) {
@@ -61,11 +53,7 @@ export const addProducts = () => async dispatch => {
 
 export const editProducts = () => async dispatch => {
   try {
-    const wines = (await axios.get('/api/wines')).data
-    const spirits = (await axios.get('/api/spirits')).data
-    const beers = (await axios.get('/api/beers')).data
-
-    const products = Promise.all(wines, spirits, beers)
+    const products = (await axios.get('/api/products')).data
     console.log(products)
     dispatch(_editProducts(products))
   } catch (err) {
@@ -83,11 +71,7 @@ export const editProducts = () => async dispatch => {
 
 export const removeProducts = () => async dispatch => {
   try {
-    const wines = (await axios.get('/api/wines')).data
-    const spirits = (await axios.get('/api/spirits')).data
-    const beers = (await axios.get('/api/beers')).data
-
-    const products = Promise.all(wines, spirits, beers)
+    const products = (await axios.get('/api/products')).data
     console.log(products)
     dispatch(_removeProducts(products))
   } catch (err) {

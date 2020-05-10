@@ -12,7 +12,7 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addToCart} from '../store/'
+import {addToCart, getProducts} from '../store/'
 import {Snackbar, SnackbarContent} from '@material-ui/core/'
 import Slide from '@material-ui/core/Slide'
 
@@ -113,14 +113,15 @@ const ProductList = ({user, products, addToCart}) => {
   )
 }
 
-const mapStateToProps = ({products, user}) => {
-  return {products, user}
+const mapStateToProps = ({products}) => {
+  return {products}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart(userId, productId) {
-      dispatch(addToCart(userId, productId))
+    loadProducts() {
+      dispatch(getProducts())
     }
   }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
