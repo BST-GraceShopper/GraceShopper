@@ -80,7 +80,7 @@ const Nav = props => {
               <Tab color="secondary" value="/" label="Home" />
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
-              <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
+              <Tab style={{color: 'white'}} value="/spirit" label="Spirits" />
               <Tab style={{color: 'white'}} value="/cart" label="Cart" />
               {!user.id ? (
                 <Tab

@@ -25,6 +25,8 @@ const ProductList = ({user, products, addToCart}) => {
   const handleClose = () => {
     setOpen(false)
   }
+
+  console.log(products)
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {products.map(product => {

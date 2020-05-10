@@ -89,10 +89,11 @@ async function seed() {
         'https://static.vinepair.com/wp-content/uploads/2019/12/RubyRedbird.png'
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 40.0,
-      brand: "Jack Daniel's",
-      type: 'Gentelman Jack',
+      name: 'Gentelman Jack',
+      maker: "Jack Daniel's",
+      type: 'Whiskey',
       region: 'Tennessee, USA',
       size: 1.75,
       price: 54.99,
@@ -101,10 +102,11 @@ async function seed() {
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hd6/h8d/8799633801246.png'
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 40.0,
-      brand: 'Crown Royal',
-      type: 'Special Reserve',
+      maker: 'Crown Royal',
+      name: 'Special Reserve',
+      type: 'Whiskey',
       region: 'Canada',
       size: 1.75,
       price: 86.99,
@@ -113,10 +115,11 @@ async function seed() {
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h04/h4c/12468343799838.png'
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 58.6,
-      brand: "Clyde May's",
-      type: '9 YR Alabama Style Cask Strength',
+      maker: "Clyde May's",
+      name: '9 YR Alabama Style Cask Strength',
+      type: 'Whiskey',
       region: 'Alabama, USA',
       size: 0.75,
       price: 129.99,
@@ -124,10 +127,11 @@ async function seed() {
       image: ''
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 40.0,
-      brand: 'Jameson',
-      type: '18 YR',
+      maker: 'Jameson',
+      name: '18 YR',
+      type: 'Whiskey',
       region: 'Ireland',
       size: 0.75,
       price: 86.99,
@@ -136,10 +140,11 @@ async function seed() {
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hf3/h4e/11698283937822.png'
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 48.0,
-      brand: 'Shin',
-      type: '10 YR Malt Whiskey Mizunara Oak Finish',
+      maker: 'Shin',
+      name: '10 YR Malt Whiskey Mizunara Oak Finish',
+      type: 'Whiskey',
       region: 'Japan',
       size: 0.75,
       price: 99.99,
@@ -148,10 +153,11 @@ async function seed() {
         'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/haf/h26/12306864472094.png'
     }),
     Product.create({
-      category: 'Whiskey',
+      category: 'Spirit',
       ABV: 46.0,
-      brand: 'Westland',
-      type: 'Sherry Wood Single Malt',
+      maker: 'Westland',
+      name: 'Sherry Wood Single Malt',
+      type: 'Whiskey',
       region: 'USA',
       size: 0.75,
       price: 79.99,
@@ -162,10 +168,11 @@ async function seed() {
 
     //--- TEQUILA ---
     Product.create({
-      category: 'Tequila',
+      category: 'Spirit',
       ABV: 40.0,
-      brand: 'Patron',
-      type: 'Reposado',
+      maker: 'Patron',
+      name: 'Reposado',
+      type: 'Tequlia',
       region: 'Mexico',
       size: 0.75,
       price: 49.99,
