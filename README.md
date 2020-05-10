@@ -1,3 +1,5 @@
+https://grace-shopper-bst.herokuapp.com/
+
 TIER 1: MVP SHOPPING EXPERIENCE
 
 Two roles: guests (not signed in) and users (signed in) --DONE
