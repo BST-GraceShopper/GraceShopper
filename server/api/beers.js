@@ -1,10 +1,9 @@
 const router = require('express').Router()
-const {Beer, Product} = require('../db/models')
+const {Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    // const beers = await Wine.findAll()
     const beers = await Product.findAll({where: {category: 'beer'}})
     res.json(beers)
   } catch (err) {
@@ -22,21 +21,30 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    // const beers = await Wine.findAll()
-    // const beers = await Product.findAll({where:{category:'wine'}})
-    // res.json(beers)
+    const {data: product} = await Product.update(
+      {
+        price: req.body.price,
+        inventory: req.body.inventory
+      },
+      {
+        where: {id: req.body.productId},
+        returning: true,
+        plain: true
+      }
+    )
+    res.json(product)
   } catch (err) {
     next(err)
   }
 })
 
-router.delete('/', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
-    // const beers = await Wine.findAll()
-    // const beers = await Product.findAll({where:{category:'wine'}})
-    // res.json(beers)
+    const beer = await Product.findByPk(req.params.id)
+    await beer.destroy()
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

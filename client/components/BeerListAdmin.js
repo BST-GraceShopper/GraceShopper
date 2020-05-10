@@ -13,80 +13,68 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addToCart, updateProduct} from '../store/'
+import {getBeers, editBeer, removeBeer} from '../store/'
 
-class beerListAdmin2 extends Component {
+class beerListAdmin extends Component {
   constructor(props) {
-    console.log(props, 'adminy')
-    let price = ''
-    if (props.user && props.beers.name) {
-      price = props.beer.price
-    }
+    console.log(props, 'admin-beers')
     super()
     this.state = {
-      id: id,
-      price: price,
-      inventory: inventory,
-      error: ''
+      productId: '',
+      price: 0,
+      inventory: 0,
+      error: '',
+      idx: 0
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
-  // componentDidMount() {
-  //   const id = this.props.match.params.id
-  //   this.props.getChef(id)
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.chef.name !== this.props.chef.name) {
-  //     this.setState({ name: this.props.chef.name })
-  //   }
-  // }
+  componentDidMount() {
+    this.props.fetch()
+  }
+
+  componentDidUpdate(prevProps) {
+    const {idx} = this.state
+    if (prevProps.beers[idx].price !== this.state.price) {
+      this.props.fetch()
+    }
+  }
+
   async onSubmit(ev) {
     ev.preventDefault()
+    console.log(this.props)
     try {
       this.props.update({
-        id: this.props.beers.id,
+        productId: this.state.productId,
         price: this.state.price,
         inventory: this.state.inventory
       })
     } catch (ex) {
-      this.setState({error: ex.response.data.message})
+      this.setState({error: ex.response.message})
     }
   }
   render() {
     const {onSubmit} = this
-    const {id, inventory, price, error} = this.state
-    console.log('in render of class')
-    return null
-  }
-}
+    const {productId, inventory, price, error, idx} = this.state
+    const {beers} = this.props
 
-const beerListAdmin = ({user, beers}) => {
-  console.log(beers, 'beru')
-  return (
-    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-      {beers.map(beer => {
-        return (
-          <ButtonBase
-            style={{
-              width: 'calc(100%/4)',
-              margin: 20,
-              padding: 10,
-              backgroundColor: 'black',
-              border: '1px white solid'
-            }}
-          >
-            <Card
-              elevation={3}
-              key={beer.id}
+    return (
+      <div
+        style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}
+      >
+        {beers.map((beer, idx) => {
+          return (
+            <ButtonBase
               style={{
-                width: 'calc(100%)',
-                display: 'flex',
+                width: 'calc(100%/4)',
+                margin: 20,
+                padding: 10,
                 backgroundColor: 'black',
-                flexDirection: 'column',
-                justifyContent: 'center'
+                border: '1px white solid'
               }}
             >
-              <div
+              <Card
+                elevation={3}
+                key={beer.id}
                 style={{
                   width: 'calc(100%)',
                   display: 'flex',
@@ -95,44 +83,81 @@ const beerListAdmin = ({user, beers}) => {
                   justifyContent: 'center'
                 }}
               >
-                <CardMedia
-                  image={beer.image}
-                  style={{width: 200, height: 200}}
-                />
-              </div>
-              <CardContent
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >
-                {[
-                  'name',
-                  'ABV',
-                  'maker',
-                  'type',
-                  'region',
-                  'price',
-                  'inventory'
-                ].map(key => {
-                  return (
-                    <Typography style={{color: 'white'}}>
-                      {key}: {beer[key]}
-                      <form>
-                        <input value="" />
-                        <button>Update</button>
-                      </form>{' '}
-                    </Typography>
-                  )
-                })}
-              </CardContent>
-            </Card>
-          </ButtonBase>
-        )
-      })}
-    </div>
-  )
+                <div
+                  style={{
+                    width: 'calc(100%)',
+                    display: 'flex',
+                    backgroundColor: 'black',
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                  }}
+                >
+                  <CardMedia
+                    image={beer.image}
+                    style={{width: 200, height: 200}}
+                  />
+                </div>
+                <CardContent
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {[
+                    'name',
+                    'ABV',
+                    'maker',
+                    'type',
+                    'region',
+                    'price',
+                    'inventory'
+                  ].map(key => {
+                    return (
+                      <Typography style={{color: 'white'}}>
+                        {key}: {beer[key]}
+                      </Typography>
+                    )
+                  })}
+                </CardContent>
+                <CardActions>
+                  <Typography style={{color: 'white'}}>
+                    <form onSubmit={onSubmit}>
+                      Price
+                      <input
+                        placeholder="price"
+                        value={price}
+                        onChange={ev => {
+                          this.setState({
+                            idx: idx,
+                            productId: beer.id,
+                            price: Number(ev.target.value)
+                          })
+                        }}
+                      />
+                      Inventory
+                      <input
+                        placeholder="inventory"
+                        value={inventory}
+                        onChange={ev => {
+                          this.setState({
+                            idx: idx,
+                            productId: beer.id,
+                            inventory: Number(ev.target.value)
+                          })
+                        }}
+                      />
+                      <button>Update</button>
+                    </form>
+                  </Typography>
+                </CardActions>
+              </Card>
+            </ButtonBase>
+          )
+        })}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = ({beers, user}) => {
@@ -140,10 +165,8 @@ const mapStateToProps = ({beers, user}) => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart(userId, productId) {
-      dispatch(addToCart(userId, productId))
-    },
-    update: product => dispatch(updateProduct(product))
+    fetch: () => dispatch(getBeers()),
+    update: beer => dispatch(editBeer(beer))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(beerListAdmin)
