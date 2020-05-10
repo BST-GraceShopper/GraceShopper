@@ -7,7 +7,7 @@ import {me} from './store'
 import Home from './components/home.js'
 import Wine from './components/wine.js'
 import Beer from './components/beer.js'
-import Spirits from './components/spirits.js'
+import Spirit from './components/spirits.js'
 import Cart from './components/cart.js'
 import LogOut from './components/logout.js'
 import ThankYou from './components/ThankYou.js'
@@ -32,7 +32,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/wine" component={Wine} />
         <Route path="/beer" component={Beer} />
-        <Route path="/spirits" component={Spirits} />
+        <Route path="/spirit" component={Spirit} />
         <Route path="/cart" component={Cart} />
         <Route path="/thankyou" component={ThankYou} />
 

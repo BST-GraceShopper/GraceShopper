@@ -27,33 +27,33 @@ export const getSpirits = () => async dispatch => {
 }
 
 export const addSpirits = () => async dispatch => {
-  try {
-    const spirits = (await axios.get('/api/spirits')).data
-    console.log(spirits)
-    dispatch(_addSpirits(spirits))
-  } catch (err) {
-    console.error(err)
-  }
+  // try {
+  //   const spirits = (await axios.get('/api/spirits')).data
+  //   console.log(spirits)
+  //   dispatch(_addSpirits(spirits))
+  // } catch (err) {
+  //   console.error(err)
+  // }
 }
 
 export const editSpirits = () => async dispatch => {
-  try {
-    const spirits = (await axios.get('/api/spirits')).data
-    console.log(spirits)
-    dispatch(_editSpirits(spirits))
-  } catch (err) {
-    console.error(err)
-  }
+  // try {
+  //   const spirits = (await axios.get('/api/spirits')).data
+  //   console.log(spirits)
+  //   dispatch(_editSpirits(spirits))
+  // } catch (err) {
+  //   console.error(err)
+  // }
 }
 
 export const removeSpirits = () => async dispatch => {
-  try {
-    const spirits = (await axios.get('/api/spirits')).data
-    console.log(spirits)
-    dispatch(_removeSpirits(spirits))
-  } catch (err) {
-    console.error(err)
-  }
+  // try {
+  //   const spirits = (await axios.get('/api/spirits')).data
+  //   console.log(spirits)
+  //   dispatch(_removeSpirits(spirits))
+  // } catch (err) {
+  //   console.error(err)
+  // }
 }
 
 //REDUCER
@@ -62,7 +62,7 @@ export default function(state = defaultSpirits, action) {
     case GET_SPIRITS:
       return action.spirits
     case ADD_SPIRITS:
-      return [...state, action.spirits]
+      return [...state, action.spirit]
     case EDIT_SPIRITS:
       return state
     case REMOVE_SPIRITS:

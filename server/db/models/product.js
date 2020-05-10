@@ -1,6 +1,25 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+/*
+Product Attributes
+
+id          -   all
+ABV         -   all
+image       -   all
+maker       -   all
+year        -   spirits , wines
+category    -   all
+type        -   all
+name        -   all
+price       -   all
+size        -   spirits , wines
+inventory   -   all
+region      -   all
+grape       -   wine
+
+*/
+
 const Product = db.define('product', {
   id: {
     type: Sequelize.UUID,
@@ -26,7 +45,7 @@ const Product = db.define('product', {
   },
   maker: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }
@@ -54,7 +73,7 @@ const Product = db.define('product', {
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }
@@ -65,6 +84,10 @@ const Product = db.define('product', {
     validation: {
       notEmpty: true
     }
+  },
+  size: {
+    type: Sequelize.DECIMAL,
+    allowNull: true
   },
   inventory: {
     type: Sequelize.INTEGER,

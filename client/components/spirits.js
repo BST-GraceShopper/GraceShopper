@@ -6,7 +6,7 @@ import {getSpirits} from '../store/'
 
 class Spirit extends Component {
   componentDidMount() {
-    this.props.loadWines()
+    this.props.loadSpirits()
   }
   render() {
     const {spirits} = this.props
@@ -26,7 +26,7 @@ const mapStateToProps = ({spirits}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadWines() {
+    loadSpirits() {
       dispatch(getSpirits())
     }
   }

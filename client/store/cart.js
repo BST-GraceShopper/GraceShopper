@@ -59,8 +59,8 @@ export const addToCart = (userId, productId) => async dispatch => {
 export const checkout = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/cart/checkout/${userId}`)
-    dispatch(getCart(userId))
-    history.push('/thankyou')
+    // dispatch(getCart(userId))
+    // history.push('/thankyou')
   } catch (err) {
     console.error(err)
   }
@@ -77,6 +77,14 @@ export const removeFromCart = (userId, product) => async dispatch => {
       const res = await axios.put(`/api/cart/${userId}`, product)
       dispatch(_removeOneFromCart(res.data))
     }
+  } catch (err) {
+    console.error(err)
+  }
+}
+export const removeProductFromCart = (userId, product) => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/cart/${userId}/${product.productId}`)
+    dispatch(_removeProductFromCart(product))
   } catch (err) {
     console.error(err)
   }

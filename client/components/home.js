@@ -1,17 +1,32 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link, useHistory} from 'react-router-dom'
-import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
-import {Login, Signup} from './auth-form'
-// const spiritImage = require('./public/images/spirits.jpg')
-// const beerImage = require('./public/images/beer.jpg')
-// const wineImage = require('..../public/images/wine.jpg')
 import {HomeHeader} from './nav'
+import ProductList from './ProductList'
+import {getProducts} from '../store/'
 
-const Home = props => {
-  return <HomeHeader />
+class Product extends Component {
+  componentDidMount() {
+    this.props.loadProducts()
+  }
+  render() {
+    const {products} = this.props
+    return (
+      <div style={{color: 'white'}}>
+        <HomeHeader />
+        <ProductList products={products} />
+      </div>
+    )
+  }
 }
 
-export default Home
+const mapStateToProps = ({products}) => {
+  return {products}
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    loadProducts() {
+      dispatch(getProducts())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Product)
