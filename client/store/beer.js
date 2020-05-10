@@ -47,6 +47,7 @@ export const editBeer = beer => async dispatch => {
   try {
     const updatedBeer = (await axios.put(`/api/beers/${beer.productId}`, beer))
       .data
+    console.log(updatedBeer, 'updated beer')
     dispatch(_editBeer(updatedBeer))
   } catch (err) {
     console.error(err)
@@ -74,6 +75,7 @@ export default function(state = defaultbeers, action) {
     case EDIT_beer:
       return state.map(beer => {
         if (beer.id === action.beer.id) {
+          console.log(action.beer, 'action.beer')
           return action.beer
         }
         return state

@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const {data: product} = await Product.update(
+    const product = await Product.update(
       {
         price: req.body.price,
         inventory: req.body.inventory
@@ -34,7 +34,8 @@ router.put('/:id', async (req, res, next) => {
         plain: true
       }
     )
-    res.json(product)
+    console.log(product[1], 'product in put')
+    res.json(product[1])
   } catch (err) {
     next(err)
   }
