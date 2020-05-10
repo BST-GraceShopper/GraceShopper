@@ -25,6 +25,11 @@ export const theme = createMuiTheme({
       primary: '#000000',
       secondary: '#ffffff'
     }
+  },
+  props: {
+    MuiTableRow: {
+      border: '1px solid black'
+    }
   }
 })
 export const formTheme = createMuiTheme({

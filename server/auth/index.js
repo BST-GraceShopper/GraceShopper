@@ -21,24 +21,21 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-router.post('/guest/login', async (req, res, next) => {
-  try {
-    const token = req.body.token
-    console.log(token)
-    // const id = (jwt.decode(token, "NONE")).id
-    const guest = await Guest.findByPk(token)
-    // req.login(guest, err => (err ? next(err) : res.json(guest)))
-  } catch (err) {
-    next(err)
-  }
-})
+// router.post('/guest/login', async (req, res, next) => {
+//   try {
+//     const token = req.body.token
+//     console.log(token)
+//     // const id = (jwt.decode(token, "NONE")).id
+//     const guest = await Guest.findByPk(token)
+//     // req.login(guest, err => (err ? next(err) : res.json(guest)))
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
-router.get('/guest/signup', async (req, res, next) => {
+router.get('/guest/create', async (req, res, next) => {
   try {
-    console.log('it gets here')
     const guest = await Guest.create({})
-    // const token =jwt.encode({ id: guest.id}, "NONE")
-    // req.login(guest, err => (err ? next(err) : res.json(token)))
     res.json(guest.id)
   } catch (err) {
     next(err)

@@ -44,18 +44,31 @@ const CartList = ({
 
   const token = window.localStorage.getItem('guestToken')
   return (
-    <Table>
+    <Table style={{border: '1px solid black'}}>
       <TableHead>
-        <TableRow>
+        <TableRow style={{border: '1px solid black'}}>
           {['Item', 'Quantity', 'Price'].map(item => {
-            return <TableCell key={item}>{item}</TableCell>
+            return (
+              <TableCell key={item}>
+                <Typography
+                  gutterBottom
+                  color="textSecondary"
+                  variant="subtitle1"
+                >
+                  {item}
+                </Typography>
+              </TableCell>
+            )
           })}
         </TableRow>
       </TableHead>
       <TableBody>
         {cart.items.map(cartItem => {
           return (
-            <TableRow key={cartItem.productId}>
+            <TableRow
+              key={cartItem.productId}
+              style={{border: '1px solid black'}}
+            >
               <TableCell>
                 <Grid style={{display: 'flex', flexWrap: 'wrap'}}>
                   <Grid item>
