@@ -71,6 +71,11 @@ const Spirit = db.define('spirit', {
   rating: {
     type: Sequelize.INTEGER,
     allowNull: true
+  },
+  image: {
+    type: Sequelize.STRING,
+    unique: false,
+    allowNull: true
   }
 })
 

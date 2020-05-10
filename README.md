@@ -4,7 +4,7 @@ Two roles: guests (not signed in) and users (signed in) --DONE
 Deployed (online!)--DONE
 See all products
 Add to cart / edit cart--DONE
-๏ Checkout (submit order)--DONE 
+๏ Checkout (submit order)--DONE
 ๏ Backend data validations
 ๏ Rudiments of security
 
