@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Paper from '@material-ui/core/Paper'
@@ -13,19 +12,28 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addToCart} from '../store/'
-import {Snackbar} from '@material-ui/core/'
+import {addToCart, getProducts} from '../store/'
+import {Snackbar, SnackbarContent} from '@material-ui/core/'
+import Slide from '@material-ui/core/Slide'
 
-const WineList = ({user, wines, addToCart}) => {
+const ProductList = ({user, products, addToCart}) => {
   const [open, setOpen] = React.useState(false)
   const token = window.localStorage.getItem('guestToken')
+  const handleClick = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  console.log(products)
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-      {wines.map(wine => {
+      {products.map(product => {
         return (
           <Card
             elevation={3}
-            key={wine.id}
+            key={product.id}
             style={{
               width: 'calc(100%)',
               display: 'flex',
@@ -52,7 +60,7 @@ const WineList = ({user, wines, addToCart}) => {
                 }}
               >
                 <CardMedia
-                  image={wine.image}
+                  image={product.image}
                   style={{width: 200, height: 200}}
                 />
               </div>
@@ -74,7 +82,7 @@ const WineList = ({user, wines, addToCart}) => {
                 ].map(prop => {
                   return (
                     <Typography key={prop} style={{color: 'white'}}>
-                      {prop}: {wine[prop]}
+                      {prop}: {product[prop]}
                     </Typography>
                   )
                 })}
@@ -84,7 +92,7 @@ const WineList = ({user, wines, addToCart}) => {
               <IconButton
                 aria-label="add to cart"
                 onClick={() => {
-                  addToCart(user.id || token, wine.id)
+                  addToCart(user.id || token, product.id)
                   setOpen(true)
                 }}
               >
@@ -95,7 +103,7 @@ const WineList = ({user, wines, addToCart}) => {
               anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
               open={open}
               autoHideDuration={2000}
-              onClose={() => setOpen(false)}
+              onClose={handleClose}
               message="Added to Cart"
             />
           </Card>
@@ -105,14 +113,15 @@ const WineList = ({user, wines, addToCart}) => {
   )
 }
 
-const mapStateToProps = ({wines, user}) => {
-  return {wines, user}
+const mapStateToProps = ({products}) => {
+  return {products}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart(userId, productId) {
-      dispatch(addToCart(userId, productId))
+    loadProducts() {
+      dispatch(getProducts())
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(WineList)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList)

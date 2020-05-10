@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const {Spirit, Product} = require('../db/models')
+const {Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const spirits = await Product.findAll({where: {category: 'Spirit'}})
-    res.json(spirits)
+    const products = await Product.findAll()
+    res.json(products)
   } catch (err) {
     next(err)
   }
@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    // const spirits = await Product.findAll({where: {category: 'spirit'}})
+    // const products = await Product.findAll()
   } catch (err) {
     next(err)
   }
@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    // const spirits = await Product.findAll({where: {category: 'spirit'}})
+    // const products = await Product.findAll()
   } catch (err) {
     next(err)
   }
@@ -29,7 +29,7 @@ router.put('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   try {
-    // const spirits = await Product.findAll({where: {category: 'spirit'}})
+    // const products = await Product.findAll()
   } catch (err) {
     next(err)
   }

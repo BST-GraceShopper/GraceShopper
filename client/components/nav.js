@@ -5,6 +5,8 @@ import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import {Login, Signup} from './auth-form'
+import {formTheme} from '../theme'
+import {ThemeProvider} from '@material-ui/core/styles'
 // const spiritImage = require('./public/images/spirits.jpg')
 // const beerImage = require('./public/images/beer.jpg')
 // const wineImage = require('..../public/images/wine.jpg')
@@ -78,7 +80,7 @@ const Nav = props => {
               <Tab color="secondary" value="/" label="Home" />
               <Tab style={{color: 'white'}} value="/beer" label="Beer" />
               <Tab style={{color: 'white'}} value="/wine" label="Wine" />
-              <Tab style={{color: 'white'}} value="/spirits" label="Spirits" />
+              <Tab style={{color: 'white'}} value="/spirit" label="Spirits" />
               <Tab style={{color: 'white'}} value="/cart" label="Cart" />
               {!user.id ? (
                 <Tab
@@ -95,53 +97,56 @@ const Nav = props => {
         {user.id ? (
           ''
         ) : (
-          <Modal
-            open={open}
-            value={value}
-            color="secondary"
-            onClose={handleClose}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Paper
-              variant="outlined"
+          <ThemeProvider theme={formTheme}>
+            <Modal
+              open={open}
+              value={value}
+              color="secondary"
+              onClose={handleClose}
+              theme={formTheme}
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: 30,
-                width: 'calc(100%*2/3)'
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              {page === '/login' ? <Login /> : <Signup />}
-              <div
+              <Paper
+                variant="outlined"
                 style={{
                   display: 'flex',
+                  flexDirection: 'column',
                   justifyContent: 'center',
-                  margin: '50px 0px 0px'
+                  padding: 30,
+                  width: 'calc(100%*2.5/3)'
                 }}
               >
-                {page === '/signup' ? (
-                  <Typography>
-                    Already have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/login')}>
-                      Log In
-                    </a>
-                  </Typography>
-                ) : (
-                  <Typography>
-                    Don't have an account?{' '}
-                    <a color="primary" onClick={() => setPage('/signup')}>
-                      Sign Up
-                    </a>
-                  </Typography>
-                )}
-              </div>
-            </Paper>
-          </Modal>
+                {page === '/login' ? <Login /> : <Signup />}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    margin: '50px 0px 0px'
+                  }}
+                >
+                  {page === '/signup' ? (
+                    <Typography color="textSecondary">
+                      Already have an account?{' '}
+                      <a color="primary" onClick={() => setPage('/login')}>
+                        <b>Log In</b>
+                      </a>
+                    </Typography>
+                  ) : (
+                    <Typography color="textSecondary">
+                      Don't have an account?{' '}
+                      <a color="primary" onClick={() => setPage('/signup')}>
+                        <b>Sign Up</b>
+                      </a>
+                    </Typography>
+                  )}
+                </div>
+              </Paper>
+            </Modal>
+          </ThemeProvider>
         )}
       </AppBar>
       <Paper
@@ -186,7 +191,7 @@ const Nav = props => {
 const mapBeer = state => {
   const {user} = state
   return {
-    name: 'beer',
+    name: 'Beer',
     imgURL:
       'https://www.connshg.com/Resources/b5f10bc2-4cd8-4ccf-be25-d8b538cf524c/bigstock-Beer-Cold-Craft-light-Beer-in-202781995.jpg',
     imgPosition: 'left top',
@@ -197,7 +202,7 @@ const mapBeer = state => {
 const mapWine = state => {
   const {user} = state
   return {
-    name: 'wine',
+    name: 'Wine',
     imgURL: 'https://citywinecellar.com/media/wysiwyg/2016/hpnew1.jpg',
     imgPosition: 'center top',
     user
@@ -206,7 +211,7 @@ const mapWine = state => {
 const mapSpirits = state => {
   const {user} = state
   return {
-    name: 'spirits',
+    name: 'Spirits',
     imgURL: 'https://www.drinkkosher.com/img/UploadImages/Whisky_Banner_14.jpg',
     imgPosition: 'right top',
     user
@@ -216,7 +221,7 @@ const mapSpirits = state => {
 const mapCart = state => {
   const {user} = state
   return {
-    name: 'cart',
+    name: 'Cart',
     imgURL:
       'http://barnbottleshop.com/wp-content/uploads/2019/02/banner-img.jpg',
     imgPosition: 'right top',
@@ -227,7 +232,7 @@ const mapCart = state => {
 const mapHome = state => {
   const {user} = state
   return {
-    name: 'home',
+    name: 'Home',
     imgURL:
       'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
     imgPosition: 'center bottom',
