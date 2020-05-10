@@ -57,7 +57,7 @@ export const editBeer = beer => async dispatch => {
 export const removeBeer = id => async dispatch => {
   try {
     await axios.delete(`/api/beeers/${id}`) // deletes from backend
-    dispatch(_deleteBeer(id)) // delete from frontend
+    dispatch(_removeBeer(id)) // delete from frontend
   } catch (err) {
     console.error(err)
   }
@@ -75,10 +75,8 @@ export default function(state = defaultbeers, action) {
     case EDIT_beer:
       return state.map(beer => {
         if (beer.id === action.beer.id) {
-          console.log(action.beer, 'action.beer')
           return action.beer
-        }
-        return state
+        } else return beer
       })
     case REMOVE_beer:
       return state.filter(beerItem => beerItem.id !== action.beer.id)
