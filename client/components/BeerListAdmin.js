@@ -32,12 +32,12 @@ class beerListAdmin extends Component {
     this.props.fetch()
   }
 
-  componentDidUpdate(prevProps) {
-    const {idx} = this.state
-    if (prevProps.beers[idx].price !== this.state.price) {
-      this.props.fetch()
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const {idx} = this.state
+  //   if (prevProps.beers[idx].price !== this.state.price) {
+  //     this.props.fetch()
+  //   }
+  // }
 
   async onSubmit(ev) {
     ev.preventDefault()
