@@ -121,17 +121,18 @@ const Checkout = ({user, checkout, cart}) => {
                     )
                   })}
                 </Stepper>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+
+                    height: '80%'
+                  }}
+                >
+                  {getStepContent(activeStep)}
+                </div>
               </ThemeProvider>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  width: '100%',
-                  height: '80%'
-                }}
-              >
-                {getStepContent(activeStep)}
-              </div>
               <div
                 style={{
                   display: 'flex',
