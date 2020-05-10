@@ -59,7 +59,7 @@ export const addToCart = (userId, productId) => async dispatch => {
 export const checkout = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/cart/checkout/${userId}`)
-    dispatch(getCart(userId))
+    // dispatch(getCart(userId))
     // history.push('/thankyou')
   } catch (err) {
     console.error(err)

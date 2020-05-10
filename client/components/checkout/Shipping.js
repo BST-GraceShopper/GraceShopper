@@ -50,7 +50,6 @@ const Shipping = ({}) => {
         >
           <FormControl
             style={{width: 'calc(100%/2)', margin: '10px'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">First Name</InputLabel>
@@ -64,7 +63,6 @@ const Shipping = ({}) => {
           </FormControl>
           <FormControl
             style={{width: 'calc(100%/2)', margin: '10px'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">Last Name</InputLabel>
@@ -81,9 +79,7 @@ const Shipping = ({}) => {
           style={{margin: '10px', width: 'calc(100%-20px)'}}
           variant="outlined"
         >
-          <InputLabel item xs htmlFor="outlined">
-            Address Line 1
-          </InputLabel>
+          <InputLabel htmlFor="outlined">Address Line 1</InputLabel>
           <OutlinedInput
             id="address1"
             // value={values.amount}
@@ -96,9 +92,7 @@ const Shipping = ({}) => {
           style={{margin: '10px', width: 'calc(100%-20px)'}}
           variant="outlined"
         >
-          <InputLabel item xs htmlFor="outlined">
-            Address Line 2
-          </InputLabel>
+          <InputLabel htmlFor="outlined">Address Line 2</InputLabel>
           <OutlinedInput
             id="address2"
             // value={values.amount}
@@ -118,7 +112,6 @@ const Shipping = ({}) => {
         >
           <FormControl
             style={{margin: '10px', width: 'calc(100%-60px)'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">City</InputLabel>
@@ -132,7 +125,6 @@ const Shipping = ({}) => {
           </FormControl>
           <FormControl
             style={{margin: '10px', width: 'calc(100%-60px)'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">State</InputLabel>
@@ -169,7 +161,6 @@ const Shipping = ({}) => {
         >
           <FormControl
             style={{width: 'calc(100%/2)', margin: '10px'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">Email</InputLabel>
@@ -183,7 +174,6 @@ const Shipping = ({}) => {
           </FormControl>
           <FormControl
             style={{width: 'calc(100%/2)', margin: '10px'}}
-            medium
             variant="outlined"
           >
             <InputLabel htmlFor="outlined">Phone</InputLabel>

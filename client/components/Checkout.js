@@ -6,8 +6,7 @@ import {Button, Modal} from '@material-ui/core/'
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {checkout} from '../store/'
-import {useHistory} from 'react-router-dom'
+import {checkout, getCart} from '../store/'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
@@ -31,13 +30,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Checkout = ({user, checkout, cart}) => {
+const Checkout = ({user, checkout, cart, getCart}) => {
   const [open, setOpen] = React.useState(false)
   const token = window.localStorage.getItem('guestToken')
   const classes = useStyles()
   const checkOut = id => {
-    // checkout(id)
-    setOpen(true)
+    checkout(id)
+    // setOpen(true)
   }
 
   function getStepContent(step) {
@@ -57,6 +56,10 @@ const Checkout = ({user, checkout, cart}) => {
   const steps = ['Shipping', 'Payment', 'Confirmation']
 
   const handleNext = () => {
+    console.log(activeStep + 1)
+    if (activeStep + 1 === steps.length) {
+      checkOut(user.id || token)
+    }
     setActiveStep(prevActiveStep => prevActiveStep + 1)
   }
 
@@ -67,11 +70,12 @@ const Checkout = ({user, checkout, cart}) => {
   const handleClose = () => {
     setOpen(false)
     setActiveStep(0)
+    getCart(user.id || token)
   }
 
   return (
     <div>
-      <Button onClick={() => checkOut(user.id || token)} color="secondary">
+      <Button onClick={() => setOpen(true)} color="secondary">
         Checkout
       </Button>
       <Modal
@@ -182,6 +186,9 @@ const mapDispatchToProps = dispatch => {
     checkout(id) {
       console.log('checkout', id)
       dispatch(checkout(id))
+    },
+    getCart(id) {
+      dispatch(getCart(id))
     }
   }
 }
