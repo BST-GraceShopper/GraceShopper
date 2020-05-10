@@ -76,7 +76,7 @@ export default function(state = defaultbeers, action) {
         if (beer.id === action.beer.id) {
           return action.beer
         }
-        return beer
+        return state
       })
     case REMOVE_beer:
       return state.filter(beerItem => beerItem.id !== action.beer.id)
