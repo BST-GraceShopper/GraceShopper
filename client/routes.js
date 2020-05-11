@@ -2,8 +2,16 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, UserHome} from './components'
 import {me} from './store'
+import Home from './components/home.js'
+import Wine from './components/wine.js'
+import Beer from './components/beer.js'
+import Spirit from './components/spirits.js'
+import Cart from './components/cart.js'
+import LogOut from './components/logout.js'
+import ThankYou from './components/ThankYou.js'
+// import {Signup} from './components'
 
 /**
  * COMPONENT
@@ -19,16 +27,26 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        {/* <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} /> */}
+        <Route exact path="/" component={Home} />
+        <Route path="/wine" component={Wine} />
+        <Route path="/beer" component={Beer} />
+        <Route path="/spirit" component={Spirit} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/thankyou" component={ThankYou} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/" component={UserHome} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/logout" component={LogOut} />
+            <Route path="/thankyou" component={ThankYou} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route exact path="/" component={Home} />
       </Switch>
     )
   }
