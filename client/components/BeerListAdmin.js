@@ -14,19 +14,26 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {getBeers, editBeer, removeBeer} from '../store/'
+import CreateBeer from './CreateBeer'
 import BeerCard from './BeerCard'
 
 class beerListAdmin extends Component {
-  constructor() {
-    super()
-  }
   componentDidMount() {
     this.props.fetch()
   }
 
   render() {
     const {beers} = this.props
-    return beers.map(beer => <BeerCard beer={beer} />)
+    return (
+      <div style={{color: 'white'}}>
+        <CreateBeer props={beers} />
+        {beers.length ? (
+          beers.map(beer => <BeerCard beer={beer} />)
+        ) : (
+          <h6>No Beers</h6>
+        )}
+      </div>
+    )
   }
 }
 

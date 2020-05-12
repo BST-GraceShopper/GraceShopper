@@ -20,11 +20,11 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
   try {
-    // const beers = await Beer.findAll()
-    // const beers = await Product.findAll({where:{category:'beer'}})
-    // res.json(beers)
+    console.log('in post', req.params, req.body)
+    const beer = await Product.create(req.body)
+    res.json(beer)
   } catch (err) {
     next(err)
   }
@@ -51,9 +51,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    console.log(req.params.id, 'req params')
     const beer = await Product.findByPk(req.params.id)
-    console.log(beer, 'in route')
     await beer.destroy()
     res.sendStatus(204)
   } catch (err) {
