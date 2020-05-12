@@ -34,13 +34,15 @@ export const getBeers = () => async dispatch => {
   }
 }
 
-export const addBeer = id => async dispatch => {
-  // try {
-  //   const beers = (await axios.post('/api/beers/:id')).data
-  //   dispatch(_addBeer(beer))
-  // } catch (err) {
-  //   console.error(err)
-  // }
+export const addBeer = beer => async dispatch => {
+  try {
+    const newBeer = (await axios.post(`/api/beers/${beer.productId}`, beer))
+      .data
+    console.log(newBeer, 'in addbeer')
+    dispatch(_addBeer(newBeer))
+  } catch (err) {
+    console.error(err)
+  }
 }
 export const editBeer = beer => async dispatch => {
   try {
@@ -54,7 +56,6 @@ export const editBeer = beer => async dispatch => {
 
 export const removeBeer = beerId => async dispatch => {
   try {
-    console.log(beerId)
     await axios.delete(`/api/beers/${beerId}`)
     dispatch(_removeBeer(beerId))
   } catch (err) {
@@ -70,6 +71,7 @@ export default function(state = defaultbeers, action) {
     case GET_BEERS:
       return action.beers
     case ADD_BEER:
+      console.log(action.beer, 'valmik')
       return [...state, action.beer]
     case EDIT_BEER:
       return state.map(beer => {
@@ -78,7 +80,6 @@ export default function(state = defaultbeers, action) {
         } else return beer
       })
     case REMOVE_BEER:
-      console.log(action.beer, 'in reducer remove')
       return state.filter(beerItem => beerItem.id !== action.beer)
     default:
       return state

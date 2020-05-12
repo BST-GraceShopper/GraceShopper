@@ -17,7 +17,6 @@ import {getBeers, editBeer, removeBeer} from '../store/'
 
 class BeerCard extends Component {
   constructor(props) {
-    console.log(props, 'beer-card-props')
     super()
     this.state = {
       productId: '',
@@ -151,7 +150,6 @@ class BeerCard extends Component {
             </CardActions>
           </Card>
         </ButtonBase>
-        )
       </div>
     )
   }
