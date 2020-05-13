@@ -51,20 +51,36 @@ export const formTheme = createMuiTheme({
     //   secondary: '#ffffff'
     // }
   },
+  // palette: {
+  //   type: 'light',
+  //   background: {
+  //     default: '#000000'
+  //   },
+  //   primary: {
+  //     main: '#01579b'
+  //   },
+  //   secondary: {
+  //     main: '#ef6c00'
+  //   },
+  //   text: {
+  //     primary: '#01579b',
+  //     secondary: '#808080'
+  //   }
+  // }
   palette: {
-    type: 'light',
+    type: 'dark',
     background: {
       default: '#000000'
     },
     primary: {
-      main: '#01579b'
+      main: '#607d8b'
     },
     secondary: {
-      main: '#ef6c00'
+      main: '#607d8b'
     },
     text: {
-      primary: '#01579b',
-      secondary: '#808080'
+      primary: '#ffffff',
+      secondary: '#b0bec5'
     }
   }
 })

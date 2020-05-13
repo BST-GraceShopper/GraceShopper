@@ -85,33 +85,33 @@ const Checkout = ({user, checkout, cart, getCart}) => {
           justifyContent: 'center'
         }}
       >
-        <Paper
-          variant="outlined"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'space-between',
-            alignContent: 'space-between',
-            padding: 30,
-            width: 'calc(100%*2/3)',
-            height: '80%'
-          }}
-        >
-          {activeStep === steps.length ? (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <Typography className={classes.instructions}>
-                Thank you for your purchase!
-              </Typography>
-            </div>
-          ) : (
-            <div style={{width: '100%', height: '100%'}}>
-              <ThemeProvider theme={formTheme}>
+        <ThemeProvider theme={formTheme}>
+          <Paper
+            variant="outlined"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'space-between',
+              alignContent: 'space-between',
+              padding: 30,
+              width: 'calc(100%*2/3)',
+              height: '80%'
+            }}
+          >
+            {activeStep === steps.length ? (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography className={classes.instructions}>
+                  Thank you for your purchase!
+                </Typography>
+              </div>
+            ) : (
+              <div style={{width: '100%', height: '100%'}}>
                 <Stepper activeStep={activeStep} theme={formTheme}>
                   {steps.map((label, idx) => {
                     return (
@@ -132,42 +132,43 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                 >
                   {getStepContent(activeStep)}
                 </div>
-              </ThemeProvider>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  padding: 30
-                }}
-              >
+
                 <div
                   style={{
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'center',
-                    width: '100%'
+                    padding: 30
                   }}
                 >
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      width: '100%'
+                    }}
                   >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </Paper>
+            )}
+          </Paper>
+        </ThemeProvider>
       </Modal>
     </div>
   )
