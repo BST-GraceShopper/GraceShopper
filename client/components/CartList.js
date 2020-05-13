@@ -1,33 +1,47 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import {
-  CardMedia,
-  Card,
-  Button,
-  CardActions,
-  IconButton,
-  ButtonBase,
-  Grid
-} from '@material-ui/core/'
-import CardContent from '@material-ui/core/CardContent'
-import {Typography} from '@material-ui/core'
+import {IconButton} from '@material-ui/core/'
+import {Typography, Grid} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import {removeFromCart, addToCart, removeProductFromCart} from '../store/'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import CloseIcon from '@material-ui/icons/Close'
+import {withStyles, makeStyles} from '@material-ui/core/styles'
 
-import TableSortLabel from '@material-ui/core/TableSortLabel'
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+    border: '1px solid black'
+  },
+  body: {
+    fontSize: 14,
+    borderBottom: '1px solid black',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    align: 'center'
+  },
+  footer: {
+    fontSize: 14,
+    borderBottom: '1px solid black',
+    backgroundColor: 'rgba(255,255,255,0.1)'
+  }
+}))(TableCell)
+
+const useStyles = makeStyles(theme => ({
+  hover: {
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.1)'
+    }
+  }
+}))
 
 const CartList = ({
   cart,
@@ -41,146 +55,153 @@ const CartList = ({
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Price'}
   ]
-
+  const classes = useStyles()
   const token = window.localStorage.getItem('guestToken')
   return (
-    <Table style={{border: '1px solid black'}}>
-      <TableHead>
-        <TableRow style={{border: '1px solid black'}}>
-          {['Item', 'Quantity', 'Price'].map(item => {
+    <div stle={{width: '80%'}}>
+      <Table style={{border: '1px solid black'}}>
+        <TableHead>
+          <TableRow style={{border: '1px solid black'}}>
+            {['Item', 'Quantity', 'Price'].map(item => {
+              return (
+                <StyledTableCell align="center" key={item}>
+                  <Typography
+                    gutterBottom
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    {item}
+                  </Typography>
+                </StyledTableCell>
+              )
+            })}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cart.items.map(cartItem => {
             return (
-              <TableCell key={item}>
-                <Typography
-                  gutterBottom
-                  color="textSecondary"
-                  variant="subtitle1"
-                >
-                  {item}
-                </Typography>
-              </TableCell>
-            )
-          })}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {cart.items.map(cartItem => {
-          return (
-            <TableRow
-              key={cartItem.productId}
-              style={{border: '1px solid black'}}
-            >
-              <TableCell>
-                <Grid style={{display: 'flex', flexWrap: 'wrap'}}>
-                  <Grid item>
-                    <img
-                      alt="complex"
-                      src={cartItem.image}
+              <TableRow
+                key={cartItem.productId}
+                style={{border: '1px solid black'}}
+              >
+                <StyledTableCell align="center">
+                  <Grid style={{display: 'flex', flexWrap: 'wrap'}}>
+                    <Grid item>
+                      <img
+                        alt="complex"
+                        src={cartItem.image}
+                        style={{
+                          margin: 'auto',
+                          display: 'block',
+                          maxWidth: 100,
+                          maxHeight: 100
+                        }}
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm
+                      container
                       style={{
-                        margin: 'auto',
-                        display: 'block',
-                        maxWidth: 150,
-                        maxHeight: 150
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
                       }}
-                    />
+                    >
+                      <Typography
+                        gutterBottom
+                        color="textSecondary"
+                        variant="subtitle1"
+                      >
+                        {cartItem.name}
+                      </Typography>
+                      <Typography
+                        color="textSecondary"
+                        variant="body2"
+                        gutterBottom
+                      >
+                        {cartItem.maker}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sm
-                    container
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <div
                     style={{
                       display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
+                      flexWrap: 'wrap',
+                      justifyContent: 'space-between',
                       alignItems: 'center'
                     }}
                   >
-                    <Typography
-                      gutterBottom
-                      color="textSecondary"
-                      variant="subtitle1"
+                    <IconButton
+                      aria-label="remove one"
+                      className={classes.hover}
+                      onClick={() => removeFromCart(user.id || token, cartItem)}
                     >
-                      {cartItem.name}
+                      <RemoveIcon color="primary" />
+                    </IconButton>
+                    <Typography variant="body2" color="textSecondary">
+                      {cartItem.quantity}
                     </Typography>
-                    <Typography
-                      color="textSecondary"
-                      variant="body2"
-                      gutterBottom
+                    <IconButton
+                      aria-label="add one"
+                      className={classes.hover}
+                      onClick={() =>
+                        addToCart(user.id || token, cartItem.productId)
+                      }
                     >
-                      {cartItem.maker}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </TableCell>
-              <TableCell>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  <IconButton
-                    aria-label="remove one"
-                    onClick={() => removeFromCart(user.id || token, cartItem)}
+                      <AddIcon color="primary" />
+                    </IconButton>
+                  </div>
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography
+                    color="textSecondary"
+                    variant="body2"
+                    gutterBottom
                   >
-                    <RemoveIcon color="secondary" />
-                  </IconButton>
-                  <Typography variant="body2" color="textSecondary">
-                    {cartItem.quantity}
+                    ${cartItem.price}
                   </Typography>
+                </StyledTableCell>
+                <StyledTableCell align="center">
                   <IconButton
-                    aria-label="add one"
+                    aria-label="remove product"
+                    className={classes.hover}
                     onClick={() =>
-                      addToCart(user.id || token, cartItem.productId)
+                      removeProductFromCart(user.id || token, cartItem)
                     }
                   >
-                    <AddIcon color="secondary" />
+                    <CloseIcon color="primary" />
                   </IconButton>
-                </div>
-              </TableCell>
-              <TableCell>
-                <Typography color="textSecondary" variant="body2" gutterBottom>
-                  ${cartItem.price}
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <IconButton
-                  aria-label="remove product"
-                  onClick={() =>
-                    removeProductFromCart(user.id || token, cartItem)
-                  }
-                >
-                  <CloseIcon color="secondary" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
-      <TableFooter>
+                </StyledTableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+        {/* <TableFooter>
         <TableRow>
-          {/* <TableCell>
-           </TableCell> */}
-          <TableCell align="right">
+          <StyledTableCell align="right">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               Total
             </Typography>
-          </TableCell>
-          <TableCell align="center">
+          </StyledTableCell>
+          <StyledTableCell align="center">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               {cart.totalQuantity}
             </Typography>
-          </TableCell>
-          <TableCell>
+          </StyledTableCell>
+          <StyledTableCell>
             <Typography color="textSecondary" variant="h6" gutterBottom>
               ${cart.totalPrice}
             </Typography>
-          </TableCell>
+          </StyledTableCell>
         </TableRow>
-      </TableFooter>
-    </Table>
+      </TableFooter> */}
+      </Table>
+    </div>
   )
 }
 

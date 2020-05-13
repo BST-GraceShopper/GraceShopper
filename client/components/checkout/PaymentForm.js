@@ -1,35 +1,30 @@
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import {Typography, Button} from '@material-ui/core'
+import {Typography} from '@material-ui/core'
 import {loadStripe} from '@stripe/stripe-js'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
 import {InputLabel} from '@material-ui/core'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormLabel from '@material-ui/core/FormLabel'
-import ReactDOM from 'react-dom'
 import Checkbox from '@material-ui/core/Checkbox'
-import {makeStyles} from '@material-ui/core/styles'
+// import {makeStyles} from '@material-ui/core/styles'
 import {
   CardElement,
   CardNumberElement,
   CardCvcElement,
   CardExpiryElement,
-  Elements,
+  // Elements,
   useStripe,
   useElements
 } from '@stripe/react-stripe-js'
 import StripeInput from './StripeInput'
 
-const useStyles = makeStyles(theme => ({
-  disabled: {
-    color: 'red'
-  }
-}))
+// const useStyles = makeStyles(theme => ({
+//   disabled: {
+//     color: 'red'
+//   }
+// }))
 
 const PaymentForm = () => {
   const stripe = useStripe()
@@ -39,7 +34,7 @@ const PaymentForm = () => {
   const handleChange = event => {
     setChecked(event.target.checked)
   }
-  const classes = useStyles()
+  // const classes = useStyles()
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -53,7 +48,6 @@ const PaymentForm = () => {
       //   },
       // },
     })
-    console.log(paymentMethod)
   }
 
   console.log(stripe)

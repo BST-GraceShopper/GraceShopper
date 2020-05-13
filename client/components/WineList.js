@@ -1,23 +1,29 @@
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import {
-  CardMedia,
-  Card,
-  Button,
-  CardActions,
-  IconButton,
-  ButtonBase
-} from '@material-ui/core/'
+import {CardMedia, Card, CardActions, IconButton} from '@material-ui/core/'
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
 import {Snackbar} from '@material-ui/core/'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import {makeStyles} from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  hover: {
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.1)'
+    }
+  }
+}))
 
 const WineList = ({user, wines, addToCart}) => {
-  const [open, setOpen] = React.useState(false)
+  const classes = useStyles()
+  const [state, setState] = React.useState({
+    open: false,
+    message: ''
+  })
   const token = window.localStorage.getItem('guestToken')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
@@ -25,82 +31,109 @@ const WineList = ({user, wines, addToCart}) => {
         return (
           <Card
             elevation={3}
+            raised={true}
             key={wine.id}
+            variant="outlined"
             style={{
-              width: 'calc(100%)',
+              width: 'calc(100%/3-60px)',
               display: 'flex',
-              backgroundColor: 'black',
-              justifyContent: 'center'
+              // backgroundColor: 'black',
+              // border: '1px solid black',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              margin: 10,
+              backgroundColor: 'rgba(255,255,255,0.1)',
+              border: '1px #303030 solid',
+              height: 'same-as-width',
+              padding: 10
             }}
           >
-            <ButtonBase
-              style={{
-                width: 'calc(100%/4)',
-                margin: 20,
-                padding: 10,
-                backgroundColor: 'black'
-                // border: '1px white solid'
-              }}
+            {/* <CardActionArea
+              // style={{
+              //   padding: 10,
+              //   backgroundColor:'rgba(255,255,255,0.1)',
+              //   display:'flex',
+              //   // flexDirection:'column',
+              //   height:'same-as-width',
+              //   border: '1px #303030 solid'
+              // }}
+            > */}
+            <CardActions
+              style={{display: 'flex', justifyContent: 'space-between'}}
             >
-              <div
-                style={{
-                  width: 'calc(100%)',
-                  display: 'flex',
-                  backgroundColor: 'black',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
+              <IconButton
+                aria-label="favorite"
+                tooltip="Add to favorites"
+                className={classes.hover}
+                onClick={() => {
+                  //add to favorites function
+                  setState({open: true, message: 'Added to favorites'})
                 }}
               >
-                <CardMedia
-                  image={wine.image}
-                  style={{width: 200, height: 200}}
-                />
-              </div>
-              <CardContent
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >
-                {[
-                  'name',
-                  'maker',
-                  'category',
-                  'grape',
-                  'region',
-                  'price',
-                  'inventory'
-                ].map(prop => {
-                  return (
-                    <Typography key={prop} style={{color: 'white'}}>
-                      {prop}: {wine[prop]}
-                    </Typography>
-                  )
-                })}
-              </CardContent>
-            </ButtonBase>
-            <CardActions>
+                <FavoriteBorderIcon color="primary" />
+              </IconButton>
               <IconButton
                 aria-label="add to cart"
+                tooltip="Add to cart"
+                className={classes.hover}
                 onClick={() => {
                   addToCart(user.id || token, wine.id)
-                  setOpen(true)
+                  setState({open: true, message: 'Added to cart'})
                 }}
               >
-                <AddIcon color="secondary" />
+                <AddIcon color="primary" />
               </IconButton>
             </CardActions>
-            <Snackbar
-              anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
-              open={open}
-              autoHideDuration={2000}
-              onClose={() => setOpen(false)}
-              message="Added to Cart"
-            />
+
+            {/* </CardActionArea> */}
+            <CardMedia image={wine.image} style={{width: 200, height: 200}} />
+            <CardContent
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignContent: 'center'
+              }}
+            >
+              <Typography variant="h5" key={wine.name} style={{color: 'white'}}>
+                {wine.name}
+              </Typography>
+              <Typography
+                variant="body1"
+                key={wine.maker}
+                style={{color: 'white'}}
+              >
+                {wine.maker}
+              </Typography>
+            </CardContent>
+            <CardContent
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignContent: 'center'
+              }}
+            >
+              <Typography
+                variant="h6"
+                key={wine.price}
+                style={{color: 'white'}}
+              >
+                ${wine.price}
+              </Typography>
+            </CardContent>
           </Card>
         )
       })}
+      <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+        open={state.open}
+        autoHideDuration={1000}
+        onClose={() => setState({open: false})}
+        message={state.message}
+      />
     </div>
   )
 }

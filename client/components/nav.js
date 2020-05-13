@@ -31,160 +31,150 @@ const Nav = props => {
   }
 
   return (
-    // <Paper
-    //   square
-    //   style={{
-    //     padding: 10,
-    //     backgroundImage: `url(${imgURL})`,
-    //     backgroundPosition: imgPosition,
-    //     backgroundSize: 'cover',
-    //     border: '1px solid black',
-    //     width: '100%',
-    //     height: 500,
-    //     margin: '0px 0px 50px',
-    //     boxShadow: 'inset 600px -125px 5000px black'
-    //   }}
-    // >
-    <div>
-      <AppBar
-        position="static"
-        style={{background: 'transparent', boxShadow: 'none'}}
-      >
-        <Grid item>
-          <div
-            style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}
-          >
-            <Typography
-              variant="h3"
-              style={{
-                margin: '0px 25px 0px 0px',
-                padding: 10,
-                borderRadius: 200,
-                fontFamily: 'cursive'
-              }}
+    <Paper
+      square
+      style={{
+        backgroundImage: `url(${imgURL})`,
+        backgroundPosition: imgPosition,
+        backgroundSize: 'cover',
+        border: '1px solid black',
+        width: '100%',
+        height: 500,
+        margin: '0px 0px 50px',
+        boxShadow: 'inset 600px -125px 5000px black'
+      }}
+    >
+      <div>
+        <AppBar
+          position="static"
+          style={{backgroundColor: 'rgba(0,0,0,0.5)', boxShadow: 'none'}}
+        >
+          <Grid item>
+            <div
+              style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}
             >
-              GS
-            </Typography>
-            <Tabs
-              value={value}
-              indicatorColor="secondary"
-              color="textSecondary"
-              onChange={handleChange}
-              aria-label="disabled tabs example"
-              style={{
-                display: 'flex',
-                flexDirection: 'flex',
-                alignItems: 'center'
-              }}
-            >
-              <Tab color="secondary" value="/" label="Home" />
-              <Tab style={{color: 'white'}} value="/beer" label="Beer" />
-              <Tab style={{color: 'white'}} value="/wine" label="Wine" />
-              <Tab style={{color: 'white'}} value="/spirit" label="Spirits" />
-              <Tab style={{color: 'white'}} value="/cart" label="Cart" />
-              {!user.id ? (
-                <Tab
-                  style={{color: 'white'}}
-                  value={'/login' && '/signup'}
-                  label="Log In/Sign Up"
-                />
-              ) : (
-                <Tab color="secondary" value="/logout" label="Log Out" />
-              )}
-            </Tabs>
-          </div>
-        </Grid>
-        {user.id ? (
-          ''
-        ) : (
-          <ThemeProvider theme={formTheme}>
-            <Modal
-              open={open}
-              value={value}
-              color="secondary"
-              onClose={handleClose}
-              theme={formTheme}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <Paper
-                variant="outlined"
+              <Typography
+                variant="h3"
+                color="primary"
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  padding: 30,
-                  width: 'calc(100%*2.5/3)'
+                  margin: '0px 25px 0px 0px',
+                  padding: 10,
+                  borderRadius: 200,
+                  fontFamily: 'cursive'
                 }}
               >
-                {page === '/login' ? <Login /> : <Signup />}
-                <div
+                GS
+              </Typography>
+              <Tabs
+                value={value}
+                indicatorColor="primary"
+                color="primary"
+                onChange={handleChange}
+                aria-label="disabled tabs example"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'flex',
+                  alignItems: 'center'
+                }}
+              >
+                <Tab style={{color: 'white'}} value="/" label="Home" />
+                <Tab style={{color: 'white'}} value="/beer" label="Beer" />
+                <Tab style={{color: 'white'}} value="/wine" label="Wine" />
+                <Tab style={{color: 'white'}} value="/spirit" label="Spirits" />
+                <Tab style={{color: 'white'}} value="/cart" label="Cart" />
+                {!user.id ? (
+                  <Tab
+                    style={{color: 'white'}}
+                    value={'/login' && '/signup'}
+                    label="Log In/Sign Up"
+                  />
+                ) : (
+                  <Tab
+                    style={{color: 'white'}}
+                    value="/logout"
+                    label="Log Out"
+                  />
+                )}
+              </Tabs>
+            </div>
+          </Grid>
+          {user.id ? (
+            ''
+          ) : (
+            <ThemeProvider theme={formTheme}>
+              <Modal
+                open={open}
+                value={value}
+                color="secondary"
+                onClose={handleClose}
+                theme={formTheme}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Paper
+                  variant="outlined"
                   style={{
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'center',
-                    margin: '50px 0px 0px'
+                    padding: 30,
+                    width: 'calc(100%*2.5/3)'
                   }}
                 >
-                  {page === '/signup' ? (
-                    <Typography color="textSecondary">
-                      Already have an account?{' '}
-                      <a color="primary" onClick={() => setPage('/login')}>
-                        <b>Log In</b>
-                      </a>
-                    </Typography>
-                  ) : (
-                    <Typography color="textSecondary">
-                      Don't have an account?{' '}
-                      <a color="primary" onClick={() => setPage('/signup')}>
-                        <b>Sign Up</b>
-                      </a>
-                    </Typography>
-                  )}
-                </div>
-              </Paper>
-            </Modal>
-          </ThemeProvider>
-        )}
-      </AppBar>
-      <Paper
-        square
+                  {page === '/login' ? <Login /> : <Signup />}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '50px 0px 0px'
+                    }}
+                  >
+                    {page === '/signup' ? (
+                      <Typography color="textSecondary">
+                        Already have an account?{' '}
+                        <a color="primary" onClick={() => setPage('/login')}>
+                          <b>Log In</b>
+                        </a>
+                      </Typography>
+                    ) : (
+                      <Typography color="textSecondary">
+                        Don't have an account?{' '}
+                        <a color="primary" onClick={() => setPage('/signup')}>
+                          <b>Sign Up</b>
+                        </a>
+                      </Typography>
+                    )}
+                  </div>
+                </Paper>
+              </Modal>
+            </ThemeProvider>
+          )}
+        </AppBar>
+      </div>
+      <div
         style={{
-          padding: 10,
-          backgroundImage: `url(${imgURL})`,
-          backgroundPosition: imgPosition,
-          backgroundSize: 'cover',
-          border: '1px solid black',
-          width: '100%',
-          height: 500,
-          margin: '0px 0px 50px',
-          boxShadow: 'inset 600px -125px 5000px black'
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 'calc(100%*2/3)',
+          width: 'calc(100%/3)'
         }}
       >
-        <div
+        <Typography
+          variant="h1"
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: 'calc(100%*2/3)',
-            width: 'calc(100%/3)'
+            color: 'white',
+            margin: 10,
+            fontFamily: 'Petit Formal Script, cursive'
           }}
         >
-          <Typography
-            variant="h1"
-            style={{
-              color: 'white',
-              margin: 10,
-              fontFamily: 'Petit Formal Script, cursive'
-            }}
-          >
-            {name}
-          </Typography>
-        </div>
-      </Paper>
-    </div>
+          {name}
+        </Typography>
+      </div>
+    </Paper>
   )
 }
 

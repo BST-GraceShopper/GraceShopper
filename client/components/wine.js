@@ -13,7 +13,7 @@ class Wine extends Component {
     return (
       <div style={{color: 'white'}}>
         <WineHeader />
-        <WineList wines={wines} />
+        <WineList />
       </div>
     )
   }

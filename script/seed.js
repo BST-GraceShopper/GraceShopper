@@ -25,7 +25,8 @@ async function seed() {
       price: 500.0,
       inventory: 2,
       image:
-        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+        '/images/winebottle.png'
     }),
     Product.create({
       maker: 'Vinter 2',
@@ -38,7 +39,8 @@ async function seed() {
       price: 700.0,
       inventory: 1,
       image:
-        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
+        '/images/winebottle.png'
     }),
     Product.create({
       ABV: 7.5,
