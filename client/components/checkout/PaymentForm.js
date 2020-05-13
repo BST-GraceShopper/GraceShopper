@@ -6,7 +6,7 @@ import {loadStripe} from '@stripe/stripe-js'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
-import {InputLabel} from '@material-ui/core'
+import {InputLabel, Button} from '@material-ui/core'
 import Checkbox from '@material-ui/core/Checkbox'
 // import {makeStyles} from '@material-ui/core/styles'
 import {
@@ -19,6 +19,7 @@ import {
   useElements
 } from '@stripe/react-stripe-js'
 import StripeInput from './StripeInput'
+import {savePayment} from '../../store'
 
 // const useStyles = makeStyles(theme => ({
 //   disabled: {
@@ -26,31 +27,30 @@ import StripeInput from './StripeInput'
 //   }
 // }))
 
-const PaymentForm = () => {
+const PaymentForm = ({shipping, payment, savePayment}) => {
   const stripe = useStripe()
   const elements = useElements()
-  const [checked, setChecked] = React.useState(true)
+  const defaultState = !shipping.zip
+  const [checked, setChecked] = React.useState(!defaultState)
+  const [state, setState] = React.useState(payment)
+  console.log(state)
 
   const handleChange = event => {
     setChecked(event.target.checked)
+    setState(payment)
   }
   // const classes = useStyles()
 
   const handleSubmit = async event => {
     event.preventDefault()
+    // const {name,address1, address2,city, state, zip} = state
     const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
+      ...state,
       card: elements.getElement(CardNumberElement)
-      // billing_details: {
-      //   name,
-      //   address: {
-      //     postal_code: postal,
-      //   },
-      // },
     })
+    savePayment(state)
+    console.log(paymentMethod)
   }
-
-  console.log(stripe)
 
   return (
     <div
@@ -64,7 +64,7 @@ const PaymentForm = () => {
       <Typography variant="h6">Billing Information</Typography>
       {/* <form onSubmit={handleSubmit}> */}
 
-      <div
+      <form
         style={{
           margin: '10px 0px',
           width: '80%',
@@ -87,6 +87,7 @@ const PaymentForm = () => {
           <Checkbox
             checked={checked}
             onChange={handleChange}
+            disabled={defaultState}
             color="primary"
             inputProps={{'aria-label': 'primary checkbox'}}
           />
@@ -98,8 +99,14 @@ const PaymentForm = () => {
         >
           <InputLabel htmlFor="outlined">Name On Card</InputLabel>
           <OutlinedInput
-            id="lastName"
+            id="name"
             disabled={checked}
+            value={
+              checked
+                ? `${shipping.firstName} ${shipping.lastName}`
+                : state.name
+            }
+            onChange={ev => setState({...state, name: ev.target.value})}
             // InputProps={{
             //   className: classes.disabled
             // }}
@@ -117,6 +124,8 @@ const PaymentForm = () => {
           <OutlinedInput
             id="address1"
             disabled={checked}
+            value={checked ? shipping.address1 : state.address2}
+            onChange={ev => setState({...state, address1: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -131,6 +140,8 @@ const PaymentForm = () => {
           <OutlinedInput
             id="address2"
             disabled={checked}
+            value={checked ? shipping.address2 : state.address2}
+            onChange={ev => setState({...state, address2: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -154,6 +165,8 @@ const PaymentForm = () => {
             <OutlinedInput
               id="city"
               disabled={checked}
+              value={checked ? shipping.city : state.city}
+              onChange={ev => setState({...state, address1: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -168,6 +181,8 @@ const PaymentForm = () => {
             <OutlinedInput
               id="state"
               disabled={checked}
+              value={checked ? shipping.state : state.state}
+              onChange={ev => setState({...state, state: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -182,6 +197,8 @@ const PaymentForm = () => {
             <OutlinedInput
               id="zip"
               disabled={checked}
+              value={checked ? shipping.zip : state.zip}
+              onChange={ev => setState({...state, zip: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -197,6 +214,7 @@ const PaymentForm = () => {
             label="Credit Card Number"
             name="ccnumber"
             variant="outlined"
+            color="primary"
             required
             fullWidth
             InputLabelProps={{shrink: true}}
@@ -257,24 +275,24 @@ const PaymentForm = () => {
           />
         </FormControl>
         {/* </div> */}
-        {/* <Button type="submit" disabled={!stripe}>
-        Pay
-      </Button> */}
-      </div>
+        <Button type="submit" disabled={!stripe}>
+          Pay
+        </Button>
+      </form>
       {/* </form> */}
     </div>
   )
 }
 
-const mapStateToProps = ({wines, user, cart}) => {
-  return {wines, cart, user}
+const mapStateToProps = ({shipping, payment}) => {
+  return {shipping, payment}
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     checkout(id) {
-//       console.log('checkout', id)
-//       dispatch(checkout(id))
-//     }
-//   }
-// }
-export default connect(mapStateToProps)(PaymentForm)
+const mapDispatchToProps = dispatch => {
+  return {
+    savePayment(payment) {
+      console.log('save payment')
+      dispatch(savePayment(payment))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm)

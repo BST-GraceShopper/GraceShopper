@@ -5,19 +5,24 @@ import {Typography} from '@material-ui/core'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
-import {InputLabel} from '@material-ui/core'
+import {InputLabel, Button} from '@material-ui/core'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
+import {saveShipping} from '../../store'
 
-const Shipping = ({}) => {
+const Shipping = ({shipping, saveShipping}) => {
   const [value, setValue] = React.useState('standard')
 
   const handleChange = event => {
     setValue(event.target.value)
   }
-
+  const [state, setState] = React.useState(shipping)
+  const handleSubmit = () => {
+    event.preventDefault()
+    saveShipping(state)
+  }
   return (
     <div
       style={{
@@ -28,7 +33,8 @@ const Shipping = ({}) => {
       }}
     >
       <Typography variant="h6">Shipping Information</Typography>
-      <div
+      <form
+        onSubmit={handleSubmit}
         style={{
           margin: '10px 0px',
           width: '80%',
@@ -55,8 +61,12 @@ const Shipping = ({}) => {
             <InputLabel htmlFor="outlined">First Name</InputLabel>
             <OutlinedInput
               id="firstName"
-              // value={values.amount}
-              // onChange={}
+              value={state.firstName}
+              onChange={ev => {
+                console.log(ev.target.value)
+                setState({...state, firstName: ev.target.value})
+                console.log(state)
+              }}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={70}
             />
@@ -68,6 +78,8 @@ const Shipping = ({}) => {
             <InputLabel htmlFor="outlined">Last Name</InputLabel>
             <OutlinedInput
               id="lastName"
+              value={state.lastName}
+              onChange={ev => setState({...state, lastName: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -82,6 +94,8 @@ const Shipping = ({}) => {
           <InputLabel htmlFor="outlined">Address Line 1</InputLabel>
           <OutlinedInput
             id="address1"
+            value={state.address1}
+            onChange={ev => setState({...state, address1: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -95,6 +109,8 @@ const Shipping = ({}) => {
           <InputLabel htmlFor="outlined">Address Line 2</InputLabel>
           <OutlinedInput
             id="address2"
+            value={state.address2}
+            onChange={ev => setState({...state, address2: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -117,6 +133,8 @@ const Shipping = ({}) => {
             <InputLabel htmlFor="outlined">City</InputLabel>
             <OutlinedInput
               id="city"
+              value={state.city}
+              onChange={ev => setState({...state, city: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -130,6 +148,8 @@ const Shipping = ({}) => {
             <InputLabel htmlFor="outlined">State</InputLabel>
             <OutlinedInput
               id="state"
+              value={state.state}
+              onChange={ev => setState({...state, state: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -143,6 +163,8 @@ const Shipping = ({}) => {
             <InputLabel htmlFor="outlined">ZIP</InputLabel>
             <OutlinedInput
               id="zip"
+              value={state.zip}
+              onChange={ev => setState({...state, zip: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -167,6 +189,8 @@ const Shipping = ({}) => {
             <OutlinedInput
               id="email"
               // value={values.amount}
+              value={state.email}
+              onChange={ev => setState({...state, email: ev.target.value})}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={50}
@@ -180,6 +204,8 @@ const Shipping = ({}) => {
             <OutlinedInput
               id="phone"
               // value={values.amount}
+              value={state.phone}
+              onChange={ev => setState({...state, phone: ev.target.value})}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={50}
@@ -213,20 +239,21 @@ const Shipping = ({}) => {
             </RadioGroup>
           </FormControl>
         </div>
-      </div>
+        <Button type="submit">Submit</Button>
+      </form>
     </div>
   )
 }
 
-const mapStateToProps = ({wines, user, cart}) => {
-  return {wines, cart, user}
+const mapStateToProps = ({wines, user, cart, shipping}) => {
+  return {wines, cart, user, shipping}
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     checkout(id) {
-//       console.log('checkout', id)
-//       dispatch(checkout(id))
-//     }
-//   }
-// }
-export default connect(mapStateToProps)(Shipping)
+const mapDispatchToProps = dispatch => {
+  return {
+    saveShipping(shipping) {
+      console.log('save shipping')
+      dispatch(saveShipping(shipping))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Shipping)
