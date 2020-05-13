@@ -2,6 +2,15 @@ import {createMuiTheme} from '@material-ui/core/'
 
 // A custom theme for this app
 export const theme = createMuiTheme({
+  overrides: {
+    MuiIconButton: {
+      root: {
+        '&:hover': {
+          backgroundColor: '$rgba(255,255,255,0.1)'
+        }
+      }
+    }
+  },
   typography: {
     // Use the system font instead of the default Roboto font.
     fontFamily: ['"Quicksand"'].join(',')
@@ -16,7 +25,8 @@ export const theme = createMuiTheme({
       default: '#000000'
     },
     primary: {
-      main: '#01579b'
+      // main: '#01579b'
+      main: '#ffffff'
     },
     secondary: {
       main: '#ef6c00'

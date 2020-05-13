@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import {Button, Modal} from '@material-ui/core/'
-import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add'
 import {checkout, getCart} from '../store/'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -14,8 +12,7 @@ import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import Shipping from './checkout/Shipping'
 import Payment from './checkout/Payment'
 import Confirmation from './checkout/Confirmation'
-
-import {theme, formTheme} from '../theme'
+import {formTheme} from '../theme'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,7 +53,6 @@ const Checkout = ({user, checkout, cart, getCart}) => {
   const steps = ['Shipping', 'Payment', 'Confirmation']
 
   const handleNext = () => {
-    console.log(activeStep + 1)
     if (activeStep + 1 === steps.length) {
       checkOut(user.id || token)
     }
