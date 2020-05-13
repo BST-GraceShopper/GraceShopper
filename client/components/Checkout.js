@@ -130,8 +130,8 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
-
-                    height: '80%'
+                    overflow: 'auto',
+                    height: '70%'
                   }}
                 >
                   {getStepContent(activeStep)}

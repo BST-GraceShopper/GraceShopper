@@ -2,7 +2,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Typography, Button} from '@material-ui/core'
-import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
@@ -12,94 +11,264 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
+import ReactDOM from 'react-dom'
+import Checkbox from '@material-ui/core/Checkbox'
+import {makeStyles} from '@material-ui/core/styles'
 import {
   CardElement,
-  injectStripe,
   CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+  Elements,
   useStripe,
   useElements
 } from '@stripe/react-stripe-js'
-// import {
-//   CardElement,
-//   injectStripe,
-//   StripeProvider,
-// } from 'react-stripe-elements'
+import StripeInput from './StripeInput'
 
-const PaymentForm = ({}) => {
-  // const stripePromise = loadStripe("pk_test_SU0EkhevzXhxoILrxioT5Xp000opJGEGK4")
+const useStyles = makeStyles(theme => ({
+  disabled: {
+    color: 'red'
+  }
+}))
+
+const PaymentForm = () => {
   const stripe = useStripe()
-  const [err, setErr] = React.useState('')
   const elements = useElements()
+  const [checked, setChecked] = React.useState(true)
+
+  const handleChange = event => {
+    setChecked(event.target.checked)
+  }
+  const classes = useStyles()
 
   const handleSubmit = async event => {
-    // Block native form submission.
     event.preventDefault()
-
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return
-    }
-
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-    const cardElement = elements.getElement(CardElement)
-    console.log(cardElement)
-
-    // Use your card Element with other Stripe.js APIs
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       type: 'card',
-      card: cardElement
+      card: elements.getElement(CardNumberElement)
+      // billing_details: {
+      //   name,
+      //   address: {
+      //     postal_code: postal,
+      //   },
+      // },
     })
+    console.log(paymentMethod)
+  }
 
-    if (error) {
-      console.log('[error]', error)
-    } else {
-      console.log('[PaymentMethod]', paymentMethod)
-    }
-  }
-  const handleChange = ({error}) => {
-    console.log('change')
-    if (error) {
-      console.log(error)
-      setErr(error)
-    }
-  }
+  console.log(stripe)
 
   return (
-    <form style={{width: '200px'}} onSubmit={handleSubmit}>
-      <label style={{width: '200px'}}>
-        {/* <Typography>Card Details</Typography> */}
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}
+    >
+      <Typography variant="h6">Billing Information</Typography>
+      {/* <form onSubmit={handleSubmit}> */}
 
-        <CardElement
-          style={{width: '200px', height: '200px', border: '1px solid black'}}
-          onChange={handleChange}
-          options={{
-            style: {
-              base: {
-                width: '300px',
-                letterSpacing: '0.025em',
-                fontSize: '24px',
-                color: '#000000',
-                '::placeholder': {
-                  color: '#000000'
-                }
-              },
-              invalid: {
-                color: '#9e2146'
-              }
-            }
+      <div
+        style={{
+          margin: '10px 0px',
+          width: '80%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'space-around',
+          justifyContent: 'space-around',
+          alignContent: 'space-around'
+        }}
+        onSubmit={handleSubmit}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            alignContent: 'center'
           }}
         >
-          {/* <TextField>
-          </TextField> */}
-        </CardElement>
-      </label>
-      <Button type="submit" disabled={!stripe}>
+          <Checkbox
+            checked={checked}
+            onChange={handleChange}
+            color="primary"
+            inputProps={{'aria-label': 'primary checkbox'}}
+          />
+          <Typography>Same as Shipping</Typography>
+        </div>
+        <FormControl
+          style={{width: 'calc(100%-20px)', margin: '10px'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Name On Card</InputLabel>
+          <OutlinedInput
+            id="lastName"
+            disabled={checked}
+            // InputProps={{
+            //   className: classes.disabled
+            // }}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Address Line 1</InputLabel>
+          <OutlinedInput
+            id="address1"
+            disabled={checked}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Address Line 2</InputLabel>
+          <OutlinedInput
+            id="address2"
+            disabled={checked}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            alignItems: 'space-between',
+            alignContent: 'space-between',
+            justifyContent: 'space-between'
+          }}
+        >
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">City</InputLabel>
+            <OutlinedInput
+              id="city"
+              disabled={checked}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">State</InputLabel>
+            <OutlinedInput
+              id="state"
+              disabled={checked}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">ZIP</InputLabel>
+            <OutlinedInput
+              id="zip"
+              disabled={checked}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+        </div>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="Credit Card Number"
+            name="ccnumber"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardNumberElement
+              }
+            }}
+          />
+        </FormControl>
+        {/* <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              alignItems: 'space-between',
+              alignContent: 'space-between',
+              justifyContent: 'space-between',
+      
+            }}
+          > */}
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="Expiry"
+            name="expiry"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardExpiryElement
+              }
+            }}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="CVC"
+            name="cvc"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardCvcElement
+              }
+            }}
+          />
+        </FormControl>
+        {/* </div> */}
+        {/* <Button type="submit" disabled={!stripe}>
         Pay
-      </Button>
-    </form>
+      </Button> */}
+      </div>
+      {/* </form> */}
+    </div>
   )
 }
 
