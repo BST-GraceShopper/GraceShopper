@@ -13,126 +13,28 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addToCart, updateProduct} from '../store/'
+import {getBeers, editBeer, removeBeer} from '../store/'
+import CreateBeer from './CreateBeer'
+import BeerCard from './BeerCard'
 
-class beerListAdmin2 extends Component {
-  constructor(props) {
-    console.log(props, 'adminy')
-    let price = ''
-    if (props.user && props.beers.name) {
-      price = props.beer.price
-    }
-    super()
-    this.state = {
-      id: id,
-      price: price,
-      inventory: inventory,
-      error: ''
-    }
-    this.onSubmit = this.onSubmit.bind(this)
+class beerListAdmin extends Component {
+  componentDidMount() {
+    this.props.fetch()
   }
-  // componentDidMount() {
-  //   const id = this.props.match.params.id
-  //   this.props.getChef(id)
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.chef.name !== this.props.chef.name) {
-  //     this.setState({ name: this.props.chef.name })
-  //   }
-  // }
-  async onSubmit(ev) {
-    ev.preventDefault()
-    try {
-      this.props.update({
-        id: this.props.beers.id,
-        price: this.state.price,
-        inventory: this.state.inventory
-      })
-    } catch (ex) {
-      this.setState({error: ex.response.data.message})
-    }
-  }
+
   render() {
-    const {onSubmit} = this
-    const {id, inventory, price, error} = this.state
-    console.log('in render of class')
-    return null
+    const {beers} = this.props
+    return (
+      <div style={{color: 'white'}}>
+        <CreateBeer props={beers} />
+        {beers.length ? (
+          beers.map(beer => <BeerCard beer={beer} />)
+        ) : (
+          <h6>No Beers</h6>
+        )}
+      </div>
+    )
   }
-}
-
-const beerListAdmin = ({user, beers}) => {
-  console.log(beers, 'beru')
-  return (
-    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-      {beers.map(beer => {
-        return (
-          <ButtonBase
-            style={{
-              width: 'calc(100%/4)',
-              margin: 20,
-              padding: 10,
-              backgroundColor: 'black',
-              border: '1px white solid'
-            }}
-          >
-            <Card
-              elevation={3}
-              key={beer.id}
-              style={{
-                width: 'calc(100%)',
-                display: 'flex',
-                backgroundColor: 'black',
-                flexDirection: 'column',
-                justifyContent: 'center'
-              }}
-            >
-              <div
-                style={{
-                  width: 'calc(100%)',
-                  display: 'flex',
-                  backgroundColor: 'black',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >
-                <CardMedia
-                  image={beer.image}
-                  style={{width: 200, height: 200}}
-                />
-              </div>
-              <CardContent
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >
-                {[
-                  'name',
-                  'ABV',
-                  'maker',
-                  'type',
-                  'region',
-                  'price',
-                  'inventory'
-                ].map(key => {
-                  return (
-                    <Typography style={{color: 'white'}}>
-                      {key}: {beer[key]}
-                      <form>
-                        <input value="" />
-                        <button>Update</button>
-                      </form>{' '}
-                    </Typography>
-                  )
-                })}
-              </CardContent>
-            </Card>
-          </ButtonBase>
-        )
-      })}
-    </div>
-  )
 }
 
 const mapStateToProps = ({beers, user}) => {
@@ -140,10 +42,8 @@ const mapStateToProps = ({beers, user}) => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addToCart(userId, productId) {
-      dispatch(addToCart(userId, productId))
-    },
-    update: product => dispatch(updateProduct(product))
+    fetch: () => dispatch(getBeers()),
+    update: beer => dispatch(editBeer(beer))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(beerListAdmin)

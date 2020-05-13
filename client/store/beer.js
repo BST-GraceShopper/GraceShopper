@@ -4,10 +4,10 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_beers = 'GET_beers'
-const ADD_beer = 'ADD_beer'
-const EDIT_beer = 'EDIT_beer'
-const REMOVE_beer = 'REMOVE_beer'
+const GET_BEERS = 'GET_BEERS'
+const ADD_BEER = 'ADD_BEER'
+const EDIT_BEER = 'EDIT_BEER'
+const REMOVE_BEER = 'REMOVE_BEER'
 
 /**
  * INITIAL STATE
@@ -17,10 +17,10 @@ const defaultbeers = []
 /**
  * ACTION CREATORS
  */
-const _getbeers = beers => ({type: GET_beers, beers})
-const _addbeer = beers => ({type: ADD_beer, beer})
-const _editbeer = beers => ({type: EDIT_beer, beer})
-const _removebeer = beers => ({type: REMOVE_beer, beer})
+const _getbeers = beers => ({type: GET_BEERS, beers})
+const _addBeer = beer => ({type: ADD_BEER, beer})
+const _editBeer = beer => ({type: EDIT_BEER, beer})
+const _removeBeer = beer => ({type: REMOVE_BEER, beer})
 
 /**
  * THUNK CREATORS
@@ -28,39 +28,39 @@ const _removebeer = beers => ({type: REMOVE_beer, beer})
 export const getBeers = () => async dispatch => {
   try {
     const beers = (await axios.get('/api/beers')).data
-    console.log(beers)
     dispatch(_getbeers(beers))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const addbeer = () => async dispatch => {
-  // try {
-  //   const beers = (await axios.get('/api/beers')).data
-  //   console.log(beers)
-  //   dispatch(_getbeers(beers))
-  // } catch (err) {
-  //   console.error(err)
-  // }
+export const addBeer = beer => async dispatch => {
+  try {
+    const newBeer = (await axios.post(`/api/beers/${beer.productId}`, beer))
+      .data
+    console.log(newBeer, 'in addbeer')
+    dispatch(_addBeer(newBeer))
+  } catch (err) {
+    console.error(err)
+  }
 }
-export const editbeer = () => async dispatch => {
-  // try {
-  //   const beers = (await axios.get('/api/beers')).data
-  //   console.log(beers)
-  //   dispatch(_getbeers(beers))
-  // } catch (err) {
-  //   console.error(err)
-  // }
+export const editBeer = beer => async dispatch => {
+  try {
+    const updatedBeer = (await axios.put(`/api/beers/${beer.productId}`, beer))
+      .data
+    dispatch(_editBeer(updatedBeer))
+  } catch (err) {
+    console.error(err)
+  }
 }
-export const removebeer = () => async dispatch => {
-  // try {
-  //   const beers = (await axios.get('/api/beers')).data
-  //   console.log(beers)
-  //   dispatch(_getbeers(beers))
-  // } catch (err) {
-  //   console.error(err)
-  // }
+
+export const removeBeer = beerId => async dispatch => {
+  try {
+    await axios.delete(`/api/beers/${beerId}`)
+    dispatch(_removeBeer(beerId))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 /**
@@ -68,14 +68,19 @@ export const removebeer = () => async dispatch => {
  */
 export default function(state = defaultbeers, action) {
   switch (action.type) {
-    case GET_beers:
+    case GET_BEERS:
       return action.beers
-    case ADD_beer:
+    case ADD_BEER:
+      console.log(action.beer, 'valmik')
       return [...state, action.beer]
-    case EDIT_beer:
-      return state
-    case REMOVE_beer:
-      return state.filter(beerItem => beerItem.id !== action.beer.id)
+    case EDIT_BEER:
+      return state.map(beer => {
+        if (beer.id === action.beer.id) {
+          return action.beer
+        } else return beer
+      })
+    case REMOVE_BEER:
+      return state.filter(beerItem => beerItem.id !== action.beer)
     default:
       return state
   }

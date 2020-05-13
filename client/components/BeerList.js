@@ -14,30 +14,32 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {addToCart} from '../store/'
+import {Snackbar} from '@material-ui/core/'
 
-const beerList = ({user, beers}) => {
+const BeerList = ({user, beers, addToCart}) => {
+  const [open, setOpen] = React.useState(false)
+  const token = window.localStorage.getItem('guestToken')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {beers.map(beer => {
         return (
-          <ButtonBase
+          <Card
+            elevation={3}
+            key={beer.id}
             style={{
-              width: 'calc(100%/4)',
-              margin: 20,
-              padding: 10,
+              width: 'calc(100%)',
+              display: 'flex',
               backgroundColor: 'black',
-              border: '1px white solid'
+              justifyContent: 'center'
             }}
           >
-            <Card
-              elevation={3}
-              key={beer.id}
+            <ButtonBase
               style={{
-                width: 'calc(100%)',
-                display: 'flex',
+                width: 'calc(100%/4)',
+                margin: 20,
+                padding: 10,
                 backgroundColor: 'black',
-                flexDirection: 'column',
-                justifyContent: 'center'
+                border: '1px white solid'
               }}
             >
               <div
@@ -69,24 +71,34 @@ const beerList = ({user, beers}) => {
                   'region',
                   'price',
                   'inventory'
-                ].map(key => {
+                ].map(prop => {
                   return (
-                    <Typography style={{color: 'white'}}>
-                      {key}: {beer[key]}
+                    <Typography key={prop} style={{color: 'white'}}>
+                      {prop}: {beer[prop]}
                     </Typography>
                   )
                 })}
               </CardContent>
-              <CardActions>
-                <IconButton
-                  aria-label="add to cart"
-                  onClick={() => addToCart(user.id, beer.id)}
-                >
-                  <AddIcon color="secondary" />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </ButtonBase>
+            </ButtonBase>
+            <CardActions>
+              <IconButton
+                aria-label="add to cart"
+                onClick={() => {
+                  addToCart(user.id || token, beer.id)
+                  setOpen(true)
+                }}
+              >
+                <AddIcon color="secondary" />
+              </IconButton>
+            </CardActions>
+            <Snackbar
+              anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
+              open={open}
+              autoHideDuration={2000}
+              onClose={() => setOpen(false)}
+              message="Added to Cart"
+            />
+          </Card>
         )
       })}
     </div>
@@ -103,4 +115,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(beerList)
+export default connect(mapStateToProps, mapDispatchToProps)(BeerList)
