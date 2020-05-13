@@ -19,14 +19,14 @@ import {withStyles, makeStyles} from '@material-ui/core/styles'
 const StyledTableCell = withStyles(theme => ({
   head: {
     fontSize: 14,
-    borderBottom: '1px solid black',
+    borderBottom: '1px #303030 solid',
     backgroundColor: 'rgba(255,255,255,0.1)',
     align: 'center',
     borderRight: 'none'
   },
   body: {
     fontSize: 14,
-    borderBottom: '1px solid black',
+    borderBottom: '1px #303030 solid',
     backgroundColor: 'rgba(255,255,255,0.1)',
     align: 'center',
     borderRight: 'none'
@@ -63,9 +63,9 @@ const CartList = ({
   const classes = useStyles()
   const token = window.localStorage.getItem('guestToken')
   return (
-    <Table>
+    <Table style={{border: 'none'}}>
       <TableHead>
-        <TableRow>
+        <TableRow style={{border: 'none'}}>
           {['Item', 'Quantity', 'Price', ''].map(item => {
             return (
               <StyledTableCell align="center" key={item}>
@@ -81,10 +81,10 @@ const CartList = ({
           })}
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody style={{border: 'none'}}>
         {cart.items.map(cartItem => {
           return (
-            <TableRow key={cartItem.productId}>
+            <TableRow key={cartItem.productId} style={{border: 'none'}}>
               <StyledTableCell align="center">
                 <Grid style={{display: 'flex', flexWrap: 'wrap'}}>
                   <Grid item>
@@ -175,7 +175,7 @@ const CartList = ({
         })}
       </TableBody>
       <TableFooter>
-        <TableRow>
+        <TableRow style={{border: 'none'}}>
           <StyledTableCell align="right">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               Total

@@ -10,6 +10,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
 import LockIcon from '@material-ui/icons/Lock'
 import {Divider} from '@material-ui/core'
 
@@ -57,13 +58,14 @@ const AuthForm = props => {
           width: 'calc(100%/2)',
           flexDirection: 'column',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
+          alignContent: 'center'
         }}
       >
         <TextField
           error={err && err.response && err.response.data}
           id="outlined-with-icon-adornment"
-          style={{margin: 10, width: 'calc(100%*2/3', color: 'black'}}
+          style={{margin: 10, width: 'calc(100%*2/3'}}
           label="Username"
           name="email"
           variant="outlined"
@@ -75,6 +77,7 @@ const AuthForm = props => {
             )
           }}
         />
+
         <TextField
           error={err && err.response && err.response.data}
           id="outlined-adornment-password"
@@ -116,13 +119,14 @@ const AuthForm = props => {
           style={{margin: 10, width: 'calc(100%/2)'}}
           variant="contained"
           color="primary"
-          // name={name}
-          // href={`/auth/${name}`}
-          // onClick={(ev)=>handleSubmit(ev)}
         >
           {displayName}
         </Button>
-        {err && err.response && <div> {err.response.data} </div>}
+        {err && err.response && err.response.data ? (
+          <Typography color="error">{err.response.data}</Typography>
+        ) : (
+          ''
+        )}
       </form>
       <Divider orientation="vertical" color="primary" flexItem />
       <div

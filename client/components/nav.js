@@ -1,7 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, useHistory} from 'react-router-dom'
-import {Paper, Typography, AppBar, Grid, Modal} from '@material-ui/core'
+import {
+  Paper,
+  Typography,
+  AppBar,
+  Grid,
+  Modal,
+  TextField
+} from '@material-ui/core'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import {Login, Signup} from './auth-form'
@@ -41,7 +48,7 @@ const Nav = props => {
         width: '100%',
         height: 500,
         margin: '0px 0px 50px',
-        boxShadow: 'inset 600px -125px 5000px black'
+        boxShadow: 'inset 600px -200px 5000px black'
       }}
     >
       <div>
@@ -101,19 +108,17 @@ const Nav = props => {
           {user.id ? (
             ''
           ) : (
-            <ThemeProvider theme={formTheme}>
-              <Modal
-                open={open}
-                value={value}
-                color="secondary"
-                onClose={handleClose}
-                theme={formTheme}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
+            <Modal
+              open={open}
+              value={value}
+              onClose={handleClose}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <ThemeProvider theme={formTheme}>
                 <Paper
                   variant="outlined"
                   style={{
@@ -135,22 +140,28 @@ const Nav = props => {
                     {page === '/signup' ? (
                       <Typography color="textSecondary">
                         Already have an account?{' '}
-                        <a color="primary" onClick={() => setPage('/login')}>
+                        <a
+                          color={formTheme.primary}
+                          onClick={() => setPage('/login')}
+                        >
                           <b>Log In</b>
                         </a>
                       </Typography>
                     ) : (
                       <Typography color="textSecondary">
                         Don't have an account?{' '}
-                        <a color="primary" onClick={() => setPage('/signup')}>
+                        <a
+                          color={formTheme.primary}
+                          onClick={() => setPage('/signup')}
+                        >
                           <b>Sign Up</b>
                         </a>
                       </Typography>
                     )}
                   </div>
                 </Paper>
-              </Modal>
-            </ThemeProvider>
+              </ThemeProvider>
+            </Modal>
           )}
         </AppBar>
       </div>

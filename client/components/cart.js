@@ -77,7 +77,9 @@ class Cart extends Component {
                     <Typography variant="h6" color="textSecondary">
                       Order Summary
                     </Typography>
-                    <CartSummary />
+                    <div style={{margin: '20px 0px'}}>
+                      <CartSummary />
+                    </div>
                     <Checkout />
                   </div>
                 </Sticky>
