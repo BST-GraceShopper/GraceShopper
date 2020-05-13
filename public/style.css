@@ -23,3 +23,7 @@ form div {
 .StripeElement {
   width: 100%;
 }
+div.sticky {
+  position: sticky;
+  top: 0;
+}

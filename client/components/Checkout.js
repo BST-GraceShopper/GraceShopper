@@ -71,7 +71,7 @@ const Checkout = ({user, checkout, cart, getCart}) => {
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} color="secondary">
+      <Button variant="outlined" onClick={() => setOpen(true)} color="primary">
         Checkout
       </Button>
       <Modal
