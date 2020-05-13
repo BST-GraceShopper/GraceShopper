@@ -25,7 +25,7 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     if (!res.data) {
-      dispatch(guestLogin())
+      dispatch(guestCreate())
     } else {
       dispatch(getUser(res.data || defaultUser))
     }
@@ -34,20 +34,15 @@ export const me = () => async dispatch => {
   }
 }
 
-export const guestLogin = () => async dispatch => {
+export const guestCreate = () => async dispatch => {
   try {
     const token = window.localStorage.getItem('guestToken')
-    if (token) {
-      //login guest
-      // const res = await axios.post('/auth/guest/login', {token})
-      // console.log('login', res.data)
-    } else {
-      //create new guest
-      const res = await axios.get('/auth/guest/signup')
+    if (!token) {
+      const res = await axios.get('/auth/guest/create')
       console.log('signup', res.data)
       window.localStorage.setItem('guestToken', res.data)
     }
-    //dispatch get user???
+    dispatch(getUser(defaultUser))
   } catch (err) {
     console.error(err)
   }

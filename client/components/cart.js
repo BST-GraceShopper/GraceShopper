@@ -16,11 +16,13 @@ class Cart extends Component {
   render() {
     const {cart} = this.props
     return (
-      <div style={{color: 'white'}}>
+      <div>
         <CartHeader />
         {cart.totalQuantity === 0 ? (
           <div style={{display: 'flex', justifyContent: 'center'}}>
-            <Typography variant="h6">There's nothing in your cart</Typography>
+            <Typography color="textSecondary" variant="h6">
+              There's nothing in your cart
+            </Typography>
           </div>
         ) : (
           <div

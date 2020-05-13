@@ -38,8 +38,8 @@ const WineList = ({user, wines, addToCart}) => {
                 width: 'calc(100%/4)',
                 margin: 20,
                 padding: 10,
-                backgroundColor: 'black',
-                border: '1px white solid'
+                backgroundColor: 'black'
+                // border: '1px white solid'
               }}
             >
               <div

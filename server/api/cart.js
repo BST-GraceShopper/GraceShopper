@@ -8,9 +8,27 @@ const {
 } = require('../db/models')
 module.exports = router
 
+router.get('/checkout/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const status = 'cart'
+    // const {productId} = req.body
+    const order = await Order.findOne({where: {userId, status}})
+    console.log(order.id)
+    const cart = await Order.update(
+      {status: 'order', orderId: order.id},
+      {returning: true, where: {userId, status}}
+    )
+    res.json(cart[1])
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:userId', async (req, res, next) => {
   try {
-    let {userId, status} = req.params
+    const {userId} = req.params
+    const status = 'cart'
     const cart = await Order.findAll({where: {userId, status}})
     res.json(cart)
   } catch (err) {
@@ -21,7 +39,8 @@ router.get('/:userId', async (req, res, next) => {
 router.post('/:userId', async (req, res, next) => {
   try {
     const {productId} = req.body
-    const {userId, status} = req.params
+    const {userId} = req.params
+    const status = 'cart'
     // const user = await User.findByPk(userId)
     // userId = user.id || jwt.decode(userId,"NONE").id
     const order = await Order.findOne({where: {userId, productId, status}})
@@ -52,7 +71,8 @@ router.post('/:userId', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
   try {
-    const {userId, status} = req.params
+    const {userId} = req.params
+    const status = 'cart'
     const {productId} = req.body
     const order = await Order.findOne({where: {userId, productId, status}})
     const cart = await Order.update(
@@ -67,7 +87,8 @@ router.put('/:userId', async (req, res, next) => {
 
 router.delete('/:userId/:productId', async (req, res, next) => {
   try {
-    const {userId, productId, status} = req.params
+    const {userId, productId} = req.params
+    const status = 'cart'
     const cart = await Order.destroy({where: {userId, productId, status}})
     res.sendStatus(204)
   } catch (err) {
