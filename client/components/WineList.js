@@ -110,6 +110,22 @@ const WineList = ({user, wines, addToCart}) => {
             <CardContent
               style={{
                 display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                alignContent: 'center'
+              }}
+            >
+              <Typography
+                variant="subtitle1"
+                key={wine.type}
+                style={{color: 'white'}}
+              >
+                {wine.type} • {wine.grape}
+              </Typography>
+            </CardContent>
+            <CardContent
+              style={{
+                display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
