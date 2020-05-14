@@ -16,12 +16,11 @@ const Shipping = ({
   shipping,
   saveShipping,
   handleNext,
-  handleBack,
-  activeStep,
-  steps
+  handleBack
+  // activeStep,
+  // steps
 }) => {
   const [value, setValue] = React.useState('standard')
-
   const handleChange = event => {
     setValue(event.target.value)
   }
@@ -50,20 +49,9 @@ const Shipping = ({
           height: '65%',
           display: 'flex',
           flexDirection: 'column',
-          // alignItems: 'space-around',
-          // justifyContent: 'space-around',
-          // alignContent: 'space-around',
           overflow: 'auto'
         }}
       >
-        {/* <div  style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'space-around',
-          justifyContent: 'space-around',
-          alignContent: 'space-around',
-          overflow:'auto'
-        }}> */}
         <div
           style={{
             display: 'flex',
@@ -80,11 +68,11 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">First Name</InputLabel>
             <OutlinedInput
               id="firstName"
+              required
               value={state.firstName}
               onChange={ev => {
                 setState({...state, firstName: ev.target.value})
               }}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={70}
             />
           </FormControl>
@@ -95,11 +83,9 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">Last Name</InputLabel>
             <OutlinedInput
               id="lastName"
+              required
               value={state.lastName}
               onChange={ev => setState({...state, lastName: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={70}
             />
           </FormControl>
@@ -111,11 +97,9 @@ const Shipping = ({
           <InputLabel htmlFor="outlined">Address Line 1</InputLabel>
           <OutlinedInput
             id="address1"
+            required
             value={state.address1}
             onChange={ev => setState({...state, address1: ev.target.value})}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -128,9 +112,6 @@ const Shipping = ({
             id="address2"
             value={state.address2}
             onChange={ev => setState({...state, address2: ev.target.value})}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -150,11 +131,9 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">City</InputLabel>
             <OutlinedInput
               id="city"
+              required
               value={state.city}
               onChange={ev => setState({...state, city: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -165,6 +144,7 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">State</InputLabel>
             <OutlinedInput
               id="state"
+              required
               value={state.state}
               onChange={ev => setState({...state, state: ev.target.value})}
               // value={values.amount}
@@ -180,11 +160,9 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">ZIP</InputLabel>
             <OutlinedInput
               id="zip"
+              required
               value={state.zip}
               onChange={ev => setState({...state, zip: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -207,9 +185,8 @@ const Shipping = ({
               id="email"
               // value={values.amount}
               value={state.email}
+              required
               onChange={ev => setState({...state, email: ev.target.value})}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={50}
             />
           </FormControl>
@@ -220,11 +197,9 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">Phone</InputLabel>
             <OutlinedInput
               id="phone"
-              // value={values.amount}
+              required
               value={state.phone}
               onChange={ev => setState({...state, phone: ev.target.value})}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={50}
             />
           </FormControl>
@@ -256,8 +231,6 @@ const Shipping = ({
             </RadioGroup>
           </FormControl>
         </div>
-        {/* </div> */}
-        {/* <Button type="submit">Submit</Button> */}
       </form>
       <div
         style={{
@@ -273,20 +246,11 @@ const Shipping = ({
             width: '100%'
           }}
         >
-          <Button
-            disabled={activeStep === 0}
-            onClick={handleBack}
-            // className={classes.button}
-          >
+          <Button disabled onClick={handleBack}>
             Back
           </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSubmit}
-            // className={classes.button}
-          >
-            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            'Next'
           </Button>
         </div>
       </div>
