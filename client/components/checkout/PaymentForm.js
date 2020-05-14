@@ -32,9 +32,9 @@ const PaymentForm = ({
   payment,
   savePayment,
   handleNext,
-  handleBack,
-  activeStep,
-  steps
+  handleBack
+  // activeStep,
+  // steps
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -303,7 +303,6 @@ const PaymentForm = ({
           }}
         >
           <Button
-            disabled={activeStep === 0}
             onClick={handleBack}
             // className={classes.button}
           >
@@ -315,7 +314,7 @@ const PaymentForm = ({
             onClick={handleSubmit}
             // className={classes.button}
           >
-            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+            Next
           </Button>
         </div>
       </div>
