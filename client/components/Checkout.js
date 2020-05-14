@@ -1,11 +1,9 @@
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import {Button, Modal} from '@material-ui/core/'
-import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add'
 import {checkout, getCart} from '../store/'
 import Stepper from '@material-ui/core/Stepper'
 import Step from '@material-ui/core/Step'
@@ -14,8 +12,7 @@ import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import Shipping from './checkout/Shipping'
 import Payment from './checkout/Payment'
 import Confirmation from './checkout/Confirmation'
-
-import {theme, formTheme} from '../theme'
+import {formTheme} from '../theme'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,24 +36,10 @@ const Checkout = ({user, checkout, cart, getCart}) => {
     // setOpen(true)
   }
 
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <Shipping />
-      case 1:
-        return <Payment />
-      case 2:
-        return <Confirmation />
-      default:
-        return null
-    }
-  }
-
   const [activeStep, setActiveStep] = React.useState(0)
   const steps = ['Shipping', 'Payment', 'Confirmation']
 
   const handleNext = () => {
-    console.log(activeStep + 1)
     if (activeStep + 1 === steps.length) {
       checkOut(user.id || token)
     }
@@ -73,9 +56,43 @@ const Checkout = ({user, checkout, cart, getCart}) => {
     getCart(user.id || token)
   }
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <Shipping
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      case 1:
+        return (
+          <Payment
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      case 2:
+        return (
+          <Confirmation
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      default:
+        return null
+    }
+  }
+
   return (
     <div>
-      <Button onClick={() => setOpen(true)} color="secondary">
+      <Button variant="outlined" onClick={() => setOpen(true)} color="primary">
         Checkout
       </Button>
       <Modal
@@ -89,33 +106,33 @@ const Checkout = ({user, checkout, cart, getCart}) => {
           justifyContent: 'center'
         }}
       >
-        <Paper
-          variant="outlined"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'space-between',
-            alignContent: 'space-between',
-            padding: 30,
-            width: 'calc(100%*2/3)',
-            height: '80%'
-          }}
-        >
-          {activeStep === steps.length ? (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center'
-              }}
-            >
-              <Typography className={classes.instructions}>
-                Thank you for your purchase!
-              </Typography>
-            </div>
-          ) : (
-            <div style={{width: '100%', height: '100%'}}>
-              <ThemeProvider theme={formTheme}>
+        <ThemeProvider theme={formTheme}>
+          <Paper
+            variant="outlined"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'space-between',
+              alignContent: 'space-between',
+              padding: 30,
+              width: 'calc(100%*2/3)',
+              height: '80%'
+            }}
+          >
+            {activeStep === steps.length ? (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography className={classes.instructions}>
+                  Thank you for your purchase!
+                </Typography>
+              </div>
+            ) : (
+              <div style={{width: '100%', height: '100%'}}>
                 <Stepper activeStep={activeStep} theme={formTheme}>
                   {steps.map((label, idx) => {
                     return (
@@ -126,52 +143,53 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                   })}
                 </Stepper>
 
-                <div
+                {/* <div
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
-
+                    overflow: 'auto',
                     height: '80%'
                   }}
-                >
-                  {getStepContent(activeStep)}
-                </div>
-              </ThemeProvider>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  padding: 30
-                }}
-              >
-                <div
+                > */}
+                {getStepContent(activeStep)}
+                {/* </div> */}
+
+                {/* <div
                   style={{
                     display: 'flex',
+                    flexDirection: 'column',
                     justifyContent: 'center',
-                    width: '100%'
+                    padding: 30
                   }}
                 >
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      width: '100%'
+                    }}
                   >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
-                </div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+                    </Button>
+                  </div>
+                </div> */}
               </div>
-            </div>
-          )}
-        </Paper>
+            )}
+          </Paper>
+        </ThemeProvider>
       </Modal>
     </div>
   )

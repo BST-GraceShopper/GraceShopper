@@ -1,117 +1,336 @@
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import {Typography, Button} from '@material-ui/core'
-import {Elements} from '@stripe/react-stripe-js'
+import {Typography} from '@material-ui/core'
 import {loadStripe} from '@stripe/stripe-js'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import OutlinedInput from '@material-ui/core/OutlinedInput'
-import {InputLabel} from '@material-ui/core'
-import Radio from '@material-ui/core/Radio'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormLabel from '@material-ui/core/FormLabel'
+import {InputLabel, Button} from '@material-ui/core'
+import Checkbox from '@material-ui/core/Checkbox'
+// import {makeStyles} from '@material-ui/core/styles'
 import {
   CardElement,
-  injectStripe,
   CardNumberElement,
+  CardCvcElement,
+  CardExpiryElement,
+  // Elements,
   useStripe,
   useElements
 } from '@stripe/react-stripe-js'
-// import {
-//   CardElement,
-//   injectStripe,
-//   StripeProvider,
-// } from 'react-stripe-elements'
+import StripeInput from './StripeInput'
+import {savePayment} from '../../store'
 
-const PaymentForm = ({}) => {
-  // const stripePromise = loadStripe("pk_test_SU0EkhevzXhxoILrxioT5Xp000opJGEGK4")
+// const useStyles = makeStyles(theme => ({
+//   disabled: {
+//     color: 'red'
+//   }
+// }))
+
+const PaymentForm = ({
+  shipping,
+  payment,
+  savePayment,
+  handleNext,
+  handleBack
+  // activeStep,
+  // steps
+}) => {
   const stripe = useStripe()
-  const [err, setErr] = React.useState('')
   const elements = useElements()
+  const defaultState = !shipping.zip
+  const [checked, setChecked] = React.useState(!defaultState)
+  const [state, setState] = React.useState(payment)
+
+  const handleChange = event => {
+    setChecked(event.target.checked)
+    setState(payment)
+  }
+  // const classes = useStyles()
 
   const handleSubmit = async event => {
-    // Block native form submission.
     event.preventDefault()
-
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return
-    }
-
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
-    const cardElement = elements.getElement(CardElement)
-    console.log(cardElement)
-
-    // Use your card Element with other Stripe.js APIs
+    // const {name,address1, address2,city, state, zip} = state
     const {error, paymentMethod} = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement
+      ...state,
+      card: elements.getElement(CardNumberElement)
     })
-
-    if (error) {
-      console.log('[error]', error)
-    } else {
-      console.log('[PaymentMethod]', paymentMethod)
-    }
-  }
-  const handleChange = ({error}) => {
-    console.log('change')
-    if (error) {
-      console.log(error)
-      setErr(error)
-    }
+    savePayment(state)
+    handleNext()
+    console.log(paymentMethod)
   }
 
   return (
-    <form style={{width: '200px'}} onSubmit={handleSubmit}>
-      <label style={{width: '200px'}}>
-        {/* <Typography>Card Details</Typography> */}
-
-        <CardElement
-          style={{width: '200px', height: '200px', border: '1px solid black'}}
-          onChange={handleChange}
-          options={{
-            style: {
-              base: {
-                width: '300px',
-                letterSpacing: '0.025em',
-                fontSize: '24px',
-                color: '#000000',
-                '::placeholder': {
-                  color: '#000000'
-                }
-              },
-              invalid: {
-                color: '#9e2146'
-              }
-            }
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}
+    >
+      <Typography variant="h6">Billing Information</Typography>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          margin: '10px 0px',
+          width: '80%',
+          height: '65%',
+          display: 'flex',
+          flexDirection: 'column',
+          // alignItems: 'space-around',
+          // justifyContent: 'space-around',
+          // alignContent: 'space-around',
+          overflow: 'auto'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            alignContent: 'center'
           }}
         >
-          {/* <TextField>
-          </TextField> */}
-        </CardElement>
-      </label>
-      <Button type="submit" disabled={!stripe}>
-        Pay
-      </Button>
-    </form>
+          <Checkbox
+            checked={checked}
+            onChange={handleChange}
+            disabled={defaultState}
+            color="primary"
+            inputProps={{'aria-label': 'primary checkbox'}}
+          />
+          <Typography>Same as Shipping</Typography>
+        </div>
+        <FormControl
+          style={{width: 'calc(100%-20px)', margin: '10px'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Name On Card</InputLabel>
+          <OutlinedInput
+            id="name"
+            disabled={checked}
+            value={
+              checked
+                ? `${shipping.firstName} ${shipping.lastName}`
+                : state.name
+            }
+            onChange={ev => setState({...state, name: ev.target.value})}
+            // InputProps={{
+            //   className: classes.disabled
+            // }}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Address Line 1</InputLabel>
+          <OutlinedInput
+            id="address1"
+            disabled={checked}
+            value={checked ? shipping.address1 : state.address2}
+            onChange={ev => setState({...state, address1: ev.target.value})}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <InputLabel htmlFor="outlined">Address Line 2</InputLabel>
+          <OutlinedInput
+            id="address2"
+            disabled={checked}
+            value={checked ? shipping.address2 : state.address2}
+            onChange={ev => setState({...state, address2: ev.target.value})}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
+        <div
+          style={{
+            display: 'flex',
+            width: '100%',
+            alignItems: 'space-between',
+            alignContent: 'space-between',
+            justifyContent: 'space-between'
+          }}
+        >
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">City</InputLabel>
+            <OutlinedInput
+              id="city"
+              disabled={checked}
+              value={checked ? shipping.city : state.city}
+              onChange={ev => setState({...state, address1: ev.target.value})}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">State</InputLabel>
+            <OutlinedInput
+              id="state"
+              disabled={checked}
+              value={checked ? shipping.state : state.state}
+              onChange={ev => setState({...state, state: ev.target.value})}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+          <FormControl
+            style={{margin: '10px', width: 'calc(100%-60px)'}}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined">ZIP</InputLabel>
+            <OutlinedInput
+              id="zip"
+              disabled={checked}
+              value={checked ? shipping.zip : state.zip}
+              onChange={ev => setState({...state, zip: ev.target.value})}
+              // value={values.amount}
+              // onChange={}
+              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+              labelWidth={30}
+            />
+          </FormControl>
+        </div>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="Credit Card Number"
+            name="ccnumber"
+            variant="outlined"
+            color="primary"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardNumberElement
+              }
+            }}
+          />
+        </FormControl>
+        {/* <div
+            style={{
+              display: 'flex',
+              width: '100%',
+              alignItems: 'space-between',
+              alignContent: 'space-between',
+              justifyContent: 'space-between',
+      
+            }}
+          > */}
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="Expiry"
+            name="expiry"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardExpiryElement
+              }
+            }}
+          />
+        </FormControl>
+        <FormControl
+          style={{margin: '10px', width: 'calc(100%-20px)'}}
+          variant="outlined"
+        >
+          <TextField
+            label="CVC"
+            name="cvc"
+            variant="outlined"
+            required
+            fullWidth
+            InputLabelProps={{shrink: true}}
+            InputProps={{
+              inputComponent: StripeInput,
+              inputProps: {
+                component: CardCvcElement
+              }
+            }}
+          />
+        </FormControl>
+        {/* </div> */}
+        {/* <Button type="submit" disabled={!stripe}>
+          Pay
+        </Button> */}
+      </form>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          <Button
+            onClick={handleBack}
+            // className={classes.button}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            // className={classes.button}
+          >
+            Next
+          </Button>
+        </div>
+      </div>
+    </div>
   )
 }
 
-const mapStateToProps = ({wines, user, cart}) => {
-  return {wines, cart, user}
+const mapStateToProps = ({shipping, payment}) => {
+  return {shipping, payment}
 }
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     checkout(id) {
-//       console.log('checkout', id)
-//       dispatch(checkout(id))
-//     }
-//   }
-// }
-export default connect(mapStateToProps)(PaymentForm)
+const mapDispatchToProps = dispatch => {
+  return {
+    savePayment(payment) {
+      console.log('save payment')
+      dispatch(savePayment(payment))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PaymentForm)

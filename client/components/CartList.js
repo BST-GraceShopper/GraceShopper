@@ -1,33 +1,52 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-key */
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
-import Paper from '@material-ui/core/Paper'
-import {
-  CardMedia,
-  Card,
-  Button,
-  CardActions,
-  IconButton,
-  ButtonBase,
-  Grid
-} from '@material-ui/core/'
-import CardContent from '@material-ui/core/CardContent'
-import {Typography} from '@material-ui/core'
+import {IconButton} from '@material-ui/core/'
+import {Typography, Grid} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import {removeFromCart, addToCart, removeProductFromCart} from '../store/'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import CloseIcon from '@material-ui/icons/Close'
+import {withStyles, makeStyles} from '@material-ui/core/styles'
 
-import TableSortLabel from '@material-ui/core/TableSortLabel'
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    fontSize: 14,
+    borderBottom: '1px #303030 solid',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    align: 'center',
+    borderRight: 'none'
+  },
+  body: {
+    fontSize: 14,
+    borderBottom: '1px #303030 solid',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    align: 'center',
+    borderRight: 'none'
+  },
+  footer: {
+    fontSize: 14,
+    borderBottom: 'none',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    align: 'center',
+    borderRight: 'none'
+  }
+}))(TableCell)
+
+const useStyles = makeStyles(theme => ({
+  hover: {
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.1)'
+    }
+  }
+}))
 
 const CartList = ({
   cart,
@@ -41,15 +60,15 @@ const CartList = ({
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Price'}
   ]
-
+  const classes = useStyles()
   const token = window.localStorage.getItem('guestToken')
   return (
-    <Table style={{border: '1px solid black'}}>
+    <Table style={{border: 'none'}}>
       <TableHead>
-        <TableRow style={{border: '1px solid black'}}>
-          {['Item', 'Quantity', 'Price'].map(item => {
+        <TableRow style={{border: 'none'}}>
+          {['Item', 'Quantity', 'Price', ''].map(item => {
             return (
-              <TableCell key={item}>
+              <StyledTableCell align="center" key={item}>
                 <Typography
                   gutterBottom
                   color="textSecondary"
@@ -57,19 +76,16 @@ const CartList = ({
                 >
                   {item}
                 </Typography>
-              </TableCell>
+              </StyledTableCell>
             )
           })}
         </TableRow>
       </TableHead>
-      <TableBody>
+      <TableBody style={{border: 'none'}}>
         {cart.items.map(cartItem => {
           return (
-            <TableRow
-              key={cartItem.productId}
-              style={{border: '1px solid black'}}
-            >
-              <TableCell>
+            <TableRow key={cartItem.productId} style={{border: 'none'}}>
+              <StyledTableCell align="center">
                 <Grid style={{display: 'flex', flexWrap: 'wrap'}}>
                   <Grid item>
                     <img
@@ -78,8 +94,8 @@ const CartList = ({
                       style={{
                         margin: 'auto',
                         display: 'block',
-                        maxWidth: 150,
-                        maxHeight: 150
+                        maxWidth: 100,
+                        maxHeight: 100
                       }}
                     />
                   </Grid>
@@ -95,11 +111,7 @@ const CartList = ({
                       alignItems: 'center'
                     }}
                   >
-                    <Typography
-                      gutterBottom
-                      color="textSecondary"
-                      variant="subtitle1"
-                    >
+                    <Typography gutterBottom color="textSecondary" variant="h6">
                       {cartItem.name}
                     </Typography>
                     <Typography
@@ -111,73 +123,75 @@ const CartList = ({
                     </Typography>
                   </Grid>
                 </Grid>
-              </TableCell>
-              <TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="center">
                 <div
                   style={{
                     display: 'flex',
                     flexWrap: 'wrap',
-                    justifyContent: 'center',
+                    justifyContent: 'space-between',
                     alignItems: 'center'
                   }}
                 >
                   <IconButton
                     aria-label="remove one"
+                    className={classes.hover}
                     onClick={() => removeFromCart(user.id || token, cartItem)}
                   >
-                    <RemoveIcon color="secondary" />
+                    <RemoveIcon color="primary" />
                   </IconButton>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="h6" color="textSecondary">
                     {cartItem.quantity}
                   </Typography>
                   <IconButton
                     aria-label="add one"
+                    className={classes.hover}
                     onClick={() =>
                       addToCart(user.id || token, cartItem.productId)
                     }
                   >
-                    <AddIcon color="secondary" />
+                    <AddIcon color="primary" />
                   </IconButton>
                 </div>
-              </TableCell>
-              <TableCell>
-                <Typography color="textSecondary" variant="body2" gutterBottom>
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                <Typography color="textSecondary" variant="h6" gutterBottom>
                   ${cartItem.price}
                 </Typography>
-              </TableCell>
-              <TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="center">
                 <IconButton
                   aria-label="remove product"
+                  className={classes.hover}
                   onClick={() =>
                     removeProductFromCart(user.id || token, cartItem)
                   }
                 >
-                  <CloseIcon color="secondary" />
+                  <CloseIcon color="primary" />
                 </IconButton>
-              </TableCell>
+              </StyledTableCell>
             </TableRow>
           )
         })}
       </TableBody>
       <TableFooter>
-        <TableRow>
-          {/* <TableCell>
-           </TableCell> */}
-          <TableCell align="right">
+        <TableRow style={{border: 'none'}}>
+          <StyledTableCell align="right">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               Total
             </Typography>
-          </TableCell>
-          <TableCell align="center">
+          </StyledTableCell>
+          <StyledTableCell align="center">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               {cart.totalQuantity}
             </Typography>
-          </TableCell>
-          <TableCell>
+          </StyledTableCell>
+          <StyledTableCell align="center">
             <Typography color="textSecondary" variant="h6" gutterBottom>
               ${cart.totalPrice}
             </Typography>
-          </TableCell>
+          </StyledTableCell>
+          <StyledTableCell />
         </TableRow>
       </TableFooter>
     </Table>
