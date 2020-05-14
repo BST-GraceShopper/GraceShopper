@@ -20,12 +20,17 @@ import {
 } from '@stripe/react-stripe-js'
 import PaymentForm from './PaymentForm'
 
-const Payment = ({}) => {
+const Payment = ({handleNext, handleBack, activeStep, steps}) => {
   const stripePromise = loadStripe('pk_test_SU0EkhevzXhxoILrxioT5Xp000opJGEGK4')
 
   return (
     <Elements stripe={stripePromise}>
-      <PaymentForm />
+      <PaymentForm
+        handleNext={handleNext}
+        handleBack={handleBack}
+        activeStep={activeStep}
+        steps={steps}
+      />
     </Elements>
   )
 }

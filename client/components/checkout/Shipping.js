@@ -12,7 +12,14 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
 import {saveShipping} from '../../store'
 
-const Shipping = ({shipping, saveShipping}) => {
+const Shipping = ({
+  shipping,
+  saveShipping,
+  handleNext,
+  handleBack,
+  activeStep,
+  steps
+}) => {
   const [value, setValue] = React.useState('standard')
 
   const handleChange = event => {
@@ -22,11 +29,13 @@ const Shipping = ({shipping, saveShipping}) => {
   const handleSubmit = () => {
     event.preventDefault()
     saveShipping(state)
+    handleNext()
   }
   return (
     <div
       style={{
         width: '100%',
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -38,13 +47,23 @@ const Shipping = ({shipping, saveShipping}) => {
         style={{
           margin: '10px 0px',
           width: '80%',
+          height: '65%',
+          display: 'flex',
+          flexDirection: 'column',
+          // alignItems: 'space-around',
+          // justifyContent: 'space-around',
+          // alignContent: 'space-around',
+          overflow: 'auto'
+        }}
+      >
+        {/* <div  style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'space-around',
           justifyContent: 'space-around',
-          alignContent: 'space-around'
-        }}
-      >
+          alignContent: 'space-around',
+          overflow:'auto'
+        }}> */}
         <div
           style={{
             display: 'flex',
@@ -63,9 +82,7 @@ const Shipping = ({shipping, saveShipping}) => {
               id="firstName"
               value={state.firstName}
               onChange={ev => {
-                console.log(ev.target.value)
                 setState({...state, firstName: ev.target.value})
-                console.log(state)
               }}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={70}
@@ -239,8 +256,40 @@ const Shipping = ({shipping, saveShipping}) => {
             </RadioGroup>
           </FormControl>
         </div>
-        <Button type="submit">Submit</Button>
+        {/* </div> */}
+        {/* <Button type="submit">Submit</Button> */}
       </form>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            // className={classes.button}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            // className={classes.button}
+          >
+            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }

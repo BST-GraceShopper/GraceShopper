@@ -27,13 +27,20 @@ import {savePayment} from '../../store'
 //   }
 // }))
 
-const PaymentForm = ({shipping, payment, savePayment}) => {
+const PaymentForm = ({
+  shipping,
+  payment,
+  savePayment,
+  handleNext,
+  handleBack,
+  activeStep,
+  steps
+}) => {
   const stripe = useStripe()
   const elements = useElements()
   const defaultState = !shipping.zip
   const [checked, setChecked] = React.useState(!defaultState)
   const [state, setState] = React.useState(payment)
-  console.log(state)
 
   const handleChange = event => {
     setChecked(event.target.checked)
@@ -49,6 +56,7 @@ const PaymentForm = ({shipping, payment, savePayment}) => {
       card: elements.getElement(CardNumberElement)
     })
     savePayment(state)
+    handleNext()
     console.log(paymentMethod)
   }
 
@@ -56,25 +64,26 @@ const PaymentForm = ({shipping, payment, savePayment}) => {
     <div
       style={{
         width: '100%',
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
       }}
     >
       <Typography variant="h6">Billing Information</Typography>
-      {/* <form onSubmit={handleSubmit}> */}
-
       <form
+        onSubmit={handleSubmit}
         style={{
           margin: '10px 0px',
           width: '80%',
+          height: '65%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'space-around',
-          justifyContent: 'space-around',
-          alignContent: 'space-around'
+          // alignItems: 'space-around',
+          // justifyContent: 'space-around',
+          // alignContent: 'space-around',
+          overflow: 'auto'
         }}
-        onSubmit={handleSubmit}
       >
         <div
           style={{
@@ -275,11 +284,41 @@ const PaymentForm = ({shipping, payment, savePayment}) => {
           />
         </FormControl>
         {/* </div> */}
-        <Button type="submit" disabled={!stripe}>
+        {/* <Button type="submit" disabled={!stripe}>
           Pay
-        </Button>
+        </Button> */}
       </form>
-      {/* </form> */}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          <Button
+            disabled={activeStep === 0}
+            onClick={handleBack}
+            // className={classes.button}
+          >
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            // className={classes.button}
+          >
+            {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
+          </Button>
+        </div>
+      </div>
     </div>
   )
 }
