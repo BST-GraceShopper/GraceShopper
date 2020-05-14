@@ -36,19 +36,6 @@ const Checkout = ({user, checkout, cart, getCart}) => {
     // setOpen(true)
   }
 
-  function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <Shipping />
-      case 1:
-        return <Payment />
-      case 2:
-        return <Confirmation />
-      default:
-        return null
-    }
-  }
-
   const [activeStep, setActiveStep] = React.useState(0)
   const steps = ['Shipping', 'Payment', 'Confirmation']
 
@@ -67,6 +54,40 @@ const Checkout = ({user, checkout, cart, getCart}) => {
     setOpen(false)
     setActiveStep(0)
     getCart(user.id || token)
+  }
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <Shipping
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      case 1:
+        return (
+          <Payment
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      case 2:
+        return (
+          <Confirmation
+            handleNext={handleNext}
+            handleBack={handleBack}
+            activeStep={activeStep}
+            steps={steps}
+          />
+        )
+      default:
+        return null
+    }
   }
 
   return (
@@ -122,18 +143,18 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                   })}
                 </Stepper>
 
-                <div
+                {/* <div
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
                     overflow: 'auto',
-                    height: '70%'
+                    height: '80%'
                   }}
-                >
-                  {getStepContent(activeStep)}
-                </div>
+                > */}
+                {getStepContent(activeStep)}
+                {/* </div> */}
 
-                <div
+                {/* <div
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -161,10 +182,10 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                       onClick={handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                      {activeStep === steps.length - 1 ? 'Place Order' : 'Next'}
                     </Button>
                   </div>
-                </div>
+                </div> */}
               </div>
             )}
           </Paper>

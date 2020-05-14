@@ -10,15 +10,15 @@ const SAVE_SHIPPING = 'SAVE_SHIPPING'
  * INITIAL STATE
  */
 const defaultShipping = {
-  firstName: null,
-  lastName: null,
-  address1: null,
-  address2: null,
-  city: null,
-  state: null,
-  zip: null,
-  email: null,
-  phone: null
+  firstName: '',
+  lastName: '',
+  address1: '',
+  address2: '',
+  city: '',
+  state: '',
+  zip: '',
+  email: '',
+  phone: ''
 }
 
 /**
