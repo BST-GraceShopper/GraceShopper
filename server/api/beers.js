@@ -3,7 +3,7 @@ const {Product} = require('../db/models')
 module.exports = router
 
 const isAdmin = (req, res, next) => {
-  if (!req.user || !req.user.level) {
+  if (!req.user || !req.user.isAdmin) {
     const err = new Error(`Admin level only!`)
     err.status = 401
     return next(err)
@@ -20,9 +20,8 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.post('/:id', async (req, res, next) => {
+router.post('/:id', isAdmin, async (req, res, next) => {
   try {
-    console.log('in post', req.params, req.body)
     const beer = await Product.create(req.body)
     res.json(beer)
   } catch (err) {
@@ -30,7 +29,7 @@ router.post('/:id', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', isAdmin, async (req, res, next) => {
   try {
     const product = await Product.update(
       {
@@ -49,7 +48,7 @@ router.put('/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAdmin, async (req, res, next) => {
   try {
     const beer = await Product.findByPk(req.params.id)
     await beer.destroy()

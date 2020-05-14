@@ -14,7 +14,7 @@ class Beer extends Component {
     return (
       <div style={{color: 'white'}}>
         <BeerHeader />
-        {user.level === 'admin' ? (
+        {user.isAdmin === true ? (
           <BeerListAdmin beers={beers} />
         ) : (
           <BeerList beers={beers} />

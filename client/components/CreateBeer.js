@@ -132,7 +132,7 @@ class CreateBeer extends Component {
                     value={ABV}
                     onChange={ev => {
                       this.setState({
-                        ABV: Number(ev.target.value)
+                        ABV: Number(ev.target.value) || 0
                       })
                     }}
                   />
@@ -154,7 +154,7 @@ class CreateBeer extends Component {
                     value={year}
                     onChange={ev => {
                       this.setState({
-                        year: Number(ev.target.value)
+                        year: Number(ev.target.value) || 0
                       })
                     }}
                   />
@@ -198,18 +198,18 @@ class CreateBeer extends Component {
                     value={price}
                     onChange={ev => {
                       this.setState({
-                        price: Number(ev.target.value)
+                        price: Number(ev.target.value) || 0
                       })
                     }}
                   />
                   <br />
-                  Size (ML)
+                  Size (mL)
                   <input
                     placeholder="size"
                     value={size}
                     onChange={ev => {
                       this.setState({
-                        size: Number(ev.target.value)
+                        size: Number(ev.target.value) || 0
                       })
                     }}
                   />
@@ -220,7 +220,7 @@ class CreateBeer extends Component {
                     value={inventory}
                     onChange={ev => {
                       this.setState({
-                        inventory: Number(ev.target.value)
+                        inventory: Number(ev.target.value) || 0
                       })
                     }}
                   />

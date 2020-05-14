@@ -37,10 +37,10 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
-  level: {
-    type: Sequelize.STRING,
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
     unique: false,
-    allowNull: false,
+    allowNull: true,
     validation: {
       notEmpty: true
     }
