@@ -21,7 +21,7 @@ class CreateBeer extends Component {
     this.state = {
       ABV: 0,
       image:
-        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h53/h9c/11192333664286.png',
+        'https://w7.pngwing.com/pngs/154/309/png-transparent-clear-glass-bottle-filled-with-yellow-liquid-beer-bottle-corona-brewery-glass-bottle-mockup-food-beer-alcoholic-drink.png',
       maker: '',
       year: 0,
       category: 'beer',

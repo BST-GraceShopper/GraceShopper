@@ -40,6 +40,7 @@ const User = db.define('user', {
   isAdmin: {
     type: Sequelize.BOOLEAN,
     unique: false,
+    defaultValue: false,
     allowNull: true,
     validation: {
       notEmpty: true

@@ -8,11 +8,18 @@ const {
 } = require('../db/models')
 module.exports = router
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/checkout/:userId', async (req, res, next) => {
   try {
-    let {userId, status} = req.params
-    const cart = await Order.findAll({where: {userId, status}})
-    res.json(cart)
+    const {userId} = req.params
+    const status = 'ordered'
+    // const {productId} = req.body
+    const order = await Order.findOne({where: {userId, status}})
+    console.log(order.id)
+    const cart = await Order.update(
+      {status: 'order', orderId: order.id},
+      {returning: true, where: {userId, status}}
+    )
+    res.json(cart[1])
   } catch (err) {
     next(err)
   }

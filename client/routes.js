@@ -9,6 +9,7 @@ import Wine from './components/wine.js'
 import Beer from './components/beer.js'
 import Spirit from './components/spirits.js'
 import Cart from './components/cart.js'
+import Orders from './components/Orders.js'
 import LogOut from './components/logout.js'
 // import {Signup} from './components'
 
@@ -33,12 +34,14 @@ class Routes extends Component {
         <Route path="/beer" component={Beer} />
         <Route path="/spirit" component={Spirit} />
         <Route path="/cart" component={Cart} />
+        <Route path="/orders" component={Orders} />
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/" component={UserHome} />
             <Route path="/cart" component={Cart} />
+            <Route path="/orders" component={Orders} />
             <Route path="/logout" component={LogOut} />
           </Switch>
         )}
