@@ -89,6 +89,7 @@ const Nav = props => {
                 <Tab style={{color: 'white'}} value="/wine" label="Wine" />
                 <Tab style={{color: 'white'}} value="/spirit" label="Spirits" />
                 <Tab style={{color: 'white'}} value="/cart" label="Cart" />
+
                 {!user.id ? (
                   <Tab
                     style={{color: 'white'}}
@@ -96,11 +97,18 @@ const Nav = props => {
                     label="Log In/Sign Up"
                   />
                 ) : (
-                  <Tab
-                    style={{color: 'white'}}
-                    value="/logout"
-                    label="Log Out"
-                  />
+                  <Tabs>
+                    <Tab
+                      style={{color: 'white'}}
+                      value="/orders"
+                      label="Orders"
+                    />
+                    <Tab
+                      style={{color: 'white'}}
+                      value="/logout"
+                      label="Log Out"
+                    />
+                  </Tabs>
                 )}
               </Tabs>
             </div>
@@ -230,6 +238,17 @@ const mapCart = state => {
   }
 }
 
+const mapOrders = state => {
+  const {user} = state
+  return {
+    name: 'Orders',
+    imgURL:
+      'https://static.wixstatic.com/media/b85605_8f7ddc550f034145a7c98a3b1086e309~mv2.jpeg',
+    imgPosition: 'center bottom',
+    user
+  }
+}
+
 const mapHome = state => {
   const {user} = state
   return {
@@ -245,4 +264,5 @@ export const BeerHeader = connect(mapBeer)(Nav)
 export const WineHeader = connect(mapWine)(Nav)
 export const SpiritsHeader = connect(mapSpirits)(Nav)
 export const CartHeader = connect(mapCart)(Nav)
+export const OrderHeader = connect(mapOrders)(Nav)
 export const HomeHeader = connect(mapHome)(Nav)
