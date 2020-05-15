@@ -250,7 +250,7 @@ const Shipping = ({
             Back
           </Button>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
-            'Next'
+            Next
           </Button>
         </div>
       </div>
