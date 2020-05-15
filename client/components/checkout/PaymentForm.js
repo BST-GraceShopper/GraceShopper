@@ -38,26 +38,61 @@ const PaymentForm = ({
 }) => {
   const stripe = useStripe()
   const elements = useElements()
-  const defaultState = !shipping.zip
-  const [checked, setChecked] = React.useState(!defaultState)
+  const sameAsShipping = {
+    name: `${shipping.firstName} ${shipping.lastName}`,
+    address: {
+      line1: shipping.address1,
+      line2: shipping.address2,
+      state: shipping.state,
+      city: shipping.city,
+      postal_code: shipping.zip
+    }
+  }
+
+  const [checked, setChecked] = React.useState(false)
   const [state, setState] = React.useState(payment)
 
   const handleChange = event => {
     setChecked(event.target.checked)
-    setState(payment)
+    if (event.target.checked) {
+      setState({...state, billing_details: sameAsShipping})
+    } else {
+      setState(payment)
+    }
   }
   // const classes = useStyles()
+
+  const pay = async () => {
+    try {
+      console.log('test')
+      const {error, paymentMethod} = await stripe.createPaymentMethod(state)
+      console.log(paymentMethod)
+    } catch (er) {
+      console.log(er)
+    }
+  }
 
   const handleSubmit = async event => {
     event.preventDefault()
     // const {name,address1, address2,city, state, zip} = state
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-      ...state,
-      card: elements.getElement(CardNumberElement)
-    })
+    // const {error, paymentMethod} = await stripe.createPaymentMethod({
+    //   ...state,
+    //   card: elements.getElement(CardNumberElement)
+    // })
+    // console.log({...state,card:elements.getElement(CardNumberElement)})
+    console.log(elements.getElement(CardNumberElement))
+    await setState({...state, card: elements.getElement(CardNumberElement)})
+    console.log({...state, card: elements.getElement(CardNumberElement)})
+    // await pay()
+
+    // console.log(elements.getElement(CardNumberElement))
+    // await pay()
+    // console.log(paymentMethod)
+    // savePayment(state)
     savePayment(state)
     handleNext()
-    console.log(paymentMethod)
+
+    // console.log(paymentMethod)
   }
 
   return (
@@ -96,7 +131,6 @@ const PaymentForm = ({
           <Checkbox
             checked={checked}
             onChange={handleChange}
-            disabled={defaultState}
             color="primary"
             inputProps={{'aria-label': 'primary checkbox'}}
           />
@@ -110,11 +144,7 @@ const PaymentForm = ({
           <OutlinedInput
             id="name"
             disabled={checked}
-            value={
-              checked
-                ? `${shipping.firstName} ${shipping.lastName}`
-                : state.name
-            }
+            value={state.billing_details.name}
             onChange={ev => setState({...state, name: ev.target.value})}
             // InputProps={{
             //   className: classes.disabled
@@ -133,7 +163,7 @@ const PaymentForm = ({
           <OutlinedInput
             id="address1"
             disabled={checked}
-            value={checked ? shipping.address1 : state.address2}
+            value={state.billing_details.address.line1}
             onChange={ev => setState({...state, address1: ev.target.value})}
             // value={values.amount}
             // onChange={}
@@ -149,7 +179,7 @@ const PaymentForm = ({
           <OutlinedInput
             id="address2"
             disabled={checked}
-            value={checked ? shipping.address2 : state.address2}
+            value={state.billing_details.address.line2}
             onChange={ev => setState({...state, address2: ev.target.value})}
             // value={values.amount}
             // onChange={}
@@ -174,7 +204,7 @@ const PaymentForm = ({
             <OutlinedInput
               id="city"
               disabled={checked}
-              value={checked ? shipping.city : state.city}
+              value={state.billing_details.address.city}
               onChange={ev => setState({...state, address1: ev.target.value})}
               // value={values.amount}
               // onChange={}
@@ -190,7 +220,7 @@ const PaymentForm = ({
             <OutlinedInput
               id="state"
               disabled={checked}
-              value={checked ? shipping.state : state.state}
+              value={state.billing_details.address.state}
               onChange={ev => setState({...state, state: ev.target.value})}
               // value={values.amount}
               // onChange={}
@@ -206,7 +236,7 @@ const PaymentForm = ({
             <OutlinedInput
               id="zip"
               disabled={checked}
-              value={checked ? shipping.zip : state.zip}
+              value={state.billing_details.address.postal_code}
               onChange={ev => setState({...state, zip: ev.target.value})}
               // value={values.amount}
               // onChange={}
@@ -235,16 +265,6 @@ const PaymentForm = ({
             }}
           />
         </FormControl>
-        {/* <div
-            style={{
-              display: 'flex',
-              width: '100%',
-              alignItems: 'space-between',
-              alignContent: 'space-between',
-              justifyContent: 'space-between',
-      
-            }}
-          > */}
         <FormControl
           style={{margin: '10px', width: 'calc(100%-20px)'}}
           variant="outlined"

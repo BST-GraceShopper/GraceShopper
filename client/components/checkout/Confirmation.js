@@ -165,7 +165,7 @@ const Confirmation = ({cart, handleNext, handleBack}) => {
             onClick={handleSubmit}
             // className={classes.button}
           >
-            'Place Order'
+            Place Order
           </Button>
         </div>
       </div>

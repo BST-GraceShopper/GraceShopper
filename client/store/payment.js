@@ -14,17 +14,17 @@ const SAVE_PAYMENT = 'SAVE_PAYMENT'
 const defaultPayment = {
   billing_details: {
     address: {
-      address1: null,
-      address2: null,
-      city: null,
-      state: null,
-      zip: null
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      postal_code: ''
     },
-    name: null,
-    email: null,
-    phone: null
+    name: '',
+    email: '',
+    phone: ''
   },
-  card: null,
+  card: {},
   type: 'card'
 }
 

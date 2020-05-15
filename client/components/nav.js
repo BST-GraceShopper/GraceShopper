@@ -54,7 +54,12 @@ const Nav = props => {
       <div>
         <AppBar
           position="static"
-          style={{backgroundColor: 'rgba(0,0,0,0.5)', boxShadow: 'none'}}
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            boxShadow: 'none',
+            position: 'fixed',
+            top: 0
+          }}
         >
           <Grid item>
             <div
