@@ -15,7 +15,7 @@ import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {addSpirit, getSpirits, editSpirit, removeSpirit} from '../store/'
 
-class Createspirit extends Component {
+class CreateSpirit extends Component {
   constructor(props) {
     super()
     this.state = {
@@ -250,4 +250,4 @@ const mapDispatchToProps = dispatch => {
     create: spirit => dispatch(addSpirit(spirit))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Createspirit)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSpirit)
