@@ -36,6 +36,17 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
+router.get('/order/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const status = 'order'
+    const cart = await Order.findAll({where: {userId, status}})
+    res.json(cart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:userId', async (req, res, next) => {
   try {
     const {productId} = req.body

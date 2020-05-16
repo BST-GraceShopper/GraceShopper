@@ -3,7 +3,7 @@ const {Product} = require('../db/models')
 module.exports = router
 
 const isAdmin = (req, res, next) => {
-  if (!req.user.isAdmin) {
+  if (!req.user || (req.user && !req.user.isAdmin)) {
     const err = new Error(`Admin level only Peet and Mark!`)
     err.status = 401
     return next(err)

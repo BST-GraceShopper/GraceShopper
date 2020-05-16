@@ -1,10 +1,18 @@
 /* eslint-disable react/jsx-key */
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {CardMedia, Card, CardActions, IconButton} from '@material-ui/core/'
+import Paper from '@material-ui/core/Paper'
+import {
+  CardMedia,
+  Card,
+  Button,
+  CardActions,
+  IconButton,
+  ButtonBase
+} from '@material-ui/core/'
 import CardContent from '@material-ui/core/CardContent'
-import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
+import {Typography} from '@material-ui/core'
 import {addToCart} from '../store/'
 import {Snackbar} from '@material-ui/core/'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
@@ -18,8 +26,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const productList = ({user, products, addToCart}) => {
-  // const classes = useStyles()
+const SpiritList = ({user, spirits, addToCart}) => {
+  const classes = useStyles()
   const [state, setState] = React.useState({
     open: false,
     message: ''
@@ -27,18 +35,16 @@ const productList = ({user, products, addToCart}) => {
   const token = window.localStorage.getItem('guestToken')
   return (
     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-      {products.map(product => {
+      {spirits.map(spirit => {
         return (
           <Card
             elevation={3}
             raised={true}
-            key={product.id}
+            key={spirit.id}
             variant="outlined"
             style={{
               width: 'calc(100%/3-60px)',
               display: 'flex',
-              // backgroundColor: 'black',
-              // border: '1px solid black',
               justifyContent: 'center',
               flexDirection: 'column',
               margin: 10,
@@ -64,7 +70,7 @@ const productList = ({user, products, addToCart}) => {
               <IconButton
                 aria-label="favorite"
                 tooltip="Add to favorites"
-                // className={classes.hover}
+                className={classes.hover}
                 onClick={() => {
                   //add to favorites function
                   setState({open: true, message: 'Added to favorites'})
@@ -75,9 +81,9 @@ const productList = ({user, products, addToCart}) => {
               <IconButton
                 aria-label="add to cart"
                 tooltip="Add to cart"
-                // className={classes.hover}
+                className={classes.hover}
                 onClick={() => {
-                  addToCart(user.id || token, product.id)
+                  addToCart(user.id || token, spirit.id)
                   setState({open: true, message: 'Added to cart'})
                 }}
               >
@@ -86,10 +92,7 @@ const productList = ({user, products, addToCart}) => {
             </CardActions>
 
             {/* </CardActionArea> */}
-            <CardMedia
-              image={product.image}
-              style={{width: 200, height: 200}}
-            />
+            <CardMedia image={spirit.image} style={{width: 200, height: 200}} />
             <CardContent
               style={{
                 display: 'flex',
@@ -101,17 +104,17 @@ const productList = ({user, products, addToCart}) => {
             >
               <Typography
                 variant="h5"
-                key={product.name}
+                key={spirit.name}
                 style={{color: 'white'}}
               >
-                {product.name}
+                {spirit.name}
               </Typography>
               <Typography
                 variant="body1"
-                key={product.maker}
+                key={spirit.maker}
                 style={{color: 'white'}}
               >
-                {product.maker}
+                {spirit.maker}
               </Typography>
             </CardContent>
             <CardContent
@@ -124,10 +127,10 @@ const productList = ({user, products, addToCart}) => {
             >
               <Typography
                 variant="subtitle1"
-                key={product.type}
+                key={spirit.type}
                 style={{color: 'white'}}
               >
-                {product.type} • {product.grape}
+                {spirit.type} • {spirit.grape}
               </Typography>
             </CardContent>
             <CardContent
@@ -141,10 +144,10 @@ const productList = ({user, products, addToCart}) => {
             >
               <Typography
                 variant="h6"
-                key={product.price}
+                key={spirit.price}
                 style={{color: 'white'}}
               >
-                ${product.price}
+                ${spirit.price}
               </Typography>
             </CardContent>
           </Card>
@@ -161,8 +164,8 @@ const productList = ({user, products, addToCart}) => {
   )
 }
 
-const mapStateToProps = ({products, user}) => {
-  return {products, user}
+const mapStateToProps = ({spirits, user}) => {
+  return {spirits, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
@@ -171,4 +174,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(productList)
+export default connect(mapStateToProps, mapDispatchToProps)(SpiritList)

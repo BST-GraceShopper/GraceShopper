@@ -13,9 +13,9 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {getBeers, editBeer, removeBeer} from '../store/'
+import {getWines, editWine, removeWine} from '../store/'
 
-class BeerCard extends Component {
+class WineCard extends Component {
   constructor(props) {
     super()
     this.state = {
@@ -47,7 +47,7 @@ class BeerCard extends Component {
   render() {
     const {onSubmit} = this
     const {productId, inventory, price, error, idx} = this.state
-    const {beer} = this.props
+    const {wine} = this.props
 
     return (
       <div
@@ -63,7 +63,7 @@ class BeerCard extends Component {
           <Card
             elevation={3}
             raised={true}
-            key={beer.id}
+            key={wine.id}
             variant="outlined"
             style={{
               width: 'calc(100%/3-60px)',
@@ -85,7 +85,7 @@ class BeerCard extends Component {
                 justifyContent: 'center'
               }}
             >
-              <CardMedia image={beer.image} style={{width: 200, height: 200}} />
+              <CardMedia image={wine.image} style={{width: 200, height: 200}} />
             </div>
             <CardContent
               style={{
@@ -105,7 +105,7 @@ class BeerCard extends Component {
               ].map(key => {
                 return (
                   <Typography style={{color: 'white'}}>
-                    {key}: {beer[key]}
+                    {key}: {wine[key]}
                   </Typography>
                 )
               })}
@@ -120,7 +120,7 @@ class BeerCard extends Component {
                     onChange={ev => {
                       this.setState({
                         idx: idx,
-                        productId: beer.id,
+                        productId: wine.id,
                         price: Number(ev.target.value)
                       })
                     }}
@@ -132,14 +132,14 @@ class BeerCard extends Component {
                     onChange={ev => {
                       this.setState({
                         idx: idx,
-                        productId: beer.id,
+                        productId: wine.id,
                         inventory: Number(ev.target.value)
                       })
                     }}
                   />
                   <button>Update</button>
                 </form>
-                <button onClick={() => this.props.remove(beer.id)}>
+                <button onClick={() => this.props.remove(wine.id)}>
                   Delete
                 </button>
               </Typography>
@@ -151,14 +151,14 @@ class BeerCard extends Component {
   }
 }
 
-const mapStateToProps = ({beers, user}) => {
-  return {beers, user}
+const mapStateToProps = ({wines, user}) => {
+  return {wines, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    fetch: () => dispatch(getBeers()),
-    update: beer => dispatch(editBeer(beer)),
-    remove: beerId => dispatch(removeBeer(beerId))
+    fetch: () => dispatch(getWines()),
+    update: wine => dispatch(editWine(wine)),
+    remove: wineId => dispatch(removeWine(wineId))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(BeerCard)
+export default connect(mapStateToProps, mapDispatchToProps)(WineCard)

@@ -23,13 +23,14 @@ class Orders extends Component {
     getCart(user.id || token)
   }
   render() {
-    const contextRef = createRef()
-    const {cart} = this.props
-    console.log(cart, 'cartsss in ordersss')
+    //   const contextRef = createRef()
+    const {order} = this.props
+    console.log(this.props)
+    // console.log(order, 'cartsss in ordersss')
     return (
       <div>
         <OrderHeader />
-        {!cart.length ? (
+        {!order ? (
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <Typography color="textSecondary" variant="h6">
               You have no current orders
@@ -93,8 +94,8 @@ class Orders extends Component {
   }
 }
 
-const mapStateToProps = ({wines, cart, user}) => {
-  return {wines, cart, user}
+const mapStateToProps = state => {
+  return state
 }
 const mapDispatchToProps = dispatch => {
   return {
