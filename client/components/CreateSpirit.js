@@ -13,18 +13,18 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addBeer, getBeers, editBeer, removeBeer} from '../store/'
+import {addSpirit, getSpirits, editSpirit, removeSpirit} from '../store/'
 
-class CreateBeer extends Component {
+class Createspirit extends Component {
   constructor(props) {
     super()
     this.state = {
       ABV: 0,
       image:
-        'https://www.searchpng.com/wp-content/uploads/2018/12/Beer-Bottle-Png.png',
+        'https://i.dlpng.com/static/png/5340517-download-old-whiskey-bottle-png-clipart-whiskey-liquor-scotch-whisky-whiskey-bottle-png-900_900_preview.png',
       maker: '',
       year: 0,
-      category: 'beer',
+      category: 'Spirit',
       type: '',
       name: '',
       price: 0,
@@ -79,7 +79,7 @@ class CreateBeer extends Component {
       price,
       error
     } = this.state
-    const {beer} = this.props
+    const {spirit} = this.props
 
     return (
       <div
@@ -229,6 +229,7 @@ class CreateBeer extends Component {
                       })
                     }}
                   />
+                  <br />
                   <button>Create</button>
                 </form>
               </Typography>
@@ -240,13 +241,13 @@ class CreateBeer extends Component {
   }
 }
 
-const mapStateToProps = ({beers, user}) => {
-  return {beers, user}
+const mapStateToProps = ({spirits, user}) => {
+  return {spirits, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    fetch: () => dispatch(getBeers()),
-    create: beer => dispatch(addBeer(beer))
+    fetch: () => dispatch(getSpirits()),
+    create: spirit => dispatch(addSpirit(spirit))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CreateBeer)
+export default connect(mapStateToProps, mapDispatchToProps)(Createspirit)

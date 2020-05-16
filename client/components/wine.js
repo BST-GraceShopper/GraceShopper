@@ -2,29 +2,34 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {WineHeader} from './nav'
 import WineList from './WineList'
+import WineListAdmin from './WineListAdmin'
 import {getWines} from '../store/'
 
 class Wine extends Component {
   componentDidMount() {
-    this.props.loadWines()
+    this.props.loadwines()
   }
   render() {
-    const {wines} = this.props
+    const {wines, user} = this.props
     return (
       <div style={{color: 'white'}}>
         <WineHeader />
-        <WineList />
+        {user.isAdmin ? (
+          <WineListAdmin wines={wines} />
+        ) : (
+          <WineList wines={wines} />
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({wines}) => {
-  return {wines}
+const mapStateToProps = ({wines, user}) => {
+  return {wines, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    loadWines() {
+    loadwines() {
       dispatch(getWines())
     }
   }

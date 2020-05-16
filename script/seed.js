@@ -196,39 +196,63 @@ async function seed() {
     }),
     Product.create({
       ABV: 5.2,
-      maker: 'Lakefront Brewery',
-      name: 'Hazy Rabbit IPA',
-      region: 'Milwaukee, WI',
-      type: 'IPA',
+      maker: 'Long Trail',
+      name: 'Long Trail Ale',
+      region: 'Vermont',
+      type: 'ALE',
       category: 'beer',
-      price: 29.0,
-      inventory: 6,
+      price: 10.99,
+      inventory: 20,
       image:
-        'https://static.vinepair.com/wp-content/uploads/2019/03/btbhazyipa_internal_lakefront.png'
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hd0/h63/8940607340574.png'
     }),
     Product.create({
-      ABV: 6.8,
-      maker: 'Anchor Brewing',
-      name: 'Fog Breaker IPA',
-      region: 'San Francisco, CA',
-      type: 'IPA',
+      ABV: 4.3,
+      maker: "O'Hara's",
+      name: 'Irish Red',
+      region: 'Ireland',
+      type: 'ALE',
       category: 'beer',
-      price: 24.0,
+      price: 24.99,
       inventory: 12,
       image:
-        'https://static.vinepair.com/wp-content/uploads/2019/12/fogbreaker.png'
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h26/hac/8806081167390.png'
     }),
     Product.create({
-      ABV: 4.0,
-      maker: 'Shiner',
-      name: 'Ruby Redbird',
-      region: 'Shiner, TX',
-      type: 'Lager',
+      ABV: 6.0,
+      maker: 'Rogue',
+      name: "Santa's Private Reserve",
+      region: 'Oregon',
+      type: 'ALE',
       category: 'beer',
-      price: 27.0,
+      price: 17.99,
       inventory: 12,
       image:
-        'https://static.vinepair.com/wp-content/uploads/2019/12/RubyRedbird.png'
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h41/h4c/11019505631262.png'
+    }),
+    Product.create({
+      ABV: 11.0,
+      maker: 'Allagash',
+      name: 'Curieux',
+      region: 'Maine',
+      type: 'ALE',
+      category: 'beer',
+      price: 17.99,
+      inventory: 12,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/hd8/ha3/8802889465886.png'
+    }),
+    Product.create({
+      ABV: 10.0,
+      maker: "Samuel Smith's",
+      name: 'Organic Chocolate Stout',
+      region: 'England',
+      type: 'ALE',
+      category: 'beer',
+      price: 22.99,
+      inventory: 12,
+      image:
+        'https://www.totalwine.com/dynamic/x1000,sq/media/sys_master/twmmedia/h22/h4d/8806007078942.png'
     }),
     Product.create({
       category: 'Spirit',

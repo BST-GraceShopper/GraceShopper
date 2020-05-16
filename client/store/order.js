@@ -4,33 +4,33 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_CART = 'GET_CART'
-const ADD_CART = 'ADD_CART'
-const REMOVEONE_CART = 'REMOVEONE_CART'
-const REMOVEP_CART = 'REMOVEP_CART'
+const GET_ORDER = 'GET_ORDER'
+const ADD_ORDER = 'ADD_ORDER'
+const REMOVEONE_ORDER = 'REMOVEONE_ORDER'
+const REMOVEP_ORDER = 'REMOVEP_ORDER'
 
 /**
  * INITIAL STATE
  */
-const defaultCart = {items: [], totalPrice: 0, totalQuantity: 0}
+const defaultorder = {items: [], totalPrice: 0, totalQuantity: 0}
 
 /**
  * ACTION CREATORS
  */
-const _getCart = cart => ({type: GET_CART, cart})
-const _addToCart = product => ({type: ADD_CART, product})
-const _removeOneFromCart = product => ({type: REMOVEONE_CART, product})
-const _removeProductFromCart = product => ({type: REMOVEP_CART, product})
+const _getOrder = order => ({type: GET_ORDER, order})
+const _addToOrder = product => ({type: ADD_ORDER, product})
+const _removeOneFromOrder = product => ({type: REMOVEONE_ORDER, product})
+const _removeProductFromOrder = product => ({type: REMOVEP_ORDER, product})
 
 /**
  * THUNK CREATORS
  */
 
-export const getCart = userId => async dispatch => {
+export const getorder = userId => async dispatch => {
   try {
-    const res = await axios.get(`/api/cart/${userId}`)
+    const res = await axios.get(`/api/order/${userId}`)
     if (res.data) {
-      const cart = {
+      const order = {
         items: res.data,
         totalPrice: res.data.reduce((acc, item) => {
           return acc + item.price * item.quantity
@@ -39,53 +39,45 @@ export const getCart = userId => async dispatch => {
           return acc + item.quantity
         }, 0)
       }
-      dispatch(_getCart(cart))
+      dispatch(_getOrder(order))
     } else {
-      dispatch(_getCart(cart || defaultCart))
+      dispatch(_getOrder(order || defaultorder))
     }
   } catch (err) {
     console.error(err)
   }
 }
 
-export const addToCart = (userId, productId) => async dispatch => {
+export const addToorder = (userId, productId) => async dispatch => {
   try {
-    const res = await axios.post(`/api/cart/${userId}`, {productId})
-    dispatch(_addToCart(res.data))
+    const res = await axios.post(`/api/order/${userId}`, {productId})
+    dispatch(_addToOrder(res.data))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const checkout = userId => async dispatch => {
-  try {
-    const res = await axios.get(`/api/cart/checkout/${userId}`)
-    // dispatch(getCart(userId))
-    // history.push('/thankyou')
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export const removeFromCart = (userId, product) => async dispatch => {
+export const removeFromorder = (userId, product) => async dispatch => {
   try {
     if (product.quantity === 1) {
       //delete
-      const res = await axios.delete(`/api/cart/${userId}/${product.productId}`)
-      dispatch(_removeProductFromCart(product))
+      const res = await axios.delete(
+        `/api/order/${userId}/${product.productId}`
+      )
+      dispatch(_removeProductFromOrder(product))
     } else {
       //remove 1
-      const res = await axios.put(`/api/cart/${userId}`, product)
-      dispatch(_removeOneFromCart(res.data))
+      const res = await axios.put(`/api/order/${userId}`, product)
+      dispatch(_removeOneFromOrder(res.data))
     }
   } catch (err) {
     console.error(err)
   }
 }
-export const removeProductFromCart = (userId, product) => async dispatch => {
+export const removeProductFromorder = (userId, product) => async dispatch => {
   try {
-    const res = await axios.delete(`/api/cart/${userId}/${product.productId}`)
-    dispatch(_removeProductFromCart(product))
+    const res = await axios.delete(`/api/order/${userId}/${product.productId}`)
+    dispatch(_removeProductFromOrder(product))
   } catch (err) {
     console.error(err)
   }
@@ -94,11 +86,11 @@ export const removeProductFromCart = (userId, product) => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultCart, action) {
+export default function(state = defaultorder, action) {
   switch (action.type) {
-    case GET_CART:
-      return action.cart
-    case ADD_CART:
+    case GET_ORDER:
+      return action.order
+    case ADD_ORDER:
       if (
         state.items.filter(item => item.productId === action.product.productId)
           .length
@@ -121,7 +113,7 @@ export default function(state = defaultCart, action) {
           items: [...state.items, action.product]
         }
       }
-    case REMOVEONE_CART:
+    case REMOVEONE_ORDER:
       return {
         totalPrice: state.totalPrice - action.product.price,
         totalQuantity: state.totalQuantity - 1,
@@ -133,7 +125,7 @@ export default function(state = defaultCart, action) {
           }
         })
       }
-    case REMOVEP_CART:
+    case REMOVEP_ORDER:
       return {
         totalPrice: state.totalPrice - action.product.price,
         totalQuantity: state.totalQuantity - action.product.quantity,

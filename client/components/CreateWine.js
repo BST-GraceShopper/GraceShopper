@@ -13,18 +13,18 @@ import {
 import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
-import {addBeer, getBeers, editBeer, removeBeer} from '../store/'
+import {addWine, getWines, editWines, removeWine} from '../store/'
 
-class CreateBeer extends Component {
+class CreateWine extends Component {
   constructor(props) {
     super()
     this.state = {
       ABV: 0,
       image:
-        'https://www.searchpng.com/wp-content/uploads/2018/12/Beer-Bottle-Png.png',
+        'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg',
       maker: '',
       year: 0,
-      category: 'beer',
+      category: 'wine',
       type: '',
       name: '',
       price: 0,
@@ -79,7 +79,7 @@ class CreateBeer extends Component {
       price,
       error
     } = this.state
-    const {beer} = this.props
+    const {wine} = this.props
 
     return (
       <div
@@ -229,6 +229,17 @@ class CreateBeer extends Component {
                       })
                     }}
                   />
+                  <br />
+                  Grape
+                  <input
+                    placeholder="grape"
+                    value={grape}
+                    onChange={ev => {
+                      this.setState({
+                        grape: ev.target.value
+                      })
+                    }}
+                  />
                   <button>Create</button>
                 </form>
               </Typography>
@@ -240,13 +251,13 @@ class CreateBeer extends Component {
   }
 }
 
-const mapStateToProps = ({beers, user}) => {
-  return {beers, user}
+const mapStateToProps = ({wines, user}) => {
+  return {wines, user}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    fetch: () => dispatch(getBeers()),
-    create: beer => dispatch(addBeer(beer))
+    fetch: () => dispatch(getWines()),
+    create: wine => dispatch(addWine(wine))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(CreateBeer)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateWine)

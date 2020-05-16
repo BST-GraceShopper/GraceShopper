@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {SpiritsHeader} from './nav'
-import SpiritList from './spirits/SpiritList'
+import SpiritList from './SpiritList'
+import SpiritListAdmin from './SpiritListAdmin'
 import {getSpirits} from '../store/'
 
 class Spirit extends Component {
@@ -9,19 +10,23 @@ class Spirit extends Component {
     this.props.loadSpirits()
   }
   render() {
-    const {spirits} = this.props
+    const {spirits, user} = this.props
     console.log(spirits)
     return (
       <div style={{color: 'white'}}>
         <SpiritsHeader />
-        <SpiritList spirits={spirits} />
+        {user.isAdmin ? (
+          <SpiritListAdmin spirits={spirits} />
+        ) : (
+          <SpiritList spirits={spirits} />
+        )}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({spirits}) => {
-  return {spirits}
+const mapStateToProps = ({spirits, user}) => {
+  return {spirits, user}
 }
 
 const mapDispatchToProps = dispatch => {

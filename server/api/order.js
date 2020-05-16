@@ -3,23 +3,41 @@ const {
   Order,
   Product,
   User,
-  addToCart,
-  removeFromCart
+  addToOrder,
+  removeFromOrder
 } = require('../db/models')
 module.exports = router
 
-router.get('/checkout/:userId', async (req, res, next) => {
+router.get('/order/:userId', async (req, res, next) => {
   try {
     const {userId} = req.params
-    const status = 'ordered'
+    const status = 'order'
     // const {productId} = req.body
     const order = await Order.findOne({where: {userId, status}})
     console.log(order.id)
-    const cart = await Order.update(
-      {status: 'order', orderId: order.id},
-      {returning: true, where: {userId, status}}
-    )
-    res.json(cart[1])
+    res.json(order[1])
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const status = 'order'
+    const order = await Order.findAll({where: {userId, status}})
+    res.json(order)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/order/:userId', async (req, res, next) => {
+  try {
+    const {userId} = req.params
+    const status = 'order'
+    const order = await Order.findAll({where: {userId, status}})
+    res.json(order)
   } catch (err) {
     next(err)
   }
@@ -28,7 +46,8 @@ router.get('/checkout/:userId', async (req, res, next) => {
 router.post('/:userId', async (req, res, next) => {
   try {
     const {productId} = req.body
-    const {userId, status} = req.params
+    const {userId} = req.params
+    const status = 'order'
     // const user = await User.findByPk(userId)
     // userId = user.id || jwt.decode(userId,"NONE").id
     const order = await Order.findOne({where: {userId, productId, status}})
@@ -59,14 +78,15 @@ router.post('/:userId', async (req, res, next) => {
 
 router.put('/:userId', async (req, res, next) => {
   try {
-    const {userId, status} = req.params
+    const {userId} = req.params
+    const status = 'order'
     const {productId} = req.body
     const order = await Order.findOne({where: {userId, productId, status}})
-    const cart = await Order.update(
+    const order1 = await Order.update(
       {quantity: order.quantity - 1},
       {returning: true, where: {userId, productId, status}}
     )
-    res.json(cart[1][0])
+    res.json(order1[1][0])
   } catch (err) {
     next(err)
   }
@@ -74,8 +94,9 @@ router.put('/:userId', async (req, res, next) => {
 
 router.delete('/:userId/:productId', async (req, res, next) => {
   try {
-    const {userId, productId, status} = req.params
-    const cart = await Order.destroy({where: {userId, productId, status}})
+    const {userId, productId} = req.params
+    const status = 'order'
+    const order = await Order.destroy({where: {userId, productId, status}})
     res.sendStatus(204)
   } catch (err) {
     next(err)
