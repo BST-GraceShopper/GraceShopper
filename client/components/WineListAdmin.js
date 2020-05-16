@@ -14,8 +14,8 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {getWines, editWine, removeWine} from '../store/'
-import CreateWine from './Createwine'
-import WineCard from './wineCard'
+import CreateWine from './CreateWine'
+import WineCard from './WineCard'
 
 class WineListAdmin extends Component {
   componentDidMount() {
