@@ -28,7 +28,7 @@ import {savePayment} from '../../store'
 // }))
 
 const PaymentForm = ({
-  shipping,
+  // shipping,
   payment,
   savePayment,
   handleNext,
@@ -38,60 +38,61 @@ const PaymentForm = ({
 }) => {
   const stripe = useStripe()
   const elements = useElements()
-  const sameAsShipping = {
-    name: `${shipping.firstName} ${shipping.lastName}`,
-    address: {
-      line1: shipping.address1,
-      line2: shipping.address2,
-      state: shipping.state,
-      city: shipping.city,
-      postal_code: shipping.zip
-    }
-  }
+  // const sameAsShipping = {
+  //   name: `${shipping.firstName} ${shipping.lastName}`,
+  //   address: {
+  //     line1: shipping.address1,
+  //     line2: shipping.address2,
+  //     state: shipping.state,
+  //     city: shipping.city,
+  //     postal_code: shipping.zip
+  //   }
+  // }
 
   const [checked, setChecked] = React.useState(false)
-  const [state, setState] = React.useState(payment)
+  const [address, setAddress] = React.useState(payment.billing_details.address)
+  const [name, setName] = React.useState(payment.billing_details.name)
 
-  const handleChange = event => {
-    setChecked(event.target.checked)
-    if (event.target.checked) {
-      setState({...state, billing_details: sameAsShipping})
-    } else {
-      setState(payment)
-    }
-  }
+  // const handleChange = event => {
+  //   setChecked(event.target.checked)
+  //   if (event.target.checked) {
+  //     setState({...state, billing_details: sameAsShipping})
+  //   } else {
+  //     setState(payment)
+  //   }
+  // }
   // const classes = useStyles()
 
-  const pay = async () => {
-    try {
-      console.log('test')
-      const {error, paymentMethod} = await stripe.createPaymentMethod(state)
-      console.log(paymentMethod)
-    } catch (er) {
-      console.log(er)
-    }
-  }
+  // const pay = async () => {
+  //   try {
+  //     console.log('test')
+  //     const {error, paymentMethod} = await stripe.createPaymentMethod(state)
+  //     console.log(paymentMethod)
+  //   } catch (er) {
+  //     console.log(er)
+  //   }
+  // }
 
   const handleSubmit = async event => {
     event.preventDefault()
     // const {name,address1, address2,city, state, zip} = state
-    console.log({
-      ...state,
-      card: elements.getElement(CardNumberElement)
+
+    // const {error, paymentMethod} = await stripe.createPaymentMethod(state)
+    const {error, paymentMethod} = await stripe.createPaymentMethod({
+      billing_details: {
+        name,
+        address
+      },
+      card: elements.getElement(CardNumberElement),
+      type: 'card'
     })
-    await setState({...state, card: elements.getElement(CardNumberElement)})
-    const {error, paymentMethod} = await stripe.createPaymentMethod(state)
-    // const {error2, paymentMethod2} = await stripe.createPaymentMethod({
-    //   ...state,
-    //   card: elements.getElement(CardNumberElement)
-    // })
     // await pay()
 
     // console.log(elements.getElement(CardNumberElement))
     // await pay()
     // console.log(paymentMethod)
     // savePayment(state)
-    savePayment(state)
+    savePayment(paymentMethod)
     handleNext()
 
     // console.log(paymentMethod)
@@ -122,7 +123,7 @@ const PaymentForm = ({
           overflow: 'auto'
         }}
       >
-        <div
+        {/* <div
           style={{
             display: 'flex',
             justifyContent: 'flex-start',
@@ -137,7 +138,7 @@ const PaymentForm = ({
             inputProps={{'aria-label': 'primary checkbox'}}
           />
           <Typography>Same as Shipping</Typography>
-        </div>
+        </div> */}
         <FormControl
           style={{width: 'calc(100%-20px)', margin: '10px'}}
           variant="outlined"
@@ -146,8 +147,8 @@ const PaymentForm = ({
           <OutlinedInput
             id="name"
             disabled={checked}
-            value={state.billing_details.name}
-            onChange={ev => setState({...state, name: ev.target.value})}
+            value={name}
+            onChange={ev => setName(ev.target.value)}
             // InputProps={{
             //   className: classes.disabled
             // }}
@@ -165,8 +166,8 @@ const PaymentForm = ({
           <OutlinedInput
             id="address1"
             disabled={checked}
-            value={state.billing_details.address.line1}
-            onChange={ev => setState({...state, address1: ev.target.value})}
+            value={address.line1}
+            onChange={ev => setAddress({...address, line1: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -181,8 +182,8 @@ const PaymentForm = ({
           <OutlinedInput
             id="address2"
             disabled={checked}
-            value={state.billing_details.address.line2}
-            onChange={ev => setState({...state, address2: ev.target.value})}
+            value={address.line2}
+            onChange={ev => setAddress({...address, line2: ev.target.value})}
             // value={values.amount}
             // onChange={}
             // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -206,8 +207,8 @@ const PaymentForm = ({
             <OutlinedInput
               id="city"
               disabled={checked}
-              value={state.billing_details.address.city}
-              onChange={ev => setState({...state, address1: ev.target.value})}
+              value={address.city}
+              onChange={ev => setAddress({...address, city: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -222,8 +223,8 @@ const PaymentForm = ({
             <OutlinedInput
               id="state"
               disabled={checked}
-              value={state.billing_details.address.state}
-              onChange={ev => setState({...state, state: ev.target.value})}
+              value={address.state}
+              onChange={ev => setAddress({...address, state: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -238,8 +239,10 @@ const PaymentForm = ({
             <OutlinedInput
               id="zip"
               disabled={checked}
-              value={state.billing_details.address.postal_code}
-              onChange={ev => setState({...state, zip: ev.target.value})}
+              value={address.postal_code}
+              onChange={ev =>
+                setAddress({...address, postal_code: ev.target.value})
+              }
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -344,8 +347,8 @@ const PaymentForm = ({
   )
 }
 
-const mapStateToProps = ({shipping, payment}) => {
-  return {shipping, payment}
+const mapStateToProps = ({paymentIntent, payment}) => {
+  return {paymentIntent, payment}
 }
 const mapDispatchToProps = dispatch => {
   return {

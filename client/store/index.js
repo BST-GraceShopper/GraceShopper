@@ -8,7 +8,7 @@ import cart from './cart'
 import beers from './beer'
 import spirits from './spirit'
 import products from './product'
-import shipping from './shipping'
+import paymentIntent from './shipping'
 import payment from './payment'
 import order from './order'
 
@@ -19,7 +19,7 @@ const reducer = combineReducers({
   spirits,
   products,
   cart,
-  shipping,
+  paymentIntent,
   payment,
   order
 })

@@ -11,8 +11,11 @@ import StepLabel from '@material-ui/core/StepLabel'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import Shipping from './checkout/Shipping'
 import Payment from './checkout/Payment'
+import PaymentForm from './checkout/PaymentForm'
 import Confirmation from './checkout/Confirmation'
 import {formTheme} from '../theme'
+import {Elements} from '@stripe/react-stripe-js'
+import {loadStripe} from '@stripe/stripe-js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,7 +72,7 @@ const Checkout = ({user, checkout, cart, getCart}) => {
         )
       case 1:
         return (
-          <Payment
+          <PaymentForm
             handleNext={handleNext}
             handleBack={handleBack}
             activeStep={activeStep}
@@ -90,6 +93,7 @@ const Checkout = ({user, checkout, cart, getCart}) => {
     }
   }
 
+  const stripePromise = loadStripe('pk_test_SU0EkhevzXhxoILrxioT5Xp000opJGEGK4')
   return (
     <div>
       <Button variant="outlined" onClick={() => setOpen(true)} color="primary">
@@ -151,7 +155,9 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                     height: '80%'
                   }}
                 > */}
-                {getStepContent(activeStep)}
+                <Elements stripe={stripePromise}>
+                  {getStepContent(activeStep)}
+                </Elements>
                 {/* </div> */}
 
                 {/* <div
