@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const OrderList = ({cart, user}) => {
+const OrderList = ({order, user}) => {
   const headCells = [
     {id: 'item', numeric: false, disablePadding: true, label: 'Item'},
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
@@ -75,7 +75,7 @@ const OrderList = ({cart, user}) => {
         </TableRow>
       </TableHead>
       <TableBody style={{border: 'none'}}>
-        {cart.items.map(orderItem => {
+        {order.items.map(orderItem => {
           return (
             <TableRow key={orderItem.productId} style={{border: 'none'}}>
               <StyledTableCell align="center">
@@ -164,8 +164,8 @@ const OrderList = ({cart, user}) => {
   )
 }
 
-const mapStateToProps = ({wines, user, orders}) => {
-  return {wines, user, orders}
+const mapStateToProps = ({user, order}) => {
+  return {user, order}
 }
 // const mapDispatchToProps = dispatch => {
 //   return {
