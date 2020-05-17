@@ -52,9 +52,7 @@ const Confirmation = ({
   const classes = useStyles()
   const handleSubmit = async () => {
     event.preventDefault()
-    console.log(paymentIntent.id, payment.id)
     const response = await confirmPayment(paymentIntent.id, payment.id)
-    console.log(response)
     if (response === 'succeeded') {
       handleNext()
     } else {
