@@ -11,23 +11,28 @@ import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
 import {saveShipping} from '../../store'
+import {useStripe, useElements} from '@stripe/react-stripe-js'
 
 const Shipping = ({
-  shipping,
+  paymentIntent,
   saveShipping,
   handleNext,
-  handleBack
+  handleBack,
+  cart
   // activeStep,
   // steps
 }) => {
-  const [value, setValue] = React.useState('standard')
+  const [value, setValue] = React.useState(0)
+  const stripe = useStripe()
   const handleChange = event => {
     setValue(event.target.value)
+    console.log(event.target.value)
   }
-  const [state, setState] = React.useState(shipping)
+  const [name, setName] = React.useState(paymentIntent.shipping.name)
+  const [address, setAddress] = React.useState(paymentIntent.shipping.address)
   const handleSubmit = () => {
     event.preventDefault()
-    saveShipping(state)
+    saveShipping({amount: cart.totalPrice + value, shipping: {name, address}})
     handleNext()
   }
   return (
@@ -52,44 +57,24 @@ const Shipping = ({
           overflow: 'auto'
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'space-between',
-            alignContent: 'space-between',
-            justifyContent: 'space-between'
-          }}
+        <FormControl
+          style={{width: 'calc(100%-20px)', margin: '10px'}}
+          variant="outlined"
         >
-          <FormControl
-            style={{width: 'calc(100%/2)', margin: '10px'}}
-            variant="outlined"
-          >
-            <InputLabel htmlFor="outlined">First Name</InputLabel>
-            <OutlinedInput
-              id="firstName"
-              required
-              value={state.firstName}
-              onChange={ev => {
-                setState({...state, firstName: ev.target.value})
-              }}
-              labelWidth={70}
-            />
-          </FormControl>
-          <FormControl
-            style={{width: 'calc(100%/2)', margin: '10px'}}
-            variant="outlined"
-          >
-            <InputLabel htmlFor="outlined">Last Name</InputLabel>
-            <OutlinedInput
-              id="lastName"
-              required
-              value={state.lastName}
-              onChange={ev => setState({...state, lastName: ev.target.value})}
-              labelWidth={70}
-            />
-          </FormControl>
-        </div>
+          <InputLabel htmlFor="outlined">Full Name</InputLabel>
+          <OutlinedInput
+            id="name"
+            value={name}
+            onChange={ev => setName(ev.target.value)}
+            // InputProps={{
+            //   className: classes.disabled
+            // }}
+            // value={values.amount}
+            // onChange={}
+            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            labelWidth={90}
+          />
+        </FormControl>
         <FormControl
           style={{margin: '10px', width: 'calc(100%-20px)'}}
           variant="outlined"
@@ -98,8 +83,8 @@ const Shipping = ({
           <OutlinedInput
             id="address1"
             required
-            value={state.address1}
-            onChange={ev => setState({...state, address1: ev.target.value})}
+            value={address.line1}
+            onChange={ev => setAddress({...address, line1: ev.target.value})}
             labelWidth={90}
           />
         </FormControl>
@@ -110,8 +95,8 @@ const Shipping = ({
           <InputLabel htmlFor="outlined">Address Line 2</InputLabel>
           <OutlinedInput
             id="address2"
-            value={state.address2}
-            onChange={ev => setState({...state, address2: ev.target.value})}
+            value={address.line2}
+            onChange={ev => setAddress({...address, line2: ev.target.value})}
             labelWidth={90}
           />
         </FormControl>
@@ -132,8 +117,8 @@ const Shipping = ({
             <OutlinedInput
               id="city"
               required
-              value={state.city}
-              onChange={ev => setState({...state, city: ev.target.value})}
+              value={address.city}
+              onChange={ev => setAddress({...address, city: ev.target.value})}
               labelWidth={30}
             />
           </FormControl>
@@ -145,8 +130,8 @@ const Shipping = ({
             <OutlinedInput
               id="state"
               required
-              value={state.state}
-              onChange={ev => setState({...state, state: ev.target.value})}
+              value={address.state}
+              onChange={ev => setAddress({...address, state: ev.target.value})}
               // value={values.amount}
               // onChange={}
               // startAdornment={<InputAdornment position="start">$</InputAdornment>}
@@ -161,13 +146,15 @@ const Shipping = ({
             <OutlinedInput
               id="zip"
               required
-              value={state.zip}
-              onChange={ev => setState({...state, zip: ev.target.value})}
+              value={address.postal_code}
+              onChange={ev =>
+                setAddress({...address, postal_code: ev.target.value})
+              }
               labelWidth={30}
             />
           </FormControl>
         </div>
-        <div
+        {/* <div
           style={{
             display: 'flex',
             width: '100%',
@@ -203,7 +190,7 @@ const Shipping = ({
               labelWidth={50}
             />
           </FormControl>
-        </div>
+        </div> */}
         <div style={{margin: '10px'}}>
           <FormControl component="fieldset">
             <FormLabel component="legend">Shipping Time</FormLabel>
@@ -214,17 +201,17 @@ const Shipping = ({
               onChange={handleChange}
             >
               <FormControlLabel
-                value="standard"
+                value={0}
                 control={<Radio />}
                 label="Standard (5-7 Business Days) - $0.00"
               />
               <FormControlLabel
-                value="rush"
+                value={10}
                 control={<Radio />}
                 label="Rushed (2-3 Business Days) - $10.00"
               />
               <FormControlLabel
-                value="oneday"
+                value={30}
                 control={<Radio />}
                 label="One Day (Get it by tomorrow) - $30.00"
               />
@@ -258,14 +245,14 @@ const Shipping = ({
   )
 }
 
-const mapStateToProps = ({wines, user, cart, shipping}) => {
-  return {wines, cart, user, shipping}
+const mapStateToProps = ({wines, user, cart, paymentIntent}) => {
+  return {wines, cart, user, paymentIntent}
 }
 const mapDispatchToProps = dispatch => {
   return {
-    saveShipping(shipping) {
+    saveShipping(amount, shipping) {
       console.log('save shipping')
-      dispatch(saveShipping(shipping))
+      dispatch(saveShipping(amount, shipping))
     }
   }
 }

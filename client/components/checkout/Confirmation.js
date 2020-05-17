@@ -13,7 +13,9 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import CloseIcon from '@material-ui/icons/Close'
+import {confirmPayment} from '../../store'
 import {withStyles, makeStyles} from '@material-ui/core/styles'
+import {useStripe, useElements} from '@stripe/react-stripe-js'
 
 const StyledTableCell = withStyles(theme => ({
   body: {
@@ -32,16 +34,32 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Confirmation = ({cart, handleNext, handleBack}) => {
+const Confirmation = ({
+  cart,
+  paymentIntent,
+  payment,
+  handleNext,
+  handleBack,
+  confirmPayment
+}) => {
+  const stripe = useStripe()
+  const elements = useElements()
   const headCells = [
     {id: 'item', numeric: false, disablePadding: true, label: 'Item'},
     {id: 'quantity', numeric: true, disablePadding: false, label: 'Quantity'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Price'}
   ]
   const classes = useStyles()
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     event.preventDefault()
-    handleNext()
+    console.log(paymentIntent.id, payment.id)
+    const response = await confirmPayment(paymentIntent.id, payment.id)
+    console.log(response)
+    if (response === 'succeeded') {
+      handleNext()
+    } else {
+      alert('There was an error with your payment. Please try again later')
+    }
   }
   const token = window.localStorage.getItem('guestToken')
   return (
@@ -173,8 +191,16 @@ const Confirmation = ({cart, handleNext, handleBack}) => {
   )
 }
 
-const mapStateToProps = ({cart, shipping, payment}) => {
-  return {cart, shipping, payment}
+const mapStateToProps = ({cart, paymentIntent, payment}) => {
+  return {cart, paymentIntent, payment}
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    confirmPayment(piID, pmID) {
+      console.log('confirm payment')
+      return dispatch(confirmPayment(piID, pmID))
+    }
+  }
 }
 
-export default connect(mapStateToProps)(Confirmation)
+export default connect(mapStateToProps, mapDispatchToProps)(Confirmation)
