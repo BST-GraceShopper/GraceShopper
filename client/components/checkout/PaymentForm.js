@@ -75,14 +75,16 @@ const PaymentForm = ({
   const handleSubmit = async event => {
     event.preventDefault()
     // const {name,address1, address2,city, state, zip} = state
-    // const {error, paymentMethod} = await stripe.createPaymentMethod({
+    console.log({
+      ...state,
+      card: elements.getElement(CardNumberElement)
+    })
+    await setState({...state, card: elements.getElement(CardNumberElement)})
+    const {error, paymentMethod} = await stripe.createPaymentMethod(state)
+    // const {error2, paymentMethod2} = await stripe.createPaymentMethod({
     //   ...state,
     //   card: elements.getElement(CardNumberElement)
     // })
-    // console.log({...state,card:elements.getElement(CardNumberElement)})
-    console.log(elements.getElement(CardNumberElement))
-    await setState({...state, card: elements.getElement(CardNumberElement)})
-    console.log({...state, card: elements.getElement(CardNumberElement)})
     // await pay()
 
     // console.log(elements.getElement(CardNumberElement))
