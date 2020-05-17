@@ -14,7 +14,7 @@ import CardContent from '@material-ui/core/CardContent'
 import {Typography} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import {getSpirits, editSpirit} from '../store/'
-import Createspirit from './Createspirit'
+import CreateSpirit from './CreateSpirit'
 import SpiritCard from './SpiritCard'
 
 class SpiritListAdmin extends Component {
@@ -26,7 +26,7 @@ class SpiritListAdmin extends Component {
     const {spirits} = this.props
     return (
       <div style={{color: 'white'}}>
-        <Createspirit props={spirits} />
+        <CreateSpirit props={spirits} />
         {spirits.length ? (
           spirits.map(spirit => <SpiritCard spirit={spirit} />)
         ) : (
