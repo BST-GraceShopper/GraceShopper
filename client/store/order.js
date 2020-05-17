@@ -26,7 +26,7 @@ const _removeProductFromOrder = product => ({type: REMOVEP_ORDER, product})
  * THUNK CREATORS
  */
 
-export const getorder = userId => async dispatch => {
+export const getOrder = userId => async dispatch => {
   try {
     const res = await axios.get(`/api/order/${userId}`)
     if (res.data) {
@@ -48,7 +48,7 @@ export const getorder = userId => async dispatch => {
   }
 }
 
-export const addToorder = (userId, productId) => async dispatch => {
+export const addToOrder = (userId, productId) => async dispatch => {
   try {
     const res = await axios.post(`/api/order/${userId}`, {productId})
     dispatch(_addToOrder(res.data))
@@ -57,7 +57,7 @@ export const addToorder = (userId, productId) => async dispatch => {
   }
 }
 
-export const removeFromorder = (userId, product) => async dispatch => {
+export const removeFromOrder = (userId, product) => async dispatch => {
   try {
     if (product.quantity === 1) {
       //delete
@@ -74,7 +74,7 @@ export const removeFromorder = (userId, product) => async dispatch => {
     console.error(err)
   }
 }
-export const removeProductFromorder = (userId, product) => async dispatch => {
+export const removeProductFromOrder = (userId, product) => async dispatch => {
   try {
     const res = await axios.delete(`/api/order/${userId}/${product.productId}`)
     dispatch(_removeProductFromOrder(product))

@@ -5,7 +5,7 @@ import OrderList from './OrderList'
 import CartSummary from './cart/CartSummary'
 import Checkout from './Checkout'
 import {Typography, Paper, Card} from '@material-ui/core'
-import {getCart} from '../store/'
+import {getOrder} from '../store/'
 import {
   Grid,
   Header,
@@ -18,14 +18,15 @@ import {
 
 class Orders extends Component {
   componentDidMount() {
-    const {getCart, user} = this.props
+    const {getOrder, user} = this.props
     const token = window.localStorage.getItem('guestToken')
-    getCart(user.id || token)
+    getOrder(user.id || token)
   }
   render() {
-    //   const contextRef = createRef()
+    const contextRef = createRef()
     const {order} = this.props
-    console.log(this.props)
+    console.log(this.props, 'props')
+
     // console.log(order, 'cartsss in ordersss')
     return (
       <div>
@@ -55,7 +56,7 @@ class Orders extends Component {
                   border: '1px #303030 solid'
                 }}
               >
-                <OrderList cart={cart} />
+                <OrderList order={order} />
               </div>
               <Card
                 square
@@ -82,7 +83,6 @@ class Orders extends Component {
                     <div style={{margin: '20px 0px'}}>
                       <CartSummary />
                     </div>
-                    <Checkout />
                   </div>
                 </Sticky>
               </Card>
@@ -99,9 +99,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getCart(userId) {
-      dispatch(getCart(userId))
-      console.log('get cart success')
+    getOrder(userId) {
+      dispatch(getOrder(userId))
+      console.log('get order success')
     }
   }
 }

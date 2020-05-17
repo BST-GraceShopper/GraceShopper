@@ -10,6 +10,7 @@ import spirits from './spirit'
 import products from './product'
 import paymentIntent from './shipping'
 import payment from './payment'
+import order from './order'
 
 const reducer = combineReducers({
   user,
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   products,
   cart,
   paymentIntent,
-  payment
+  payment,
+  order
 })
 
 const middleware = composeWithDevTools(
@@ -37,3 +39,4 @@ export * from './beer'
 export * from './product'
 export * from './shipping'
 export * from './payment'
+export * from './order'
