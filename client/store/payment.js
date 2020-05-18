@@ -52,13 +52,10 @@ export const confirmPayment = (
   paymentMethod
 ) => async dispatch => {
   try {
-    //add axios save request
-    console.log(paymentIntent, paymentMethod)
     const response = (await axios.post('/api/stripe/confirm', {
       paymentIntent,
       paymentMethod
     })).data
-    // dispatch(_savePayment(payment))
     return response.status
   } catch (err) {
     console.error(err)

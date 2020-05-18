@@ -24,8 +24,10 @@ const SAVE_PAYMENTINTENT = 'SAVE_PAYMENTINTENT'
 const defaultPaymentIntent = {
   id: '',
   amount: '',
+  receipt_email: '',
   shipping: {
     name: '',
+    phone: '',
     address: {
       line1: '',
       line2: '',
@@ -51,7 +53,6 @@ const _savePaymentIntent = paymentIntent => ({
 
 export const saveShipping = paymentIntent => async dispatch => {
   try {
-    console.log(paymentIntent)
     const response = await axios.post(
       '/api/stripe/paymentIntent',
       paymentIntent

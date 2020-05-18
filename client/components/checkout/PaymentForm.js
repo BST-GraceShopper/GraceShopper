@@ -29,6 +29,7 @@ import {savePayment} from '../../store'
 
 const PaymentForm = ({
   // shipping,
+  paymentIntent,
   payment,
   savePayment,
   handleNext,
@@ -38,46 +39,28 @@ const PaymentForm = ({
 }) => {
   const stripe = useStripe()
   const elements = useElements()
-  // const sameAsShipping = {
-  //   name: `${shipping.firstName} ${shipping.lastName}`,
-  //   address: {
-  //     line1: shipping.address1,
-  //     line2: shipping.address2,
-  //     state: shipping.state,
-  //     city: shipping.city,
-  //     postal_code: shipping.zip
-  //   }
-  // }
-
+  const sameAsShipping = {
+    name: paymentIntent.shipping.name,
+    address: paymentIntent.shipping.address
+  }
   const [checked, setChecked] = React.useState(false)
   const [address, setAddress] = React.useState(payment.billing_details.address)
   const [name, setName] = React.useState(payment.billing_details.name)
 
-  // const handleChange = event => {
-  //   setChecked(event.target.checked)
-  //   if (event.target.checked) {
-  //     setState({...state, billing_details: sameAsShipping})
-  //   } else {
-  //     setState(payment)
-  //   }
-  // }
-  // const classes = useStyles()
+  const handleChange = event => {
+    setChecked(event.target.checked)
 
-  // const pay = async () => {
-  //   try {
-  //     console.log('test')
-  //     const {error, paymentMethod} = await stripe.createPaymentMethod(state)
-  //     console.log(paymentMethod)
-  //   } catch (er) {
-  //     console.log(er)
-  //   }
-  // }
+    if (event.target.checked) {
+      setName(sameAsShipping.name)
+      setAddress(sameAsShipping.address)
+    } else {
+      setName(payment.billing_details.name)
+      setAddress(payment.billing_details.address)
+    }
+  }
 
   const handleSubmit = async event => {
     event.preventDefault()
-    // const {name,address1, address2,city, state, zip} = state
-
-    // const {error, paymentMethod} = await stripe.createPaymentMethod(state)
     const {error, paymentMethod} = await stripe.createPaymentMethod({
       billing_details: {
         name,
@@ -86,16 +69,8 @@ const PaymentForm = ({
       card: elements.getElement(CardNumberElement),
       type: 'card'
     })
-    // await pay()
-
-    // console.log(elements.getElement(CardNumberElement))
-    // await pay()
-    // console.log(paymentMethod)
-    // savePayment(state)
     savePayment(paymentMethod)
     handleNext()
-
-    // console.log(paymentMethod)
   }
 
   return (
@@ -117,13 +92,10 @@ const PaymentForm = ({
           height: '65%',
           display: 'flex',
           flexDirection: 'column',
-          // alignItems: 'space-around',
-          // justifyContent: 'space-around',
-          // alignContent: 'space-around',
           overflow: 'auto'
         }}
       >
-        {/* <div
+        <div
           style={{
             display: 'flex',
             justifyContent: 'flex-start',
@@ -138,7 +110,7 @@ const PaymentForm = ({
             inputProps={{'aria-label': 'primary checkbox'}}
           />
           <Typography>Same as Shipping</Typography>
-        </div> */}
+        </div>
         <FormControl
           style={{width: 'calc(100%-20px)', margin: '10px'}}
           variant="outlined"
@@ -149,12 +121,6 @@ const PaymentForm = ({
             disabled={checked}
             value={name}
             onChange={ev => setName(ev.target.value)}
-            // InputProps={{
-            //   className: classes.disabled
-            // }}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -168,9 +134,6 @@ const PaymentForm = ({
             disabled={checked}
             value={address.line1}
             onChange={ev => setAddress({...address, line1: ev.target.value})}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -184,9 +147,6 @@ const PaymentForm = ({
             disabled={checked}
             value={address.line2}
             onChange={ev => setAddress({...address, line2: ev.target.value})}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -209,9 +169,6 @@ const PaymentForm = ({
               disabled={checked}
               value={address.city}
               onChange={ev => setAddress({...address, city: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -225,9 +182,6 @@ const PaymentForm = ({
               disabled={checked}
               value={address.state}
               onChange={ev => setAddress({...address, state: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -243,9 +197,6 @@ const PaymentForm = ({
               onChange={ev =>
                 setAddress({...address, postal_code: ev.target.value})
               }
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -262,10 +213,14 @@ const PaymentForm = ({
             required
             fullWidth
             InputLabelProps={{shrink: true}}
+            style={{color: 'white'}}
             InputProps={{
               inputComponent: StripeInput,
               inputProps: {
-                component: CardNumberElement
+                component: CardNumberElement,
+                style: {
+                  color: '#fff'
+                }
               }
             }}
           />

@@ -10,7 +10,6 @@ import Step from '@material-ui/core/Step'
 import StepLabel from '@material-ui/core/StepLabel'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles'
 import Shipping from './checkout/Shipping'
-import Payment from './checkout/Payment'
 import PaymentForm from './checkout/PaymentForm'
 import Confirmation from './checkout/Confirmation'
 import {formTheme} from '../theme'
@@ -66,8 +65,8 @@ const Checkout = ({user, checkout, cart, getCart}) => {
           <Shipping
             handleNext={handleNext}
             handleBack={handleBack}
-            activeStep={activeStep}
-            steps={steps}
+            // activeStep={activeStep}
+            // steps={steps}
           />
         )
       case 1:
@@ -75,8 +74,8 @@ const Checkout = ({user, checkout, cart, getCart}) => {
           <PaymentForm
             handleNext={handleNext}
             handleBack={handleBack}
-            activeStep={activeStep}
-            steps={steps}
+            // activeStep={activeStep}
+            // steps={steps}
           />
         )
       case 2:
@@ -84,8 +83,8 @@ const Checkout = ({user, checkout, cart, getCart}) => {
           <Confirmation
             handleNext={handleNext}
             handleBack={handleBack}
-            activeStep={activeStep}
-            steps={steps}
+            // activeStep={activeStep}
+            // steps={steps}
           />
         )
       default:
@@ -99,68 +98,84 @@ const Checkout = ({user, checkout, cart, getCart}) => {
       <Button variant="outlined" onClick={() => setOpen(true)} color="primary">
         Checkout
       </Button>
-      <Modal
-        open={open}
-        // value={value}
-        color="secondary"
-        onClose={handleClose}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <ThemeProvider theme={formTheme}>
-          <Paper
-            variant="outlined"
+      <div>
+        <Modal
+          open={open}
+          // value={value}
+          color="secondary"
+          onClose={handleClose}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%'
+            // height:'100%'
+          }}
+        >
+          <div
             style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'space-between',
-              alignContent: 'space-between',
-              padding: 30,
+              // display: 'flex',
+              // flexDirection: 'column',
+              // justifyContent: 'space-between',
+              // alignItems: 'space-between',
+              // alignContent: 'space-between',
               width: 'calc(100%*2/3)',
               height: '80%'
             }}
           >
-            {activeStep === steps.length ? (
-              <div
+            <ThemeProvider theme={formTheme}>
+              <Paper
+                variant="outlined"
                 style={{
                   display: 'flex',
-                  justifyContent: 'center'
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'space-between',
+                  alignContent: 'space-between',
+                  padding: 30,
+                  width: '100%',
+                  height: '100%'
+                  // width: 'calc(100%*2/3)',
+                  // height: '80%'
                 }}
               >
-                <Typography className={classes.instructions}>
-                  Thank you for your purchase!
-                </Typography>
-              </div>
-            ) : (
-              <div style={{width: '100%', height: '100%'}}>
-                <Stepper activeStep={activeStep} theme={formTheme}>
-                  {steps.map((label, idx) => {
-                    return (
-                      <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                      </Step>
-                    )
-                  })}
-                </Stepper>
+                {activeStep === steps.length ? (
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <Typography className={classes.instructions}>
+                      Thank you for your purchase!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div style={{width: '100%', height: '100%'}}>
+                    <Stepper activeStep={activeStep} theme={formTheme}>
+                      {steps.map((label, idx) => {
+                        return (
+                          <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                          </Step>
+                        )
+                      })}
+                    </Stepper>
 
-                {/* <div
+                    {/* <div
                   style={{
                     display: 'flex',
                     justifyContent: 'center',
                     overflow: 'auto',
-                    height: '80%'
+                    height: '70%'
                   }}
                 > */}
-                <Elements stripe={stripePromise}>
-                  {getStepContent(activeStep)}
-                </Elements>
-                {/* </div> */}
+                    <Elements stripe={stripePromise}>
+                      {getStepContent(activeStep)}
+                    </Elements>
+                    {/* </div> */}
 
-                {/* <div
+                    {/* <div
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -192,11 +207,13 @@ const Checkout = ({user, checkout, cart, getCart}) => {
                     </Button>
                   </div>
                 </div> */}
-              </div>
-            )}
-          </Paper>
-        </ThemeProvider>
-      </Modal>
+                  </div>
+                )}
+              </Paper>
+            </ThemeProvider>
+          </div>
+        </Modal>
+      </div>
     </div>
   )
 }

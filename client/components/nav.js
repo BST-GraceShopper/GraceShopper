@@ -121,60 +121,64 @@ const Nav = props => {
           {user.id ? (
             ''
           ) : (
-            <Modal
-              open={open}
-              value={value}
-              onClose={handleClose}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <ThemeProvider theme={formTheme}>
-                <Paper
-                  variant="outlined"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    padding: 30,
-                    width: 'calc(100%*2.5/3)'
-                  }}
-                >
-                  {page === '/login' ? <Login /> : <Signup />}
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      margin: '50px 0px 0px'
-                    }}
-                  >
-                    {page === '/signup' ? (
-                      <Typography color="textSecondary">
-                        Already have an account?{' '}
-                        <a
-                          color={formTheme.primary}
-                          onClick={() => setPage('/login')}
-                        >
-                          <b>Log In</b>
-                        </a>
-                      </Typography>
-                    ) : (
-                      <Typography color="textSecondary">
-                        Don't have an account?{' '}
-                        <a
-                          color={formTheme.primary}
-                          onClick={() => setPage('/signup')}
-                        >
-                          <b>Sign Up</b>
-                        </a>
-                      </Typography>
-                    )}
-                  </div>
-                </Paper>
-              </ThemeProvider>
-            </Modal>
+            <div>
+              <Modal
+                open={open}
+                value={value}
+                onClose={handleClose}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <div>
+                  <ThemeProvider theme={formTheme}>
+                    <Paper
+                      variant="outlined"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        padding: 30,
+                        width: 'calc(100%*2.5/3)'
+                      }}
+                    >
+                      {page === '/login' ? <Login /> : <Signup />}
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          margin: '50px 0px 0px'
+                        }}
+                      >
+                        {page === '/signup' ? (
+                          <Typography color="textSecondary">
+                            Already have an account?{' '}
+                            <a
+                              color={formTheme.primary}
+                              onClick={() => setPage('/login')}
+                            >
+                              <b>Log In</b>
+                            </a>
+                          </Typography>
+                        ) : (
+                          <Typography color="textSecondary">
+                            Don't have an account?{' '}
+                            <a
+                              color={formTheme.primary}
+                              onClick={() => setPage('/signup')}
+                            >
+                              <b>Sign Up</b>
+                            </a>
+                          </Typography>
+                        )}
+                      </div>
+                    </Paper>
+                  </ThemeProvider>
+                </div>
+              </Modal>
+            </div>
           )}
         </AppBar>
       </div>
