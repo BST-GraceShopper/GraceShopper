@@ -2,7 +2,6 @@ import React, {Component, createRef} from 'react'
 import {connect} from 'react-redux'
 import {OrderHeader} from './nav'
 import OrderList from './OrderList'
-import CartSummary from './cart/CartSummary'
 import Checkout from './Checkout'
 import {Typography, Paper, Card} from '@material-ui/core'
 import {getOrder} from '../store/'
@@ -80,9 +79,7 @@ class Orders extends Component {
                     <Typography variant="h6" color="textSecondary">
                       Order Summary
                     </Typography>
-                    <div style={{margin: '20px 0px'}}>
-                      <CartSummary />
-                    </div>
+                    <div style={{margin: '20px 0px'}} />
                   </div>
                 </Sticky>
               </Card>
