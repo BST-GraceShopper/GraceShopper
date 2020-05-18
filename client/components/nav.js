@@ -132,7 +132,7 @@ const Nav = props => {
                   justifyContent: 'center'
                 }}
               >
-                <div>
+                <div style={{width: 'calc(100%*2.5/3)'}}>
                   <ThemeProvider theme={formTheme}>
                     <Paper
                       variant="outlined"
@@ -141,7 +141,7 @@ const Nav = props => {
                         flexDirection: 'column',
                         justifyContent: 'center',
                         padding: 30,
-                        width: 'calc(100%*2.5/3)'
+                        width: '100%'
                       }}
                     >
                       {page === '/login' ? <Login /> : <Signup />}
