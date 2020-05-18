@@ -15,17 +15,17 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      maker: 'Vino Maestro',
+      maker: 'Chinchilla',
       year: 2019,
-      name: 'Chinchilla',
+      name: 'Roble',
       region: 'Old World',
-      type: 'White',
+      type: 'Red',
       category: 'wine',
-      grape: 'Moscato',
+      grape: 'Red Blend',
       price: 500.0,
       inventory: 2,
       image:
-        'http://clipart-library.com/new_gallery/170-1707861_wine-bottle.png'
+        'https://www.bodecall.com/images/stories/virtuemart/product/chinchilla-roble.png'
       // '/images/winebottle.png'
     }),
     Product.create({
