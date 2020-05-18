@@ -6,7 +6,8 @@ const {
   addToCart,
   removeFromCart
 } = require('../db/models')
-const stripe_key = process.env.stripe_key || require('../../secrets.js').stripe_key
+const stripe_key =
+  process.env.stripe_key || require('../../secrets.js').stripe_key
 module.exports = router
 const stripe = require('stripe')(stripe_key)
 

@@ -35,11 +35,13 @@ const productList = ({user, products, addToCart}) => {
             key={product.id}
             variant="outlined"
             style={{
-              width: 'calc(100%/3-60px)',
+              width: 'calc(100%/4)',
               display: 'flex',
               // backgroundColor: 'black',
               // border: '1px solid black',
               justifyContent: 'center',
+              alignContent: 'center',
+              alignItems: 'center',
               flexDirection: 'column',
               margin: 10,
               backgroundColor: 'rgba(255,255,255,0.1)',
@@ -59,7 +61,12 @@ const productList = ({user, products, addToCart}) => {
               // }}
             > */}
             <CardActions
-              style={{display: 'flex', justifyContent: 'space-between'}}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                padding: 10
+              }}
             >
               <IconButton
                 aria-label="favorite"
@@ -88,7 +95,7 @@ const productList = ({user, products, addToCart}) => {
             {/* </CardActionArea> */}
             <CardMedia
               image={product.image}
-              style={{width: 200, height: 200}}
+              style={{width: 200, height: 200, backgroundSize: 'contain'}}
             />
             <CardContent
               style={{
@@ -96,13 +103,14 @@ const productList = ({user, products, addToCart}) => {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                alignContent: 'center'
+                alignContent: 'center',
+                width: '90%'
               }}
             >
               <Typography
                 variant="h5"
                 key={product.name}
-                style={{color: 'white'}}
+                style={{color: 'white', textAlign: 'center'}}
               >
                 {product.name}
               </Typography>

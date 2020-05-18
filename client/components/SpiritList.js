@@ -43,9 +43,11 @@ const SpiritList = ({user, spirits, addToCart}) => {
             key={spirit.id}
             variant="outlined"
             style={{
-              width: 'calc(100%/3-60px)',
+              width: 'calc(100%/4)',
               display: 'flex',
               justifyContent: 'center',
+              alignContent: 'center',
+              alignItems: 'center',
               flexDirection: 'column',
               margin: 10,
               backgroundColor: 'rgba(255,255,255,0.1)',
@@ -65,7 +67,12 @@ const SpiritList = ({user, spirits, addToCart}) => {
               // }}
             > */}
             <CardActions
-              style={{display: 'flex', justifyContent: 'space-between'}}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                padding: 10
+              }}
             >
               <IconButton
                 aria-label="favorite"
@@ -92,7 +99,10 @@ const SpiritList = ({user, spirits, addToCart}) => {
             </CardActions>
 
             {/* </CardActionArea> */}
-            <CardMedia image={spirit.image} style={{width: 200, height: 200}} />
+            <CardMedia
+              image={spirit.image}
+              style={{width: 200, height: 200, backgroundSize: 'contain'}}
+            />
             <CardContent
               style={{
                 display: 'flex',
@@ -105,7 +115,7 @@ const SpiritList = ({user, spirits, addToCart}) => {
               <Typography
                 variant="h5"
                 key={spirit.name}
-                style={{color: 'white'}}
+                style={{color: 'white', textAlign: 'center'}}
               >
                 {spirit.name}
               </Typography>
