@@ -35,11 +35,13 @@ const BeerList = ({user, beers, addToCart}) => {
             key={beer.id}
             variant="outlined"
             style={{
-              width: 'calc(100%/3-60px)',
+              width: 'calc(100%/4)',
               display: 'flex',
               // backgroundColor: 'black',
               // border: '1px solid black',
               justifyContent: 'center',
+              alignContent: 'center',
+              alignItems: 'center',
               flexDirection: 'column',
               margin: 10,
               backgroundColor: 'rgba(255,255,255,0.1)',
@@ -59,7 +61,12 @@ const BeerList = ({user, beers, addToCart}) => {
               // }}
             > */}
             <CardActions
-              style={{display: 'flex', justifyContent: 'space-between'}}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+                padding: 10
+              }}
             >
               <IconButton
                 aria-label="favorite"
@@ -86,7 +93,10 @@ const BeerList = ({user, beers, addToCart}) => {
             </CardActions>
 
             {/* </CardActionArea> */}
-            <CardMedia image={beer.image} style={{width: 200, height: 200}} />
+            <CardMedia
+              image={beer.image}
+              style={{width: 200, height: 200, backgroundSize: 'contain'}}
+            />
             <CardContent
               style={{
                 display: 'flex',
@@ -96,7 +106,11 @@ const BeerList = ({user, beers, addToCart}) => {
                 alignContent: 'center'
               }}
             >
-              <Typography variant="h5" key={beer.name} style={{color: 'white'}}>
+              <Typography
+                variant="h5"
+                key={beer.name}
+                style={{color: 'white', textAlign: 'center'}}
+              >
                 {beer.name}
               </Typography>
               <Typography
