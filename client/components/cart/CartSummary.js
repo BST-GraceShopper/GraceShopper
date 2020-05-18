@@ -46,7 +46,9 @@ const CartSummary = ({cart}) => {
             <Typography color="textSecondary">Tax</Typography>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography color="textSecondary">${totalPrice * 0.05}</Typography>
+            <Typography color="textSecondary">
+              ${Math.floor(totalPrice * 0.05)}
+            </Typography>
           </StyledTableCell>
         </TableRow>
         <TableRow>

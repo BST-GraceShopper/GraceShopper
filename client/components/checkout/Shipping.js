@@ -19,20 +19,28 @@ const Shipping = ({
   handleNext,
   handleBack,
   cart
-  // activeStep,
-  // steps
 }) => {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = React.useState(5)
   const stripe = useStripe()
   const handleChange = event => {
-    setValue(event.target.value)
-    console.log(event.target.value)
+    setValue(parseInt(event.target.value))
   }
   const [name, setName] = React.useState(paymentIntent.shipping.name)
+  const [email, setEmail] = React.useState(paymentIntent.receipt_email)
+  const [phone, setPhone] = React.useState(paymentIntent.shipping.phone)
   const [address, setAddress] = React.useState(paymentIntent.shipping.address)
   const handleSubmit = () => {
     event.preventDefault()
-    saveShipping({amount: cart.totalPrice + value, shipping: {name, address}})
+    saveShipping({
+      amount:
+        (cart.totalPrice + Math.floor(cart.totalPrice * 0.05) + value) * 100,
+      receipt_email: email,
+      shipping: {
+        name,
+        phone,
+        address
+      }
+    })
     handleNext()
   }
   return (
@@ -65,13 +73,8 @@ const Shipping = ({
           <OutlinedInput
             id="name"
             value={name}
+            required
             onChange={ev => setName(ev.target.value)}
-            // InputProps={{
-            //   className: classes.disabled
-            // }}
-            // value={values.amount}
-            // onChange={}
-            // startAdornment={<InputAdornment position="start">$</InputAdornment>}
             labelWidth={90}
           />
         </FormControl>
@@ -132,9 +135,6 @@ const Shipping = ({
               required
               value={address.state}
               onChange={ev => setAddress({...address, state: ev.target.value})}
-              // value={values.amount}
-              // onChange={}
-              // startAdornment={<InputAdornment position="start">$</InputAdornment>}
               labelWidth={30}
             />
           </FormControl>
@@ -154,7 +154,7 @@ const Shipping = ({
             />
           </FormControl>
         </div>
-        {/* <div
+        <div
           style={{
             display: 'flex',
             width: '100%',
@@ -170,10 +170,9 @@ const Shipping = ({
             <InputLabel htmlFor="outlined">Email</InputLabel>
             <OutlinedInput
               id="email"
-              // value={values.amount}
-              value={state.email}
+              value={email}
               required
-              onChange={ev => setState({...state, email: ev.target.value})}
+              onChange={ev => setEmail(ev.target.value)}
               labelWidth={50}
             />
           </FormControl>
@@ -185,25 +184,25 @@ const Shipping = ({
             <OutlinedInput
               id="phone"
               required
-              value={state.phone}
-              onChange={ev => setState({...state, phone: ev.target.value})}
+              value={phone}
+              onChange={ev => setPhone(ev.target.value)}
               labelWidth={50}
             />
           </FormControl>
-        </div> */}
+        </div>
         <div style={{margin: '10px'}}>
           <FormControl component="fieldset">
             <FormLabel component="legend">Shipping Time</FormLabel>
             <RadioGroup
-              aria-label="gender"
-              name="gender1"
+              aria-label="shipping"
+              name="shipping"
               value={value}
               onChange={handleChange}
             >
               <FormControlLabel
-                value={0}
+                value={5}
                 control={<Radio />}
-                label="Standard (5-7 Business Days) - $0.00"
+                label="Standard (5-7 Business Days) - $5.00"
               />
               <FormControlLabel
                 value={10}
@@ -250,9 +249,9 @@ const mapStateToProps = ({wines, user, cart, paymentIntent}) => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    saveShipping(amount, shipping) {
+    saveShipping(paymentIntent) {
       console.log('save shipping')
-      dispatch(saveShipping(amount, shipping))
+      dispatch(saveShipping(paymentIntent))
     }
   }
 }
