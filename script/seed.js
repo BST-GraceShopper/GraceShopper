@@ -15,167 +15,156 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      maker: 'Vinter 1',
+      maker: 'Vino Maestro',
       year: 2019,
-      name: 'Wine 1',
+      name: 'Chinchilla',
       region: 'Old World',
-      type: 'Red',
+      type: 'White',
       category: 'wine',
-      grape: 'Cabernet Sauvignon',
+      grape: 'Moscato',
       price: 500.0,
       inventory: 2,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'http://clipart-library.com/new_gallery/170-1707861_wine-bottle.png'
+      // '/images/winebottle.png'
     }),
     Product.create({
-      maker: 'Vinter 2',
+      maker: 'True & Daring',
       year: 2019,
-      name: 'Wine 2',
+      name: 'Richter Reserve',
       region: 'New World',
-      type: 'Red',
+      type: 'White',
       category: 'wine',
-      grape: 'Pinot Noir',
+      grape: 'Riesling',
       price: 700.0,
       inventory: 1,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'http://clipart-library.com/images_k/wine-bottle-transparent-background/wine-bottle-transparent-background-17.png'
+      // '/images/winebottle.png'
     }),
     Product.create({
-      maker: 'Vinter 1',
-      year: 2019,
-      name: 'Wine 1',
+      maker: 'Argento',
+      year: 2010,
+      name: 'Reserva',
       region: 'Old World',
       type: 'Red',
       category: 'wine',
-      grape: 'Cabernet Sauvignon',
+      grape: 'Malbec',
       price: 500.0,
       inventory: 2,
-      image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+      image: 'https://pngimg.com/uploads/bottle/bottle_PNG2066.png'
     }),
     Product.create({
-      maker: 'Vinter 1',
+      maker: 'Joel Sokin',
       year: 2019,
-      name: 'Wine 1',
-      region: 'Old World',
-      type: 'Red',
-      category: 'wine',
-      grape: 'Cabernet Sauvignon',
-      price: 500.0,
-      inventory: 2,
-      image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
-    }),
-    Product.create({
-      maker: 'Vinter 1',
-      year: 2019,
-      name: 'Wine 1',
-      region: 'Old World',
-      type: 'Red',
-      category: 'wine',
-      grape: 'Cabernet Sauvignon',
-      price: 500.0,
-      inventory: 2,
-      image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
-    }),
-    Product.create({
-      maker: 'Vinter 2',
-      year: 2019,
-      name: 'Wine 2',
+      name: 'Aiken',
       region: 'New World',
       type: 'Red',
       category: 'wine',
       grape: 'Pinot Noir',
+      price: 500.0,
+      inventory: 2,
+      image: 'https://pngimg.com/uploads/wine/wine_PNG9473.png'
+    }),
+    Product.create({
+      maker: 'Hyland',
+      year: 2017,
+      name: 'Kelly Fox',
+      region: 'New World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Pinot Noir',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://www.vinboundmarketing.com/wp-content/uploads/2018/12/2017-Coury-Clone.png'
+    }),
+    Product.create({
+      maker: 'Brown Hill',
+      year: 2019,
+      name: 'Ivanhoe',
+      region: 'New World',
+      type: 'Red',
+      category: 'wine',
+      grape: 'Cabernet Sauvignon',
       price: 700.0,
       inventory: 1,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'https://www.brownhillestate.com.au/assets/images/products/pictures/20_20160718_BROWNHILL_WhiteBackgroundBottles_copy.png'
     }),
     Product.create({
-      maker: 'Vinter 1',
+      maker: 'Sterling Vineyards',
       year: 2019,
-      name: 'Wine 1',
-      region: 'Old World',
-      type: 'Red',
-      category: 'wine',
-      grape: 'Cabernet Sauvignon',
-      price: 500.0,
-      inventory: 2,
-      image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
-    }),
-    Product.create({
-      maker: 'Vinter 1',
-      year: 2019,
-      name: 'Wine 1',
-      region: 'Old World',
-      type: 'Red',
-      category: 'wine',
-      grape: 'Cabernet Sauvignon',
-      price: 500.0,
-      inventory: 2,
-      image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
-    }),
-    Product.create({
-      maker: 'Vinter 2',
-      year: 2019,
-      name: 'Wine 2',
+      name: 'Winemaker Select',
       region: 'New World',
-      type: 'Red',
+      type: 'White',
       category: 'wine',
-      grape: 'Pinot Noir',
+      grape: 'White Blend',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://www.sterlingvineyards.com/-/media/Images/Sterling/Bottle-Shots/Sterling-2014-CellarClub-NV-Winemakers-Select-WhiteBlend-750.ashx?la=en&modified=20181128021252&mw=1382&hash=B382EC6ABA465117924B126A399DFEC4583439B4'
+    }),
+    Product.create({
+      maker: 'Merkin Vineyard',
+      year: 2019,
+      name: 'Riserva',
+      region: 'New World',
+      type: 'White',
+      category: 'wine',
+      grape: 'Chardonnay',
+      price: 500.0,
+      inventory: 2,
+      image:
+        'https://caduceus.org/wp-content/themes/caduceus/images/merkin-white-wine-bottle.png'
+    }),
+    Product.create({
+      maker: 'Robert Mondavi',
+      year: 2019,
+      name: 'Fume Blanc',
+      region: 'New World',
+      type: 'White',
+      category: 'wine',
+      grape: 'Sauvignon Blanc',
       price: 700.0,
       inventory: 1,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'https://www.saq.com/media/catalog/product/2/2/221887-1_1580592910.png?quality=80&fit=bounds&height=&width='
     }),
     Product.create({
-      maker: 'Vinter 1',
-      year: 2019,
-      name: 'Wine 1',
-      region: 'Old World',
+      maker: 'Cullen',
+      year: 2011,
+      name: 'Diana Madeline',
+      region: 'New World',
       type: 'Red',
       category: 'wine',
-      grape: 'Cabernet Sauvignon',
+      grape: 'Red Blend',
       price: 500.0,
       inventory: 2,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'https://lh4.googleusercontent.com/proxy/eTdSBVGatoZAIG6Afn4LFy__W6fhPw6b0JbA-JsVxN1PocEXieCb4h9Nie8RrLXHbe5kQHIOkvz7Qk-Ct87TUB_cBtcrU5lga5ryESy-zzy0uHfn-Qct0DmI-vO8uuWuT2F5JEF327tLuIhi_A'
     }),
     Product.create({
-      maker: 'Vinter 2',
+      maker: 'Josh Cellars',
       year: 2019,
-      name: 'Wine 2',
+      name: 'North Coast Reserve',
       region: 'New World',
       type: 'Red',
       category: 'wine',
-      grape: 'Pinot Noir',
+      grape: 'Cabernet Sauvignon',
       price: 700.0,
       inventory: 1,
       image:
-        // 'https://t3.ftcdn.net/jpg/02/53/01/92/240_F_253019246_bZNh7BPfzVV3z8gtFf0vjvBmrZcAxU0O.jpg'
-        '/images/winebottle.png'
+        'https://d3czfiwbzom72b.cloudfront.net/wp-content/uploads/2018/10/108685-JOSH-NORTH-COAST-RES-CABERNET-SAUVIGNON.png'
     }),
     Product.create({
-      maker: 'Vinter 2',
-      year: 2019,
-      name: 'Wine 2',
+      maker: 'Stags Leap',
+      year: 2018,
+      name: 'Reserve',
       region: 'New World',
       type: 'Red',
       category: 'wine',
-      grape: 'Pinot Noir',
+      grape: 'Cabernet Sauvignon',
       price: 700.0,
       inventory: 1,
       image:

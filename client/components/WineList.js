@@ -35,11 +35,13 @@ const WineList = ({user, wines, addToCart}) => {
             key={wine.id}
             variant="outlined"
             style={{
-              width: 'calc(100%/3-60px)',
+              width: 'calc(100%/4)',
               display: 'flex',
               // backgroundColor: 'black',
               // border: '1px solid black',
               justifyContent: 'center',
+              alignItems: 'center',
+              alignContent: 'center',
               flexDirection: 'column',
               margin: 10,
               backgroundColor: 'rgba(255,255,255,0.1)',
@@ -59,7 +61,12 @@ const WineList = ({user, wines, addToCart}) => {
               // }}
             > */}
             <CardActions
-              style={{display: 'flex', justifyContent: 'space-between'}}
+              style={{
+                display: 'flex',
+                width: '100%',
+                padding: 10,
+                justifyContent: 'space-between'
+              }}
             >
               <IconButton
                 aria-label="favorite"
@@ -86,17 +93,29 @@ const WineList = ({user, wines, addToCart}) => {
             </CardActions>
 
             {/* </CardActionArea> */}
-            <CardMedia image={wine.image} style={{width: 200, height: 200}} />
+            <CardMedia
+              image={wine.image}
+              height="200"
+              style={{width: 200, height: 200, backgroundSize: 'contain'}}
+            />
+            {/* <CardMedia>
+              <img src={wine.image} style={{width:700}} />
+            </CardMedia> */}
             <CardContent
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                alignContent: 'center'
+                alignContent: 'center',
+                width: '90%'
               }}
             >
-              <Typography variant="h5" key={wine.name} style={{color: 'white'}}>
+              <Typography
+                variant="h5"
+                key={wine.name}
+                style={{color: 'white', textAlign: 'center'}}
+              >
                 {wine.name}
               </Typography>
               <Typography
